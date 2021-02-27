@@ -4,10 +4,10 @@
 #include "expression.h"
 
 template <typename T, typename Left, typename Right>
-class CAddExpression : public CExpression<T> {
+class CDivExpression : public CExpression<T> {
 public:
-    CAddExpression(std::shared_ptr<Left>  left,
-                   std::shared_ptr<Right> right);
+    CDivExpression(std::shared_ptr<CExpression<Left>>  left,
+                   std::shared_ptr<CExpression<Right>> right);
     T eval() const override;
 
 private:

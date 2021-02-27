@@ -4,10 +4,10 @@
 #include "expression.h"
 
 template <typename T, typename Left, typename Right>
-class CMulExpression : public CExpression<T> {
+class CSubExpression : public CExpression<T> {
 public:
-    CMulExpression(std::shared_ptr<Left>  left,
-                   std::shared_ptr<Right> right);
+    CSubExpression(std::shared_ptr<CExpression<Left>>  left,
+                   std::shared_ptr<CExpression<Right>> right);
     T eval() const override;
 
 private:
