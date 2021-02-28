@@ -45,7 +45,7 @@ blank [ \t\r]
 "BUBLIC"   { return yy::parser::make_PUBLIC    (loc); }
 "SECOOR"   { return yy::parser::make_PRIVATE   (loc); }
 "STATEC"   { return yy::parser::make_STATIC    (loc); }
-"TOAD"     { return yy::parser::make_MAIN      (loc); }
+"SWAMP"    { return yy::parser::make_MAIN      (loc); }
 
 "NUMBA"    { return yy::parser::make_INT       (loc); }
 "DUMBA"    { return yy::parser::make_DOUBLE    (loc); }
@@ -53,8 +53,15 @@ blank [ \t\r]
 "TEXTA"    { return yy::parser::make_STRING    (loc); }
 "VOEDA"    { return yy::parser::make_VOID      (loc); }
 
+"POLLIWOG" { return yy::parser::make_NEW       (loc); }
+"LENA"     { return yy::parser::make_LENGTH    (loc); }
+
+"YES"      { return yy::parser::make_TRUE      (loc); }
+"NO"       { return yy::parser::make_FALSE     (loc); }
+
+"DIS"      { return yy::parser::make_THIS      (loc); }
 "OSETR"    { return yy::parser::make_ASSERT    (loc); }
-"VRIET"    { return yy::parser::make_PRINT     (loc); }
+"CROAK"    { return yy::parser::make_PRINT     (loc); }
 "IFF"      { return yy::parser::make_IF        (loc); }
 "ELS"      { return yy::parser::make_ELSE      (loc); }
 "LOOPA"    { return yy::parser::make_WHILE     (loc); }
@@ -74,12 +81,20 @@ blank [ \t\r]
               std::cout << loc.begin.line << " " << loc.end.line << std::endl;
               return yy::parser::make_MINUS  (loc);
            }
-"PLUBS"    return yy::parser::make_PLUS   (loc);
-"MUTLI"    return yy::parser::make_STAR   (loc);
-"DEVID"    return yy::parser::make_SLASH  (loc);
-"("        return yy::parser::make_LPAREN (loc);
-")"        return yy::parser::make_RPAREN (loc);
-"ASS"      return yy::parser::make_ASSIGN (loc);
+"PLUBS"    { return yy::parser::make_PLUS    (loc); }
+"MUTLI"    { return yy::parser::make_STAR    (loc); }
+"DEVID"    { return yy::parser::make_SLASH   (loc); }
+"("        { return yy::parser::make_LPAREN  (loc); }
+")"        { return yy::parser::make_RPAREN  (loc); }
+"ASS"      { return yy::parser::make_ASSIGN  (loc); }
+"NOT"      { return yy::parser::make_NOT     (loc); }
+"EKWAL"    { return yy::parser::make_EQUAL   (loc); }
+"NEKWAL"   { return yy::parser::make_NEQUAL  (loc); }
+"LES"      { return yy::parser::make_LESS    (loc); }
+"BIGA"     { return yy::parser::make_BIGGER  (loc); }
+"LESOEK"   { return yy::parser::make_LEQUAL  (loc); }
+"BIGOEK"   { return yy::parser::make_BEQUAL  (loc); }
+
 
 {int}      return make_NUMBER(yytext, loc);
 {id}       return yy::parser::make_IDENTIFIER(yytext, loc);

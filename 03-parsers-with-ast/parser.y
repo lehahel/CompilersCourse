@@ -77,6 +77,13 @@
     PLUS        "PLUBS"
     STAR        "MULTI"
     SLASH       "DEVID"
+    NOT         "NOT"
+    EQUAL       "EKWAL"
+    NEQUAL      "NEKWAL"
+    LESS        "LES"
+    BIGGER      "BIGA"
+    LEQUAL      "LESOEK"
+    BEQUAL      "BIGOEK"
     LPAREN      "("
     RPAREN      ")"
     LBLOCKPAR   "{"
@@ -87,15 +94,20 @@
     PUBLIC      "BUBLIC"
     PRIVATE     "SECOOR"
     STATIC      "STATEC"
-    MAIN        "TOAD"
+    MAIN        "SWAMP"
     CLASS       "FROG"
     INT         "NUMBA"
     DOUBLE      "DUMBA"
     BOOL        "BOOLA"
     STRING      "TEXTA"
     VOID        "VOEDA"
-    OSETR       "ASSERT"
-    VRIET       "VRIET"
+    NEW         "POLLIWOG"
+    LENGTH      "LENA"
+    TRUE        "YES"
+    FALSE       "NO"
+    THIS        "DIS"
+    ASSERT      "OSETR"
+    PRINT       "CROAK"
     IF          "IFF"
     ELSE        "ELS"
     WHILE       "LOOPA"
@@ -121,7 +133,7 @@ program:
   | program classdecl { /* TODO */ };
 
 main: 
-    "FROG" "identifier" "{" "BUBLIC" "STATEC" "VOEDA" "TOAD" "(" ")" "{" unit "}" "}";
+    "FROG" "identifier" "{" "BUBLIC" "STATEC" "VOEDA" "SWAMP" "(" ")" "{" unit "}" "}";
 
 classdecl:
     "FROG" "identifier" "{" declarations "}" { /* TODO */ };
@@ -148,27 +160,36 @@ formals:
     formal                { /* TODO */ }
   | formals formal        { /* TODO */ };
 
-statement:  "OSETR" "(" expr ")"                         { /* TODO */ }
-          | locvardecl                                   { /* TODO */ }
-          | "{" statements "}"                           { /* TODO */ }
-          | "IFF" "(" expr ")" statement                 { /* TODO */ }
-          | "IFF" "(" expr ")" statement "ELS" statement { /* TODO */ }
-          | "LOOPA" "(" expr ")" statement               { /* TODO */ }
-          | "VRIET" "(" expr ")" ";"                     { /* TODO */ }
-          | lvalue "ASS" expr ";"                        { /* TODO */ }
-          | "BURP" expr ";"                              { /* TODO */ }
-          | methinvokation ";"                           { /* TODO */ };
+statement:  "OSETR" "(" exp ")"                         { /* TODO */ }
+          | locvardecl                                  { /* TODO */ }
+          | "{" statements "}"                          { /* TODO */ }
+          | "IFF" "(" exp ")" statement                 { /* TODO */ }
+          | "IFF" "(" exp ")" statement "ELS" statement { /* TODO */ }
+          | "LOOPA" "(" exp ")" statement               { /* TODO */ }
+          | "CROAK" "(" exp ")" ";"                     { /* TODO */ }
+          | lvalue "ASS" exp ";"                        { /* TODO */ }
+          | "BURP" exp ";"                              { /* TODO */ }
+          | methinvokation ";"                          { /* TODO */ };
 
 locvardecl:
     vardecl { /* TODO */ };
 
 exprargs:
-    expr            { /* TODO */ }
-  | exprargs, expr  { /* TODO */ };
+    exp            { /* TODO */ }
+  | exprargs, exp  { /* TODO */ };
 
 methinvokation:
-    expr "." "identifier" "(" ")"           { /* TODO */ }
-  | expr "." "identifier" "(" exprargs ")"  { /* TODO */ };
+    exp "." "identifier" "(" ")"           { /* TODO */ }
+  | exp "." "identifier" "(" exprargs ")"  { /* TODO */ };
+
+fieldinvokation:
+    this "." "identifier"              { /* TODO */ }
+  | this "." "identifier" "[" exp "]" { /* TODO */ };
+
+lvalue:
+    "identifier"              { /* TODO */ }
+  | "identifier" "[" exp "]" { /* TODO */ }
+  | fieldinvokation           { /* TODO */ };
 
 type:
     simpletype { /* TODO */ }
@@ -206,13 +227,27 @@ assignment:
 %left "MULTI" "DEVID";
 
 exp:
-    "number"           { $$ = new NumberExpression($1); }
-    | "identifier"     { $$ = new IdentExpression($1); }
-    | exp "PLUBS" exp  { $$ = new AddExpression($1, $3); }
-    | exp "MENUS" exp  { $$ = new SubstractExpression($1, $3); }
-    | exp "MULTI" exp  { $$ = new MulExpression($1, $3); }
-    | exp "DEVID" exp  { $$ = new DivExpression($1, $3); }
-    | "(" exp ")"      { $$ = $2; };
+    "number"         { $$ = new NumberExpression($1); }
+  | "identifier"     { $$ = new IdentExpression($1); }
+  | exp "[" exp "]"  { /* TODO */ }
+  | exp "." length   { /* TODO */ }
+  | "YES"            { /* TODO */ }
+  | "NO"             { /* TODO */ }
+  | "NOT" exp        { /* TODO */ }
+  | "POLLIWOG" simpletype "[" exp "]" { /* TODO */ }
+  | "POLLIWOG" typeid "(" ")"         { /* TODO */ }
+  | exp "PLUBS" exp  { $$ = new AddExpression($1, $3); }
+  | exp "MENUS" exp  { $$ = new SubstractExpression($1, $3); }
+  | exp "MULTI" exp  { $$ = new MulExpression($1, $3); }
+  | exp "DEVID" exp  { $$ = new DivExpression($1, $3); }
+  | exp "EKWAL" exp  { /* TODO */ }
+  | exp "NEKWAL" exp { /* TODO */ }
+  | exp "LES" exp    { /* TODO */ }
+  | exp "BIGA" exp   { /* TODO */ }
+  | exp "LESOEK" exp { /* TODO */ }
+  | exp "BIGOEK" exp { /* TODO */ }
+  | "(" exp ")"      { $$ = $2; };
+
 
 %%
 
