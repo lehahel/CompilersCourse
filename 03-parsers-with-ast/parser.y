@@ -83,6 +83,7 @@
     RBLOCKPAR   "}"
     LARRAYPAR   "["
     RARRAYPAR   "]"
+    DOT         "."
     PUBLIC      "BUBLIC"
     PRIVATE     "SECOOR"
     STATIC      "STATEC"
@@ -93,6 +94,12 @@
     BOOL        "BOOLA"
     STRING      "TEXTA"
     VOID        "VOEDA"
+    OSETR       "ASSERT"
+    VRIET       "VRIET"
+    IF          "IFF"
+    ELSE        "ELS"
+    WHILE       "LOOPA"
+    RETURN      "BURP"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
@@ -109,39 +116,77 @@
 %%
 %start program;
 
-program: 
-        main { /* TODO */ }
-        | program classdecl { /* TODO */ };
+program:
+    main              { /* TODO */ }
+  | program classdecl { /* TODO */ };
 
-main: "FROG" "identifier" "{" "BUBLIC" "STATEC" "VOEDA" "TOAD" "(" ")" "{" unit "}" "}";
+main: 
+    "FROG" "identifier" "{" "BUBLIC" "STATEC" "VOEDA" "TOAD" "(" ")" "{" unit "}" "}";
 
-classdecl: "FROG" "identifier" "{" declarations "}" { /* TODO */ };
+classdecl:
+    "FROG" "identifier" "{" declarations "}" { /* TODO */ };
 
-declaration:  vardecl    { /* TODO */ } 
-            | methoddecl { /* TODO */ };
+declaration:  
+    vardecl    { /* TODO */ } 
+  | methoddecl { /* TODO */ };
 
 declarations:
-          %empty                   { /* TODO */ }
-        | declarations declaration { /* TODO */ };
+    %empty                   { /* TODO */ }
+  | declarations declaration { /* TODO */ };
 
-methoddecl: 
-          "BUBLIC" type "identifier" "(" ")" "{" statements "}"   { /* TODO */ }
-        | "BUBLIC" type "identifier" "(" formals ")" "{" statements "}" { /* TODO */ };
+methoddecl:
+    "BUBLIC" type "identifier" "(" ")" "{" statements "}"         { /* TODO */ }
+  | "BUBLIC" type "identifier" "(" formals ")" "{" statements "}" { /* TODO */ };
 
-vardecl: type "identifier" ";" { /* TODO */ };
+vardecl:
+    type "identifier" ";" { /* TODO */ };
 
-formal: type "identifier" { /* TODO */ };
+formal:
+    type "identifier" { /* TODO */ };
 
-formals:  formal         { /* TODO */ }
-        | formals formal { /* TODO */ };
+formals:  
+    formal                { /* TODO */ }
+  | formals formal        { /* TODO */ };
 
+statement:  "OSETR" "(" expr ")"                         { /* TODO */ }
+          | locvardecl                                   { /* TODO */ }
+          | "{" statements "}"                           { /* TODO */ }
+          | "IFF" "(" expr ")" statement                 { /* TODO */ }
+          | "IFF" "(" expr ")" statement "ELS" statement { /* TODO */ }
+          | "LOOPA" "(" expr ")" statement               { /* TODO */ }
+          | "VRIET" "(" expr ")" ";"                     { /* TODO */ }
+          | lvalue "ASS" expr ";"                        { /* TODO */ }
+          | "BURP" expr ";"                              { /* TODO */ }
+          | methinvokation ";"                           { /* TODO */ };
 
+locvardecl:
+    vardecl { /* TODO */ };
 
-type: simpletype | arraytype { /* TODO */ };
+exprargs:
+    expr            { /* TODO */ }
+  | exprargs, expr  { /* TODO */ };
 
-simpletype: "NUMBA" | "DUMBA" | "TEXTA" | "BOOLA" | "VOEDA" { /* TODO */ };
+methinvokation:
+    expr "." "identifier" "(" ")"           { /* TODO */ }
+  | expr "." "identifier" "(" exprargs ")"  { /* TODO */ };
 
-arraytype: simpletype "[" "]" { /* TODO */ };
+type:
+    simpletype { /* TODO */ }
+  | arraytype  { /* TODO */ };
+
+typeid:
+    "identifier" { /* TODO */ }
+
+simpletype: 
+    "NUMBA"  { /* TODO */ }
+  | "DUMBA"  { /* TODO */ }
+  | "TEXTA"  { /* TODO */ }
+  | "BOOLA"  { /* TODO */ }
+  | "VOEDA"  { /* TODO */ }
+  | typeid   { /* TODO */ };
+
+arraytype:
+    simpletype "[" "]" { /* TODO */ };
 
 unit: assignments exp { $$ = new Program($1, $2); driver.program = $$; };
 

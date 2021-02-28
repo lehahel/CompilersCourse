@@ -41,23 +41,31 @@ blank [ \t\r]
   loc.step();
 %}
 
-"FROG"     { return yy::parser::make_CLASS   (loc); }
-"BUBLIC"   { return yy::parser::make_PUBLIC  (loc); }
-"SECOOR"   { return yy::parser::make_PRIVATE (loc); }
-"STATEC"   { return yy::parser::make_STATIC  (loc); }
-"TOAD"     { return yy::parser::make_MAIN    (loc); }
+"FROG"     { return yy::parser::make_CLASS     (loc); }
+"BUBLIC"   { return yy::parser::make_PUBLIC    (loc); }
+"SECOOR"   { return yy::parser::make_PRIVATE   (loc); }
+"STATEC"   { return yy::parser::make_STATIC    (loc); }
+"TOAD"     { return yy::parser::make_MAIN      (loc); }
 
-"NUMBA"    { return yy::parser::make_INT     (loc); }
-"DUMBA"    { return yy::parser::make_DOUBLE  (loc); }
-"BOOLA"    { return yy::parser::make_BOOL    (loc); }
-"TEXTA"    { return yy::parser::make_STRING  (loc); }
-"VOEDA"    { return yy::parser::make_VOID    (loc); }
+"NUMBA"    { return yy::parser::make_INT       (loc); }
+"DUMBA"    { return yy::parser::make_DOUBLE    (loc); }
+"BOOLA"    { return yy::parser::make_BOOL      (loc); }
+"TEXTA"    { return yy::parser::make_STRING    (loc); }
+"VOEDA"    { return yy::parser::make_VOID      (loc); }
+
+"OSETR"    { return yy::parser::make_ASSERT    (loc); }
+"VRIET"    { return yy::parser::make_PRINT     (loc); }
+"IFF"      { return yy::parser::make_IF        (loc); }
+"ELS"      { return yy::parser::make_ELSE      (loc); }
+"LOOPA"    { return yy::parser::make_WHILE     (loc); }
+"BURP"     { return yy::parser::make_RETURN    (loc); }
 
 ";"        { return yy::parser::make_SEMICOLON (loc); }
 "{"        { return yy::parser::make_LBLOCKPAR (loc); }
 "}"        { return yy::parser::make_RBLOCKPAR (loc); }
 "["        { return yy::parser::make_LARRAYPAR (loc); }
 "]"        { return yy::parser::make_RARRAYPAR (loc); }
+"."        { return yy::parser::make_DOT       (loc); }
 
 {blank}+   loc.step ();
 \n+        loc.lines (yyleng); loc.step ();
