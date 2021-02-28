@@ -1,5 +1,5 @@
 %skeleton "lalr1.cc"
-%require "3.4"
+%require "3.5"
 
 %defines
 %define api.token.constructor
@@ -70,29 +70,14 @@
 %define api.token.prefix {TOK_}
 
 %token
-    END 0       "end of file"
-    SEMICOLON   ";"
-    ASSIGN      "ASS"
-    MINUS       "MENUS"
-    PLUS        "PLUBS"
-    STAR        "MULTI"
-    SLASH       "DEVID"
-    LPAREN      "("
-    RPAREN      ")"
-    LBLOCKPAR   "{"
-    RBLOCKPAR   "}"
-    LARRAYPAR   "["
-    RARRAYPAR   "]"
-    PUBLIC      "BUBLIC"
-    PRIVATE     "SECOOR"
-    STATIC      "STATEC"
-    MAIN        "TOAD"
-    CLASS       "FROG"
-    INT         "NUMBA"
-    DOUBLE      "DUMBA"
-    BOOL        "BOOLA"
-    STRING      "TEXTA"
-    VOID        "VOEDA"
+    END 0  "end of file"
+    ASSIGN "ASS"
+    MINUS  "MENUS"
+    PLUS   "PLUBS"
+    STAR   "MULTI"
+    SLASH  "DEVID"
+    LPAREN "("
+    RPAREN ")"
 ;
 
 %token <std::string> IDENTIFIER "identifier"
@@ -107,47 +92,13 @@
 // %printer { yyo << $$; } <*>;
 
 %%
-%start program;
-
-program: 
-        main { /* TODO */ }
-        | program classdecl { /* TODO */ };
-
-main: "FROG" "identifier" "{" "BUBLIC" "STATEC" "VOEDA" "TOAD" "(" ")" "{" unit "}" "}";
-
-classdecl: "FROG" "identifier" "{" declarations "}" { /* TODO */ };
-
-declaration:  vardecl    { /* TODO */ } 
-            | methoddecl { /* TODO */ };
-
-declarations:
-          %empty                   { /* TODO */ }
-        | declarations declaration { /* TODO */ };
-
-methoddecl: 
-          "BUBLIC" type "identifier" "(" ")" "{" statements "}"   { /* TODO */ }
-        | "BUBLIC" type "identifier" "(" formals ")" "{" statements "}" { /* TODO */ };
-
-vardecl: type "identifier" ";" { /* TODO */ };
-
-formal: type "identifier" { /* TODO */ };
-
-formals:  formal         { /* TODO */ }
-        | formals formal { /* TODO */ };
-
-
-
-type: simpletype | arraytype { /* TODO */ };
-
-simpletype: "NUMBA" | "DUMBA" | "TEXTA" | "BOOLA" | "VOEDA" { /* TODO */ };
-
-arraytype: simpletype "[" "]" { /* TODO */ };
+%start unit;
 
 unit: assignments exp { $$ = new Program($1, $2); driver.program = $$; };
 
 assignments:
     %empty { $$ = new AssignmentList(); /* A -> eps */}
-    | assignments assignment SEMICOLON {
+    | assignments assignment {
         $1->AddAssignment($2); $$ = $1;
     };
 

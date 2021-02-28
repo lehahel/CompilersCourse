@@ -41,6 +41,24 @@ blank [ \t\r]
   loc.step();
 %}
 
+"FROG"     { return yy::parser::make_CLASS   (loc); }
+"BUBLIC"   { return yy::parser::make_PUBLIC  (loc); }
+"SECOOR"   { return yy::parser::make_PRIVATE (loc); }
+"STATEC"   { return yy::parser::make_STATIC  (loc); }
+"TOAD"     { return yy::parser::make_MAIN    (loc); }
+
+"NUMBA"    { return yy::parser::make_INT     (loc); }
+"DUMBA"    { return yy::parser::make_DOUBLE  (loc); }
+"BOOLA"    { return yy::parser::make_BOOL    (loc); }
+"TEXTA"    { return yy::parser::make_STRING  (loc); }
+"VOEDA"    { return yy::parser::make_VOID    (loc); }
+
+";"        { return yy::parser::make_SEMICOLON (loc); }
+"{"        { return yy::parser::make_LBLOCKPAR (loc); }
+"}"        { return yy::parser::make_RBLOCKPAR (loc); }
+"["        { return yy::parser::make_LARRAYPAR (loc); }
+"]"        { return yy::parser::make_RARRAYPAR (loc); }
+
 {blank}+   loc.step ();
 \n+        loc.lines (yyleng); loc.step ();
 
