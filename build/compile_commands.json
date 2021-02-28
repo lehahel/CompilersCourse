@@ -1,0 +1,67 @@
+[
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/main.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/main.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/main.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/driver.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/driver.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/driver.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/parser.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/scanner.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/scanner.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/scanner.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/expressions/NumberExpression.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/NumberExpression.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/NumberExpression.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/expressions/MulExpression.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/MulExpression.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/MulExpression.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/expressions/AddExpression.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/AddExpression.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/AddExpression.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/expressions/SubstractExpression.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/SubstractExpression.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/SubstractExpression.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/expressions/DivExpression.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/DivExpression.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/DivExpression.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/expressions/IdentExpression.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/IdentExpression.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/expressions/IdentExpression.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/assignments/Assignment.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/assignments/Assignment.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/assignments/Assignment.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/assignments/AssignmentList.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/assignments/AssignmentList.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/assignments/AssignmentList.cpp"
+},
+{
+  "directory": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build",
+  "command": "/usr/local/bin/g++-10 -I/usr/local/opt/flex/include -I../03-parsers-with-ast -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -mmacosx-version-min=10.15 -std=gnu++17 -o 03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir/Program.cpp.o -c /Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/Program.cpp",
+  "file": "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/Program.cpp"
+}
+]

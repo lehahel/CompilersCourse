@@ -2,7 +2,7 @@
     #include <cerrno>
     #include <climits>
     #include <cstdlib>
-    #include <cstring>
+    #include <cstring> // strerror
     #include <string>
     #include <iostream>
     #include "driver.hh"
@@ -13,6 +13,9 @@
 
 %option c++
 %option yyclass="Scanner"
+%option yylineno      
+
+%option debug
 
 %{
   // A number symbol corresponding to the value in S.

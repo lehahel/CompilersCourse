@@ -1,0 +1,5 @@
+/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build/CMakeFiles/rebuild_cache.dir
+/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build/CMakeFiles/edit_cache.dir
+/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build/03-parsers-with-ast/CMakeFiles/rebuild_cache.dir
+/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build/03-parsers-with-ast/CMakeFiles/edit_cache.dir
+/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/build/03-parsers-with-ast/CMakeFiles/ParserExampleWithAst.dir
