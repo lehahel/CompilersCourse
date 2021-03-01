@@ -75,7 +75,7 @@
     ASSIGN      "ASS"
     MINUS       "MENUS"
     PLUS        "PLUBS"
-    STAR        "MULTI"
+    STAR        "MUTLI"
     SLASH       "DEVID"
     NOT         "NOT"
     EQUAL       "EKWAL"
@@ -224,7 +224,7 @@ assignment:
     };
 
 %left "PLUBS" "MENUS";
-%left "MULTI" "DEVID";
+%left "MUTLI" "DEVID";
 
 exp:
     "number"         { $$ = new NumberExpression($1); }
@@ -238,12 +238,12 @@ exp:
   | "POLLIWOG" typeid "(" ")"         { /* TODO */ }
   | exp "PLUBS" exp  { $$ = new AddExpression($1, $3); }
   | exp "MENUS" exp  { $$ = new SubstractExpression($1, $3); }
-  | exp "MULTI" exp  { $$ = new MulExpression($1, $3); }
+  | exp "MUTLI" exp  { $$ = new MulExpression($1, $3); }
   | exp "DEVID" exp  { $$ = new DivExpression($1, $3); }
   | exp "EKWAL" exp  { /* TODO */ }
   | exp "NEKWAL" exp { /* TODO */ }
-  | exp "LES" exp    { /* TODO */ }
-  | exp "BIGA" exp   { /* TODO */ }
+  | exp "LES"    exp { /* TODO */ }
+  | exp "BIGA"   exp { /* TODO */ }
   | exp "LESOEK" exp { /* TODO */ }
   | exp "BIGOEK" exp { /* TODO */ }
   | "(" exp ")"      { $$ = $2; };
