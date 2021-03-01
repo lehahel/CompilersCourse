@@ -31,27 +31,7 @@
     #include "driver.hh"
     #include "location.hh"
 
-    #include "expressions/NumberExpression.h"
-    #include "expressions/AddExpression.h"
-    #include "expressions/MulExpression.h"
-    #include "expressions/DivExpression.h"
-    #include "expressions/SubstractExpression.h"
-    #include "expressions/IdentExpression.h"
-    #include "assignments/Assignment.h"
-    #include "assignments/AssignmentList.h"
-
-    // #include "assignments_default/assignment.h"
-    // #include "assignments_default/assignment_list.h"
-    // #include "expression_default/addexpression.h"
-    // #include "expression_default/divexpression.h"
-    // #include "expression_default/expression.h"
-    // #include "expression_default/mulexpression.h"
-    // #include "expression_default/subexpression.h"
-    // #include "expression_template/addexpression.h"
-    // #include "expression_template/divexpression.h"
-    // #include "expression_template/expression.h"
-    // #include "expression_template/mulexpression.h"
-    // #include "expression_template/subexpression.h"
+    #include "ast.h"
 
     #include "Program.h"
 
@@ -70,13 +50,46 @@
 %define api.token.prefix {TOK_}
 
 %token
-    END 0       "end of file"
-    SEMICOLON   ";"
+
+    PUBLIC      "BUBLIC"
+    PRIVATE     "SECOOR"
+    STATIC      "STATEC"
+    MAIN        "TOAD"
+    CLASS       "FROG"
     ASSIGN      "ASS"
-    MINUS       "MENUS"
-    PLUS        "PLUBS"
-    STAR        "MULTI"
-    SLASH       "DEVID"
+
+    // Types
+    INT         "NUMBA"
+    DOUBLE      "DUMBA"
+    BOOL        "BOOLA"
+    STRING      "TEXTA"
+    VOID        "VOEDA"
+
+    // Control structures and cycles
+    ASSERT      "OSETR"
+    PRINT       "VRIET"
+    IF          "IFF"
+    ELSE        "ELS"
+    WHILE       "LOOPA"
+    RETURN      "BURP"
+
+    TRUE        "RLY"
+    FALSE       "NOPE"
+
+    // Logical operations
+    AND         "&&"
+    OR          "||"
+
+    // Comparison
+    EQUAL       "=="
+    NEQ         "!="
+    LESS        "<"
+    LEQ         "<="
+    GREATER     ">"
+    GEQ         ">="
+
+    // Brackets & marks
+    SEMICOLON   ";"
     LPAREN      "("
     RPAREN      ")"
     LBLOCKPAR   "{"
@@ -84,22 +97,18 @@
     LARRAYPAR   "["
     RARRAYPAR   "]"
     DOT         "."
-    PUBLIC      "BUBLIC"
-    PRIVATE     "SECOOR"
-    STATIC      "STATEC"
-    MAIN        "TOAD"
-    CLASS       "FROG"
-    INT         "NUMBA"
-    DOUBLE      "DUMBA"
-    BOOL        "BOOLA"
-    STRING      "TEXTA"
-    VOID        "VOEDA"
-    OSETR       "ASSERT"
-    VRIET       "VRIET"
-    IF          "IFF"
-    ELSE        "ELS"
-    WHILE       "LOOPA"
-    RETURN      "BURP"
+    COMMA       ","
+    EXCLAM      "!"
+
+    // Arithmetic operations
+    MINUS       "MENUS"
+    PLUS        "PLUBS"
+    STAR        "MULTI"
+    SLASH       "DEVID"
+    PERC        "MODI"
+
+    END 0       "end of file"
+
 ;
 
 %token <std::string> IDENTIFIER "identifier"
@@ -148,27 +157,28 @@ formals:
     formal                { /* TODO */ }
   | formals formal        { /* TODO */ };
 
-statement:  "OSETR" "(" expr ")"                         { /* TODO */ }
+statement:  "OSETR" "(" exp ")"                         { /* TODO */ }
           | locvardecl                                   { /* TODO */ }
           | "{" statements "}"                           { /* TODO */ }
-          | "IFF" "(" expr ")" statement                 { /* TODO */ }
-          | "IFF" "(" expr ")" statement "ELS" statement { /* TODO */ }
-          | "LOOPA" "(" expr ")" statement               { /* TODO */ }
-          | "VRIET" "(" expr ")" ";"                     { /* TODO */ }
-          | lvalue "ASS" expr ";"                        { /* TODO */ }
-          | "BURP" expr ";"                              { /* TODO */ }
+          | "IFF" "(" exp ")" statement                 { /* TODO */ }
+          | "IFF" "(" exp ")" statement "ELS" statement { /* TODO */ }
+          | "LOOPA" "(" exp ")" statement               { /* TODO */ }
+          | "VRIET" "(" exp ")" ";"                     { /* TODO */ }
+          | lvalue "ASS" exp ";"                        { /* TODO */ }
+          | "BURP" exp ";"                              { /* TODO */ }
           | methinvokation ";"                           { /* TODO */ };
+
 
 locvardecl:
     vardecl { /* TODO */ };
 
 exprargs:
-    expr            { /* TODO */ }
-  | exprargs, expr  { /* TODO */ };
+    exp            { /* TODO */ }
+  | exprargs, exp  { /* TODO */ };
 
 methinvokation:
-    expr "." "identifier" "(" ")"           { /* TODO */ }
-  | expr "." "identifier" "(" exprargs ")"  { /* TODO */ };
+    exp "." "identifier" "(" ")"           { /* TODO */ }
+  | exp "." "identifier" "(" exprargs ")"  { /* TODO */ };
 
 type:
     simpletype { /* TODO */ }
