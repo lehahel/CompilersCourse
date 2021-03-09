@@ -134,7 +134,7 @@ program:
   | program classdecl { /* TODO */ };
 
 main: 
-    "FROG" "identifier" "{" "BUBLIC" "STATEC" "VOEDA" "SWAMP" "(" ")" "{" unit "}" "}";
+    "FROG" "identifier" "{" "BUBLIC" "STATEC" "VOEDA" "SWAMP" "(" ")" "{" statements "}" "}";
 
 classdecl:
     "FROG" "identifier" "{" declarations "}" { /* TODO */ };
@@ -162,16 +162,17 @@ formals:
   | formals formal        { /* TODO */ };
 
 statement:  
-    "OSETR" "(" exp ")"                         { /* TODO */ }
-  | locvardecl                                  { /* TODO */ }
-  | "{" statements "}"                          { /* TODO */ }
-  | "IFF" "(" exp ")" statement                 { /* TODO */ }
-  | "IFF" "(" exp ")" statement "ELS" statement { /* TODO */ }
-  | "LOOPA" "(" exp ")" statement               { /* TODO */ }
-  | "CROAK" "(" exp ")" ";"                     { /* TODO */ }
-  | lvalue "ASS" exp ";"                        { /* TODO */ }
-  | "BURP" exp ";"                              { /* TODO */ }
-  | methinvokation ";"                          { /* TODO */ };
+    "OSETR" "(" exp ")" ";"                        { /* TODO */ }
+  | locvardecl ";"                                 { /* TODO */ }
+  | "{" statements "}" ";"                         { /* TODO */ }
+  | "IFF" "(" exp ")" statement ";"                { /* TODO */ }
+  | "IFF" "(" exp ")" statement "ELS" statement ";"{ /* TODO */ }
+  | "LOOPA" "(" exp ")" statement ";"              { /* TODO */ }
+  | "CROAK" "(" exp ")" ";"                        { /* TODO */ }
+  | lvalue "ASS" exp ";"                           { /* TODO */ }
+  | "BURP" exp ";"                                 { /* TODO */ }
+  | methinvokation ";"                             { /* TODO */ }
+  | exp ";"                                        { /* TODO */ };
 
 statements:
     %empty                { /* TODO */ }
@@ -182,7 +183,7 @@ locvardecl:
     vardecl { /* TODO */ };
 
 exprargs:
-    exp            { /* TODO */ }
+    exp               { /* TODO */ }
   | exprargs "," exp  { /* TODO */ };
 
 methinvokation:
@@ -191,7 +192,7 @@ methinvokation:
 
 fieldinvokation:
     "DIS" "." "identifier"              { /* TODO */ }
-  | "DIS" "." "identifier" "[" exp "]" { /* TODO */ };
+  | "DIS" "." "identifier" "[" exp "]"  { /* TODO */ };
 
 lvalue:
     "identifier"              { /* TODO */ }
@@ -216,7 +217,8 @@ simpletype:
 arraytype:
     simpletype "[" "]" { /* TODO */ };
 
-unit: assignments exp { $$ = new Program($1, $2); driver.program = $$; };
+unit: 
+    assignments exp { $$ = new Program($1, $2); driver.program = $$; };
 
 assignments:
     %empty { $$ = new AssignmentList(); /* A -> eps */}
