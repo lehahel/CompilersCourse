@@ -1,10 +1,10 @@
 #pragma once
 
-#include "expression/expression.h"
+#include <expression/Expression.h>
 
 namespace Visitor {
-    class Base {
+    class CBase {
       public:
-        virtual void Visit(CExpression *expr) = 0;
+        virtual void Visit(Expression::CBase *expr) = 0;
     };
 };

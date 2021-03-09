@@ -9,5 +9,5 @@ class CBoolObject : public CObject {
     explicit CBoolObject(bool val)
     : CObject(new CBool()), value_(val) {};
   private:
-    bool value_;  
+    bool value_;
 };

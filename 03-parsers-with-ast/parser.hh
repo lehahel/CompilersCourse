@@ -379,23 +379,14 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // assignment
-      char dummy1[sizeof (Assignment*)];
-
-      // assignments
-      char dummy2[sizeof (AssignmentList*)];
-
       // exp
-      char dummy3[sizeof (Expression*)];
-
-      // unit
-      char dummy4[sizeof (Program*)];
+      char dummy1[sizeof (Expression*)];
 
       // "number"
-      char dummy5[sizeof (int)];
+      char dummy2[sizeof (int)];
 
       // "identifier"
-      char dummy6[sizeof (std::string)];
+      char dummy3[sizeof (std::string)];
     };
 
     /// The size of the largest semantic type.
@@ -542,32 +533,6 @@ namespace yy {
       {}
 #endif
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Assignment*&& v, location_type&& l)
-        : Base (t)
-        , value (std::move (v))
-        , location (std::move (l))
-      {}
-#else
-      basic_symbol (typename Base::kind_type t, const Assignment*& v, const location_type& l)
-        : Base (t)
-        , value (v)
-        , location (l)
-      {}
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, AssignmentList*&& v, location_type&& l)
-        : Base (t)
-        , value (std::move (v))
-        , location (std::move (l))
-      {}
-#else
-      basic_symbol (typename Base::kind_type t, const AssignmentList*& v, const location_type& l)
-        : Base (t)
-        , value (v)
-        , location (l)
-      {}
-#endif
-#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, Expression*&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -575,19 +540,6 @@ namespace yy {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const Expression*& v, const location_type& l)
-        : Base (t)
-        , value (v)
-        , location (l)
-      {}
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, Program*&& v, location_type&& l)
-        : Base (t)
-        , value (std::move (v))
-        , location (std::move (l))
-      {}
-#else
-      basic_symbol (typename Base::kind_type t, const Program*& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -642,20 +594,8 @@ namespace yy {
         // Type destructor.
 switch (yytype)
     {
-      case 49: // assignment
-        value.template destroy< Assignment* > ();
-        break;
-
-      case 50: // assignments
-        value.template destroy< AssignmentList* > ();
-        break;
-
       case 48: // exp
         value.template destroy< Expression* > ();
-        break;
-
-      case 51: // unit
-        value.template destroy< Program* > ();
         break;
 
       case 46: // "number"
@@ -1798,8 +1738,8 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 529,     ///< Last index in yytable_.
-      yynnts_ = 25,  ///< Number of nonterminal symbols.
+      yylast_ = 550,     ///< Last index in yytable_.
+      yynnts_ = 22,  ///< Number of nonterminal symbols.
       yyfinal_ = 5, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
@@ -1875,20 +1815,8 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
-      case 49: // assignment
-        value.move< Assignment* > (std::move (that.value));
-        break;
-
-      case 50: // assignments
-        value.move< AssignmentList* > (std::move (that.value));
-        break;
-
       case 48: // exp
         value.move< Expression* > (std::move (that.value));
-        break;
-
-      case 51: // unit
-        value.move< Program* > (std::move (that.value));
         break;
 
       case 46: // "number"
@@ -1914,20 +1842,8 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
-      case 49: // assignment
-        value.copy< Assignment* > (YY_MOVE (that.value));
-        break;
-
-      case 50: // assignments
-        value.copy< AssignmentList* > (YY_MOVE (that.value));
-        break;
-
       case 48: // exp
         value.copy< Expression* > (YY_MOVE (that.value));
-        break;
-
-      case 51: // unit
-        value.copy< Program* > (YY_MOVE (that.value));
         break;
 
       case 46: // "number"
@@ -1960,20 +1876,8 @@ switch (yytype)
     super_type::move (s);
     switch (this->type_get ())
     {
-      case 49: // assignment
-        value.move< Assignment* > (YY_MOVE (s.value));
-        break;
-
-      case 50: // assignments
-        value.move< AssignmentList* > (YY_MOVE (s.value));
-        break;
-
       case 48: // exp
         value.move< Expression* > (YY_MOVE (s.value));
-        break;
-
-      case 51: // unit
-        value.move< Program* > (YY_MOVE (s.value));
         break;
 
       case 46: // "number"
@@ -2058,7 +1962,7 @@ switch (yytype)
   }
 
 } // yy
-#line 2062 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.hh"
+#line 1966 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.hh"
 
 
 
