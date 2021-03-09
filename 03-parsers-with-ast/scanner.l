@@ -67,6 +67,7 @@ blank [ \t\r]
 "LOOPA"    { return yy::parser::make_WHILE     (loc); }
 "BURP"     { return yy::parser::make_RETURN    (loc); }
 
+","        { return yy::parser::make_COMMA     (loc); }
 ";"        { return yy::parser::make_SEMICOLON (loc); }
 "{"        { return yy::parser::make_LBLOCKPAR (loc); }
 "}"        { return yy::parser::make_RBLOCKPAR (loc); }
@@ -74,11 +75,12 @@ blank [ \t\r]
 "]"        { return yy::parser::make_RARRAYPAR (loc); }
 "."        { return yy::parser::make_DOT       (loc); }
 
+
 {blank}+   loc.step ();
 \n+        loc.lines (yyleng); loc.step ();
 
 "MENUS"    {
-              std::cout << loc.begin.line << " " << loc.end.line << std::endl;
+              std::cout << "MENBUS : " << loc.begin.line << " " << loc.end.line << std::endl;
               return yy::parser::make_MINUS  (loc);
            }
 "PLUBS"    { return yy::parser::make_PLUS    (loc); }

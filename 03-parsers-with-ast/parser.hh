@@ -450,22 +450,44 @@ namespace yy {
         TOK_PLUS = 261,
         TOK_STAR = 262,
         TOK_SLASH = 263,
-        TOK_LPAREN = 264,
-        TOK_RPAREN = 265,
-        TOK_LBLOCKPAR = 266,
-        TOK_RBLOCKPAR = 267,
-        TOK_PUBLIC = 268,
-        TOK_PRIVATE = 269,
-        TOK_STATIC = 270,
-        TOK_MAIN = 271,
-        TOK_CLASS = 272,
-        TOK_INT = 273,
-        TOK_DOUBLE = 274,
-        TOK_BOOL = 275,
-        TOK_STRING = 276,
-        TOK_VOID = 277,
-        TOK_IDENTIFIER = 278,
-        TOK_NUMBER = 279
+        TOK_NOT = 264,
+        TOK_EQUAL = 265,
+        TOK_NEQUAL = 266,
+        TOK_LESS = 267,
+        TOK_BIGGER = 268,
+        TOK_LEQUAL = 269,
+        TOK_BEQUAL = 270,
+        TOK_LPAREN = 271,
+        TOK_RPAREN = 272,
+        TOK_LBLOCKPAR = 273,
+        TOK_RBLOCKPAR = 274,
+        TOK_LARRAYPAR = 275,
+        TOK_RARRAYPAR = 276,
+        TOK_DOT = 277,
+        TOK_COMMA = 278,
+        TOK_PUBLIC = 279,
+        TOK_PRIVATE = 280,
+        TOK_STATIC = 281,
+        TOK_MAIN = 282,
+        TOK_CLASS = 283,
+        TOK_INT = 284,
+        TOK_DOUBLE = 285,
+        TOK_BOOL = 286,
+        TOK_STRING = 287,
+        TOK_VOID = 288,
+        TOK_NEW = 289,
+        TOK_LENGTH = 290,
+        TOK_TRUE = 291,
+        TOK_FALSE = 292,
+        TOK_THIS = 293,
+        TOK_ASSERT = 294,
+        TOK_PRINT = 295,
+        TOK_IF = 296,
+        TOK_ELSE = 297,
+        TOK_WHILE = 298,
+        TOK_RETURN = 299,
+        TOK_IDENTIFIER = 300,
+        TOK_NUMBER = 301
       };
     };
 
@@ -620,27 +642,27 @@ namespace yy {
         // Type destructor.
 switch (yytype)
     {
-      case 27: // assignment
+      case 49: // assignment
         value.template destroy< Assignment* > ();
         break;
 
-      case 28: // assignments
+      case 50: // assignments
         value.template destroy< AssignmentList* > ();
         break;
 
-      case 26: // exp
+      case 48: // exp
         value.template destroy< Expression* > ();
         break;
 
-      case 29: // unit
+      case 51: // unit
         value.template destroy< Program* > ();
         break;
 
-      case 24: // "number"
+      case 46: // "number"
         value.template destroy< int > ();
         break;
 
-      case 23: // "identifier"
+      case 45: // "identifier"
         value.template destroy< std::string > ();
         break;
 
@@ -723,13 +745,13 @@ switch (yytype)
       symbol_type (int tok, location_type l)
         : super_type(token_type (tok), std::move (l))
       {
-        YYASSERT (tok == token::TOK_END || tok == token::TOK_SEMICOLON || tok == token::TOK_ASSIGN || tok == token::TOK_MINUS || tok == token::TOK_PLUS || tok == token::TOK_STAR || tok == token::TOK_SLASH || tok == token::TOK_LPAREN || tok == token::TOK_RPAREN || tok == token::TOK_LBLOCKPAR || tok == token::TOK_RBLOCKPAR || tok == token::TOK_PUBLIC || tok == token::TOK_PRIVATE || tok == token::TOK_STATIC || tok == token::TOK_MAIN || tok == token::TOK_CLASS || tok == token::TOK_INT || tok == token::TOK_DOUBLE || tok == token::TOK_BOOL || tok == token::TOK_STRING || tok == token::TOK_VOID);
+        YYASSERT (tok == token::TOK_END || tok == token::TOK_SEMICOLON || tok == token::TOK_ASSIGN || tok == token::TOK_MINUS || tok == token::TOK_PLUS || tok == token::TOK_STAR || tok == token::TOK_SLASH || tok == token::TOK_NOT || tok == token::TOK_EQUAL || tok == token::TOK_NEQUAL || tok == token::TOK_LESS || tok == token::TOK_BIGGER || tok == token::TOK_LEQUAL || tok == token::TOK_BEQUAL || tok == token::TOK_LPAREN || tok == token::TOK_RPAREN || tok == token::TOK_LBLOCKPAR || tok == token::TOK_RBLOCKPAR || tok == token::TOK_LARRAYPAR || tok == token::TOK_RARRAYPAR || tok == token::TOK_DOT || tok == token::TOK_COMMA || tok == token::TOK_PUBLIC || tok == token::TOK_PRIVATE || tok == token::TOK_STATIC || tok == token::TOK_MAIN || tok == token::TOK_CLASS || tok == token::TOK_INT || tok == token::TOK_DOUBLE || tok == token::TOK_BOOL || tok == token::TOK_STRING || tok == token::TOK_VOID || tok == token::TOK_NEW || tok == token::TOK_LENGTH || tok == token::TOK_TRUE || tok == token::TOK_FALSE || tok == token::TOK_THIS || tok == token::TOK_ASSERT || tok == token::TOK_PRINT || tok == token::TOK_IF || tok == token::TOK_ELSE || tok == token::TOK_WHILE || tok == token::TOK_RETURN);
       }
 #else
       symbol_type (int tok, const location_type& l)
         : super_type(token_type (tok), l)
       {
-        YYASSERT (tok == token::TOK_END || tok == token::TOK_SEMICOLON || tok == token::TOK_ASSIGN || tok == token::TOK_MINUS || tok == token::TOK_PLUS || tok == token::TOK_STAR || tok == token::TOK_SLASH || tok == token::TOK_LPAREN || tok == token::TOK_RPAREN || tok == token::TOK_LBLOCKPAR || tok == token::TOK_RBLOCKPAR || tok == token::TOK_PUBLIC || tok == token::TOK_PRIVATE || tok == token::TOK_STATIC || tok == token::TOK_MAIN || tok == token::TOK_CLASS || tok == token::TOK_INT || tok == token::TOK_DOUBLE || tok == token::TOK_BOOL || tok == token::TOK_STRING || tok == token::TOK_VOID);
+        YYASSERT (tok == token::TOK_END || tok == token::TOK_SEMICOLON || tok == token::TOK_ASSIGN || tok == token::TOK_MINUS || tok == token::TOK_PLUS || tok == token::TOK_STAR || tok == token::TOK_SLASH || tok == token::TOK_NOT || tok == token::TOK_EQUAL || tok == token::TOK_NEQUAL || tok == token::TOK_LESS || tok == token::TOK_BIGGER || tok == token::TOK_LEQUAL || tok == token::TOK_BEQUAL || tok == token::TOK_LPAREN || tok == token::TOK_RPAREN || tok == token::TOK_LBLOCKPAR || tok == token::TOK_RBLOCKPAR || tok == token::TOK_LARRAYPAR || tok == token::TOK_RARRAYPAR || tok == token::TOK_DOT || tok == token::TOK_COMMA || tok == token::TOK_PUBLIC || tok == token::TOK_PRIVATE || tok == token::TOK_STATIC || tok == token::TOK_MAIN || tok == token::TOK_CLASS || tok == token::TOK_INT || tok == token::TOK_DOUBLE || tok == token::TOK_BOOL || tok == token::TOK_STRING || tok == token::TOK_VOID || tok == token::TOK_NEW || tok == token::TOK_LENGTH || tok == token::TOK_TRUE || tok == token::TOK_FALSE || tok == token::TOK_THIS || tok == token::TOK_ASSERT || tok == token::TOK_PRINT || tok == token::TOK_IF || tok == token::TOK_ELSE || tok == token::TOK_WHILE || tok == token::TOK_RETURN);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -903,6 +925,111 @@ switch (yytype)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
+      make_NOT (location_type l)
+      {
+        return symbol_type (token::TOK_NOT, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_NOT (const location_type& l)
+      {
+        return symbol_type (token::TOK_NOT, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_EQUAL (location_type l)
+      {
+        return symbol_type (token::TOK_EQUAL, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_EQUAL (const location_type& l)
+      {
+        return symbol_type (token::TOK_EQUAL, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_NEQUAL (location_type l)
+      {
+        return symbol_type (token::TOK_NEQUAL, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_NEQUAL (const location_type& l)
+      {
+        return symbol_type (token::TOK_NEQUAL, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_LESS (location_type l)
+      {
+        return symbol_type (token::TOK_LESS, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_LESS (const location_type& l)
+      {
+        return symbol_type (token::TOK_LESS, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_BIGGER (location_type l)
+      {
+        return symbol_type (token::TOK_BIGGER, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_BIGGER (const location_type& l)
+      {
+        return symbol_type (token::TOK_BIGGER, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_LEQUAL (location_type l)
+      {
+        return symbol_type (token::TOK_LEQUAL, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_LEQUAL (const location_type& l)
+      {
+        return symbol_type (token::TOK_LEQUAL, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_BEQUAL (location_type l)
+      {
+        return symbol_type (token::TOK_BEQUAL, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_BEQUAL (const location_type& l)
+      {
+        return symbol_type (token::TOK_BEQUAL, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
       make_LPAREN (location_type l)
       {
         return symbol_type (token::TOK_LPAREN, std::move (l));
@@ -958,6 +1085,66 @@ switch (yytype)
       make_RBLOCKPAR (const location_type& l)
       {
         return symbol_type (token::TOK_RBLOCKPAR, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_LARRAYPAR (location_type l)
+      {
+        return symbol_type (token::TOK_LARRAYPAR, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_LARRAYPAR (const location_type& l)
+      {
+        return symbol_type (token::TOK_LARRAYPAR, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_RARRAYPAR (location_type l)
+      {
+        return symbol_type (token::TOK_RARRAYPAR, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_RARRAYPAR (const location_type& l)
+      {
+        return symbol_type (token::TOK_RARRAYPAR, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_DOT (location_type l)
+      {
+        return symbol_type (token::TOK_DOT, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_DOT (const location_type& l)
+      {
+        return symbol_type (token::TOK_DOT, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_COMMA (location_type l)
+      {
+        return symbol_type (token::TOK_COMMA, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_COMMA (const location_type& l)
+      {
+        return symbol_type (token::TOK_COMMA, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1113,6 +1300,171 @@ switch (yytype)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
+      make_NEW (location_type l)
+      {
+        return symbol_type (token::TOK_NEW, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_NEW (const location_type& l)
+      {
+        return symbol_type (token::TOK_NEW, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_LENGTH (location_type l)
+      {
+        return symbol_type (token::TOK_LENGTH, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_LENGTH (const location_type& l)
+      {
+        return symbol_type (token::TOK_LENGTH, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_TRUE (location_type l)
+      {
+        return symbol_type (token::TOK_TRUE, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_TRUE (const location_type& l)
+      {
+        return symbol_type (token::TOK_TRUE, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_FALSE (location_type l)
+      {
+        return symbol_type (token::TOK_FALSE, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_FALSE (const location_type& l)
+      {
+        return symbol_type (token::TOK_FALSE, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_THIS (location_type l)
+      {
+        return symbol_type (token::TOK_THIS, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_THIS (const location_type& l)
+      {
+        return symbol_type (token::TOK_THIS, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_ASSERT (location_type l)
+      {
+        return symbol_type (token::TOK_ASSERT, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_ASSERT (const location_type& l)
+      {
+        return symbol_type (token::TOK_ASSERT, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_PRINT (location_type l)
+      {
+        return symbol_type (token::TOK_PRINT, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_PRINT (const location_type& l)
+      {
+        return symbol_type (token::TOK_PRINT, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_IF (location_type l)
+      {
+        return symbol_type (token::TOK_IF, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_IF (const location_type& l)
+      {
+        return symbol_type (token::TOK_IF, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_ELSE (location_type l)
+      {
+        return symbol_type (token::TOK_ELSE, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_ELSE (const location_type& l)
+      {
+        return symbol_type (token::TOK_ELSE, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_WHILE (location_type l)
+      {
+        return symbol_type (token::TOK_WHILE, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_WHILE (const location_type& l)
+      {
+        return symbol_type (token::TOK_WHILE, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_RETURN (location_type l)
+      {
+        return symbol_type (token::TOK_RETURN, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_RETURN (const location_type& l)
+      {
+        return symbol_type (token::TOK_RETURN, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
       make_IDENTIFIER (std::string v, location_type l)
       {
         return symbol_type (token::TOK_IDENTIFIER, std::move (v), std::move (l));
@@ -1169,7 +1521,7 @@ switch (yytype)
     /// \param yyvalue   the value to check
     static bool yy_table_value_is_error_ (int yyvalue);
 
-    static const signed char yypact_ninf_;
+    static const short yypact_ninf_;
     static const signed char yytable_ninf_;
 
     /// Convert a scanner token number \a t to a symbol number.
@@ -1178,7 +1530,7 @@ switch (yytype)
     // Tables.
   // YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
   // STATE-NUM.
-  static const signed char yypact_[];
+  static const short yypact_[];
 
   // YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
   // Performed when YYTABLE does not specify something else to do.  Zero
@@ -1186,17 +1538,17 @@ switch (yytype)
   static const unsigned char yydefact_[];
 
   // YYPGOTO[NTERM-NUM].
-  static const signed char yypgoto_[];
+  static const short yypgoto_[];
 
   // YYDEFGOTO[NTERM-NUM].
-  static const signed char yydefgoto_[];
+  static const short yydefgoto_[];
 
   // YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
   // positive, shift that token.  If negative, reduce the rule whose
   // number is the opposite.  If YYTABLE_NINF, syntax error.
-  static const unsigned char yytable_[];
+  static const short yytable_[];
 
-  static const signed char yycheck_[];
+  static const short yycheck_[];
 
   // YYSTOS[STATE-NUM] -- The (internal number of the) accessing
   // symbol of state STATE-NUM.
@@ -1217,7 +1569,7 @@ switch (yytype)
     static const char* const yytname_[];
 #if YYDEBUG
   // YYRLINE[YYN] -- Source line where rule number YYN was defined.
-  static const unsigned char yyrline_[];
+  static const unsigned short yyrline_[];
     /// Report on the debug stream that the rule \a r is going to be reduced.
     virtual void yy_reduce_print_ (int r);
     /// Print the state stack on the debug stream.
@@ -1446,12 +1798,12 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 38,     ///< Last index in yytable_.
-      yynnts_ = 6,  ///< Number of nonterminal symbols.
-      yyfinal_ = 4, ///< Termination state number.
+      yylast_ = 529,     ///< Last index in yytable_.
+      yynnts_ = 25,  ///< Number of nonterminal symbols.
+      yyfinal_ = 5, ///< Termination state number.
       yyterror_ = 1,
       yyerrcode_ = 256,
-      yyntokens_ = 25  ///< Number of tokens.
+      yyntokens_ = 47  ///< Number of tokens.
     };
 
 
@@ -1497,9 +1849,12 @@ switch (yytype)
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23,    24
+      15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,    43,    44,
+      45,    46
     };
-    const unsigned user_token_number_max_ = 279;
+    const unsigned user_token_number_max_ = 301;
     const token_number_type undef_token_ = 2;
 
     if (static_cast<int> (t) <= yyeof_)
@@ -1520,27 +1875,27 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
-      case 27: // assignment
+      case 49: // assignment
         value.move< Assignment* > (std::move (that.value));
         break;
 
-      case 28: // assignments
+      case 50: // assignments
         value.move< AssignmentList* > (std::move (that.value));
         break;
 
-      case 26: // exp
+      case 48: // exp
         value.move< Expression* > (std::move (that.value));
         break;
 
-      case 29: // unit
+      case 51: // unit
         value.move< Program* > (std::move (that.value));
         break;
 
-      case 24: // "number"
+      case 46: // "number"
         value.move< int > (std::move (that.value));
         break;
 
-      case 23: // "identifier"
+      case 45: // "identifier"
         value.move< std::string > (std::move (that.value));
         break;
 
@@ -1559,27 +1914,27 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
-      case 27: // assignment
+      case 49: // assignment
         value.copy< Assignment* > (YY_MOVE (that.value));
         break;
 
-      case 28: // assignments
+      case 50: // assignments
         value.copy< AssignmentList* > (YY_MOVE (that.value));
         break;
 
-      case 26: // exp
+      case 48: // exp
         value.copy< Expression* > (YY_MOVE (that.value));
         break;
 
-      case 29: // unit
+      case 51: // unit
         value.copy< Program* > (YY_MOVE (that.value));
         break;
 
-      case 24: // "number"
+      case 46: // "number"
         value.copy< int > (YY_MOVE (that.value));
         break;
 
-      case 23: // "identifier"
+      case 45: // "identifier"
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
@@ -1605,27 +1960,27 @@ switch (yytype)
     super_type::move (s);
     switch (this->type_get ())
     {
-      case 27: // assignment
+      case 49: // assignment
         value.move< Assignment* > (YY_MOVE (s.value));
         break;
 
-      case 28: // assignments
+      case 50: // assignments
         value.move< AssignmentList* > (YY_MOVE (s.value));
         break;
 
-      case 26: // exp
+      case 48: // exp
         value.move< Expression* > (YY_MOVE (s.value));
         break;
 
-      case 29: // unit
+      case 51: // unit
         value.move< Program* > (YY_MOVE (s.value));
         break;
 
-      case 24: // "number"
+      case 46: // "number"
         value.move< int > (YY_MOVE (s.value));
         break;
 
-      case 23: // "identifier"
+      case 45: // "identifier"
         value.move< std::string > (YY_MOVE (s.value));
         break;
 
@@ -1695,13 +2050,15 @@ switch (yytype)
     {
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
-     275,   276,   277,   278,   279
+     275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
+     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
+     295,   296,   297,   298,   299,   300,   301
     };
     return token_type (yytoken_number_[type]);
   }
 
 } // yy
-#line 1705 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.hh"
+#line 2062 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.hh"
 
 
 

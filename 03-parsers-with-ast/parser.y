@@ -91,6 +91,7 @@
     LARRAYPAR   "["
     RARRAYPAR   "]"
     DOT         "."
+    COMMA       ","
     PUBLIC      "BUBLIC"
     PRIVATE     "SECOOR"
     STATIC      "STATEC"
@@ -160,35 +161,41 @@ formals:
     formal                { /* TODO */ }
   | formals formal        { /* TODO */ };
 
-statement:  "OSETR" "(" exp ")"                         { /* TODO */ }
-          | locvardecl                                  { /* TODO */ }
-          | "{" statements "}"                          { /* TODO */ }
-          | "IFF" "(" exp ")" statement                 { /* TODO */ }
-          | "IFF" "(" exp ")" statement "ELS" statement { /* TODO */ }
-          | "LOOPA" "(" exp ")" statement               { /* TODO */ }
-          | "CROAK" "(" exp ")" ";"                     { /* TODO */ }
-          | lvalue "ASS" exp ";"                        { /* TODO */ }
-          | "BURP" exp ";"                              { /* TODO */ }
-          | methinvokation ";"                          { /* TODO */ };
+statement:  
+    "OSETR" "(" exp ")"                         { /* TODO */ }
+  | locvardecl                                  { /* TODO */ }
+  | "{" statements "}"                          { /* TODO */ }
+  | "IFF" "(" exp ")" statement                 { /* TODO */ }
+  | "IFF" "(" exp ")" statement "ELS" statement { /* TODO */ }
+  | "LOOPA" "(" exp ")" statement               { /* TODO */ }
+  | "CROAK" "(" exp ")" ";"                     { /* TODO */ }
+  | lvalue "ASS" exp ";"                        { /* TODO */ }
+  | "BURP" exp ";"                              { /* TODO */ }
+  | methinvokation ";"                          { /* TODO */ };
+
+statements:
+    %empty                { /* TODO */ }
+  | statements statement  { /* TODO */ };
+
 
 locvardecl:
     vardecl { /* TODO */ };
 
 exprargs:
     exp            { /* TODO */ }
-  | exprargs, exp  { /* TODO */ };
+  | exprargs "," exp  { /* TODO */ };
 
 methinvokation:
     exp "." "identifier" "(" ")"           { /* TODO */ }
   | exp "." "identifier" "(" exprargs ")"  { /* TODO */ };
 
 fieldinvokation:
-    this "." "identifier"              { /* TODO */ }
-  | this "." "identifier" "[" exp "]" { /* TODO */ };
+    "DIS" "." "identifier"              { /* TODO */ }
+  | "DIS" "." "identifier" "[" exp "]" { /* TODO */ };
 
 lvalue:
     "identifier"              { /* TODO */ }
-  | "identifier" "[" exp "]" { /* TODO */ }
+  | "identifier" "[" exp "]"  { /* TODO */ }
   | fieldinvokation           { /* TODO */ };
 
 type:
@@ -227,10 +234,10 @@ assignment:
 %left "MUTLI" "DEVID";
 
 exp:
-    "number"         { $$ = new NumberExpression($1); }
+    "number"         { $$ = new NumberExpression($1);}
   | "identifier"     { $$ = new IdentExpression($1); }
   | exp "[" exp "]"  { /* TODO */ }
-  | exp "." length   { /* TODO */ }
+  | exp "." "LENA"   { /* TODO */ }
   | "YES"            { /* TODO */ }
   | "NO"             { /* TODO */ }
   | "NOT" exp        { /* TODO */ }

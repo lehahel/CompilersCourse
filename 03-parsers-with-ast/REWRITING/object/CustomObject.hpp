@@ -6,7 +6,7 @@
 
 class CCustomObject : public CObject {
   public:
-      
+    
   private:
     
 };
