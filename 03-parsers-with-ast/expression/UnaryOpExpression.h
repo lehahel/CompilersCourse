@@ -3,26 +3,26 @@
 #include "Expression.h"
 #include <visitor/Visitor.h>
 
-namespace Expression {
+namespace Expr {
     enum UnaryOperatorType {
         MINUS,
         NOT
     };
 
-    class CUnaryOperation : public Expression::CBase {
+    class CUnaryOperation : public Expr::CBase {
       public:
         void Accept(Visitor::CBase *visitor) override;
         CUnaryOperation(
             UnaryOperatorType type,
-            Expression::CBase *expr
+            Expr::CBase *expr
         );
         ~CUnaryOperation() override = default;
 
-        static CUnaryOperation *CreateMinus(Expression::CBase *expr);
-        static CUnaryOperation *CreateNot  (Expression::CBase *expr);
+        static CUnaryOperation *CreateMinus(Expr::CBase *expr);
+        static CUnaryOperation *CreateNot  (Expr::CBase *expr);
 
       private:
         UnaryOperatorType type_;
-        Expression::CBase *expr_;
+        Expr::CBase *expr_;
     };
 }

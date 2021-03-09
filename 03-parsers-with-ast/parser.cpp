@@ -47,15 +47,21 @@
     #include "driver.hh"
     #include "location.hh"
 
-    #include "expressions/NumberExpression.h"
-    #include "expressions/AddExpression.h"
-    #include "expressions/MulExpression.h"
-    #include "expressions/DivExpression.h"
-    #include "expressions/SubstractExpression.h"
-    #include "expressions/IdentExpression.h"
-    #include "assignments/Assignment.h"
-    #include "assignments/AssignmentList.h"
+    // #include "expressions/NumberExpression.h"
+    // #include "expressions/AddExpression.h"
+    // #include "expressions/MulExpression.h"
+    // #include "expressions/DivExpression.h"
+    // #include "expressions/SubstractExpression.h"
+    // #include "expressions/IdentExpression.h"
+    // #include "assignments/Assignment.h"
+    // #include "assignments/AssignmentList.h"
 
+    #include "Base.h"
+    #include "visitor/Visitor.h"
+    #include "expression/Expression.h"
+    #include "expression/BinaryOpExpression.h"
+    #include "expression/UnaryOpExpression.h"
+    #include "expression/NumberExpression.h"
     // #include "assignments_default/assignment.h"
     // #include "assignments_default/assignment_list.h"
     // #include "expression_default/addexpression.h"
@@ -75,7 +81,7 @@
         return scanner.ScanToken();
     }
 
-#line 79 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 85 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
 
 #ifndef YY_
@@ -167,7 +173,7 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 171 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 177 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
   /// Build a parser object.
   parser::parser (Scanner &scanner_yyarg, Driver &driver_yyarg)
@@ -620,403 +626,403 @@ namespace yy {
           switch (yyn)
             {
   case 2: // program: main
-#line 133 "parser.y"
-                      { /* TODO */ }
-#line 626 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 3: // program: program classdecl
-#line 134 "parser.y"
+#line 139 "parser.y"
                       { /* TODO */ }
 #line 632 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 5: // classdecl: "FROG" "identifier" "{" declarations "}"
+  case 3: // program: program classdecl
 #line 140 "parser.y"
-                                             { /* TODO */ }
+                      { /* TODO */ }
 #line 638 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 6: // declaration: vardecl
-#line 143 "parser.y"
-               { /* TODO */ }
+  case 5: // classdecl: "FROG" "identifier" "{" declarations "}"
+#line 146 "parser.y"
+                                             { /* TODO */ }
 #line 644 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 7: // declaration: methoddecl
-#line 144 "parser.y"
+  case 6: // declaration: vardecl
+#line 149 "parser.y"
                { /* TODO */ }
 #line 650 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 8: // declarations: %empty
-#line 147 "parser.y"
-                             { /* TODO */ }
+  case 7: // declaration: methoddecl
+#line 150 "parser.y"
+               { /* TODO */ }
 #line 656 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 9: // declarations: declarations declaration
-#line 148 "parser.y"
+  case 8: // declarations: %empty
+#line 153 "parser.y"
                              { /* TODO */ }
 #line 662 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 10: // methoddecl: "BUBLIC" type "identifier" "(" ")" "{" statements "}"
-#line 151 "parser.y"
-                                                                  { /* TODO */ }
+  case 9: // declarations: declarations declaration
+#line 154 "parser.y"
+                             { /* TODO */ }
 #line 668 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 11: // methoddecl: "BUBLIC" type "identifier" "(" formals ")" "{" statements "}"
-#line 152 "parser.y"
+  case 10: // methoddecl: "BUBLIC" type "identifier" "(" ")" "{" statements "}"
+#line 157 "parser.y"
                                                                   { /* TODO */ }
 #line 674 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 12: // vardecl: type "identifier" ";"
-#line 155 "parser.y"
-                          { /* TODO */ }
+  case 11: // methoddecl: "BUBLIC" type "identifier" "(" formals ")" "{" statements "}"
+#line 158 "parser.y"
+                                                                  { /* TODO */ }
 #line 680 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 13: // formal: type "identifier"
-#line 158 "parser.y"
-                      { /* TODO */ }
+  case 12: // vardecl: type "identifier" ";"
+#line 161 "parser.y"
+                          { /* TODO */ }
 #line 686 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 14: // formals: formal
-#line 161 "parser.y"
-                          { /* TODO */ }
+  case 13: // formal: type "identifier"
+#line 164 "parser.y"
+                      { /* TODO */ }
 #line 692 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 15: // formals: formals formal
-#line 162 "parser.y"
+  case 14: // formals: formal
+#line 167 "parser.y"
                           { /* TODO */ }
 #line 698 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 16: // statement: "OSETR" "(" exp ")" ";"
-#line 165 "parser.y"
-                                                   { /* TODO */ }
+  case 15: // formals: formals formal
+#line 168 "parser.y"
+                          { /* TODO */ }
 #line 704 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 17: // statement: locvardecl ";"
-#line 166 "parser.y"
+  case 16: // statement: "OSETR" "(" exp ")" ";"
+#line 171 "parser.y"
                                                    { /* TODO */ }
 #line 710 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 18: // statement: "{" statements "}" ";"
-#line 167 "parser.y"
+  case 17: // statement: locvardecl ";"
+#line 172 "parser.y"
                                                    { /* TODO */ }
 #line 716 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 19: // statement: "IFF" "(" exp ")" statement ";"
-#line 168 "parser.y"
+  case 18: // statement: "{" statements "}" ";"
+#line 173 "parser.y"
                                                    { /* TODO */ }
 #line 722 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 20: // statement: "IFF" "(" exp ")" statement "ELS" statement ";"
-#line 169 "parser.y"
+  case 19: // statement: "IFF" "(" exp ")" statement ";"
+#line 174 "parser.y"
                                                    { /* TODO */ }
 #line 728 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 21: // statement: "LOOPA" "(" exp ")" statement ";"
-#line 170 "parser.y"
+  case 20: // statement: "IFF" "(" exp ")" statement "ELS" statement ";"
+#line 175 "parser.y"
                                                    { /* TODO */ }
 #line 734 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 22: // statement: "CROAK" "(" exp ")" ";"
-#line 171 "parser.y"
+  case 21: // statement: "LOOPA" "(" exp ")" statement ";"
+#line 176 "parser.y"
                                                    { /* TODO */ }
 #line 740 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 23: // statement: lvalue "ASS" exp ";"
-#line 172 "parser.y"
+  case 22: // statement: "CROAK" "(" exp ")" ";"
+#line 177 "parser.y"
                                                    { /* TODO */ }
 #line 746 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 24: // statement: "BURP" exp ";"
-#line 173 "parser.y"
+  case 23: // statement: lvalue "ASS" exp ";"
+#line 178 "parser.y"
                                                    { /* TODO */ }
 #line 752 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 25: // statement: methinvokation ";"
-#line 174 "parser.y"
+  case 24: // statement: "BURP" exp ";"
+#line 179 "parser.y"
                                                    { /* TODO */ }
 #line 758 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 26: // statement: exp ";"
-#line 175 "parser.y"
+  case 25: // statement: methinvokation ";"
+#line 180 "parser.y"
                                                    { /* TODO */ }
 #line 764 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 27: // statements: %empty
-#line 178 "parser.y"
-                          { /* TODO */ }
+  case 26: // statement: exp ";"
+#line 181 "parser.y"
+                                                   { /* TODO */ }
 #line 770 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 28: // statements: statements statement
-#line 179 "parser.y"
+  case 27: // statements: %empty
+#line 184 "parser.y"
                           { /* TODO */ }
 #line 776 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 29: // locvardecl: vardecl
-#line 183 "parser.y"
-            { /* TODO */ }
+  case 28: // statements: statements statement
+#line 185 "parser.y"
+                          { /* TODO */ }
 #line 782 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 30: // exprargs: exp
-#line 186 "parser.y"
-                      { /* TODO */ }
+  case 29: // locvardecl: vardecl
+#line 189 "parser.y"
+            { /* TODO */ }
 #line 788 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 31: // exprargs: exprargs "," exp
-#line 187 "parser.y"
+  case 30: // exprargs: exp
+#line 192 "parser.y"
                       { /* TODO */ }
 #line 794 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 32: // methinvokation: exp "." "identifier" "(" ")"
-#line 190 "parser.y"
-                                           { /* TODO */ }
+  case 31: // exprargs: exprargs "," exp
+#line 193 "parser.y"
+                      { /* TODO */ }
 #line 800 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 33: // methinvokation: exp "." "identifier" "(" exprargs ")"
-#line 191 "parser.y"
+  case 32: // methinvokation: exp "." "identifier" "(" ")"
+#line 196 "parser.y"
                                            { /* TODO */ }
 #line 806 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 34: // fieldinvokation: "DIS" "." "identifier"
-#line 194 "parser.y"
-                                        { /* TODO */ }
+  case 33: // methinvokation: exp "." "identifier" "(" exprargs ")"
+#line 197 "parser.y"
+                                           { /* TODO */ }
 #line 812 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 35: // fieldinvokation: "DIS" "." "identifier" "[" exp "]"
-#line 195 "parser.y"
+  case 34: // fieldinvokation: "DIS" "." "identifier"
+#line 200 "parser.y"
                                         { /* TODO */ }
 #line 818 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 36: // lvalue: "identifier"
-#line 198 "parser.y"
-                              { /* TODO */ }
+  case 35: // fieldinvokation: "DIS" "." "identifier" "[" exp "]"
+#line 201 "parser.y"
+                                        { /* TODO */ }
 #line 824 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 37: // lvalue: "identifier" "[" exp "]"
-#line 199 "parser.y"
+  case 36: // lvalue: "identifier"
+#line 204 "parser.y"
                               { /* TODO */ }
 #line 830 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 38: // lvalue: fieldinvokation
-#line 200 "parser.y"
+  case 37: // lvalue: "identifier" "[" exp "]"
+#line 205 "parser.y"
                               { /* TODO */ }
 #line 836 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 39: // type: simpletype
-#line 203 "parser.y"
-               { /* TODO */ }
+  case 38: // lvalue: fieldinvokation
+#line 206 "parser.y"
+                              { /* TODO */ }
 #line 842 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 40: // type: arraytype
-#line 204 "parser.y"
+  case 39: // type: simpletype
+#line 209 "parser.y"
                { /* TODO */ }
 #line 848 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 41: // typeid: "identifier"
-#line 207 "parser.y"
-                 { /* TODO */ }
+  case 40: // type: arraytype
+#line 210 "parser.y"
+               { /* TODO */ }
 #line 854 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 42: // simpletype: "NUMBA"
-#line 210 "parser.y"
-             { /* TODO */ }
+  case 41: // typeid: "identifier"
+#line 213 "parser.y"
+                 { /* TODO */ }
 #line 860 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 43: // simpletype: "DUMBA"
-#line 211 "parser.y"
+  case 42: // simpletype: "NUMBA"
+#line 216 "parser.y"
              { /* TODO */ }
 #line 866 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 44: // simpletype: "TEXTA"
-#line 212 "parser.y"
+  case 43: // simpletype: "DUMBA"
+#line 217 "parser.y"
              { /* TODO */ }
 #line 872 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 45: // simpletype: "BOOLA"
-#line 213 "parser.y"
+  case 44: // simpletype: "TEXTA"
+#line 218 "parser.y"
              { /* TODO */ }
 #line 878 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 46: // simpletype: "VOEDA"
-#line 214 "parser.y"
+  case 45: // simpletype: "BOOLA"
+#line 219 "parser.y"
              { /* TODO */ }
 #line 884 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 47: // simpletype: typeid
-#line 215 "parser.y"
+  case 46: // simpletype: "VOEDA"
+#line 220 "parser.y"
              { /* TODO */ }
 #line 890 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 48: // arraytype: simpletype "[" "]"
-#line 218 "parser.y"
-                       { /* TODO */ }
+  case 47: // simpletype: typeid
+#line 221 "parser.y"
+             { /* TODO */ }
 #line 896 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 49: // exp: "number"
-#line 239 "parser.y"
-                     { yylhs.value.as < Expression* > () = new NumberExpression(yystack_[0].value.as < int > ());}
+  case 48: // arraytype: simpletype "[" "]"
+#line 224 "parser.y"
+                       { /* TODO */ }
 #line 902 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 50: // exp: "identifier"
-#line 240 "parser.y"
-                     { yylhs.value.as < Expression* > () = new IdentExpression(yystack_[0].value.as < std::string > ()); }
+  case 49: // exp: "number"
+#line 245 "parser.y"
+                     { yylhs.value.as < Expression* > () = new Expr::CNumber(yystack_[0].value.as < int > ());}
 #line 908 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 51: // exp: exp "[" exp "]"
-#line 241 "parser.y"
-                     { /* TODO */ }
+  case 50: // exp: "identifier"
+#line 246 "parser.y"
+                     { /*$$ = new IdentExpression($1);*/ }
 #line 914 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 52: // exp: exp "." "LENA"
-#line 242 "parser.y"
+  case 51: // exp: exp "[" exp "]"
+#line 247 "parser.y"
                      { /* TODO */ }
 #line 920 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 53: // exp: "YES"
-#line 243 "parser.y"
+  case 52: // exp: exp "." "LENA"
+#line 248 "parser.y"
                      { /* TODO */ }
 #line 926 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 54: // exp: "NO"
-#line 244 "parser.y"
+  case 53: // exp: "YES"
+#line 249 "parser.y"
                      { /* TODO */ }
 #line 932 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 55: // exp: "NOT" exp
-#line 245 "parser.y"
+  case 54: // exp: "NO"
+#line 250 "parser.y"
                      { /* TODO */ }
 #line 938 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 56: // exp: "POLLIWOG" simpletype "[" exp "]"
-#line 246 "parser.y"
-                                      { /* TODO */ }
+  case 55: // exp: "NOT" exp
+#line 251 "parser.y"
+                     { /* TODO */ }
 #line 944 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 57: // exp: "POLLIWOG" typeid "(" ")"
-#line 247 "parser.y"
+  case 56: // exp: "POLLIWOG" simpletype "[" exp "]"
+#line 252 "parser.y"
                                       { /* TODO */ }
 #line 950 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 58: // exp: exp "PLUBS" exp
-#line 248 "parser.y"
-                     { yylhs.value.as < Expression* > () = new AddExpression(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
+  case 57: // exp: "POLLIWOG" typeid "(" ")"
+#line 253 "parser.y"
+                                      { /* TODO */ }
 #line 956 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 59: // exp: exp "MENUS" exp
-#line 249 "parser.y"
-                     { yylhs.value.as < Expression* > () = new SubstractExpression(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
+  case 58: // exp: exp "MENUS" exp
+#line 254 "parser.y"
+                     { yylhs.value.as < Expression* > () = new Expr::CBinaryOperation::CreateSub(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
 #line 962 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 60: // exp: exp "MUTLI" exp
-#line 250 "parser.y"
-                     { yylhs.value.as < Expression* > () = new MulExpression(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
+  case 59: // exp: exp "PLUBS" exp
+#line 255 "parser.y"
+                     { yylhs.value.as < Expression* > () = new Expr::CBinaryOperation::CreateAdd(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
 #line 968 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 61: // exp: exp "DEVID" exp
-#line 251 "parser.y"
-                     { yylhs.value.as < Expression* > () = new DivExpression(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
+  case 60: // exp: exp "MUTLI" exp
+#line 256 "parser.y"
+                     { yylhs.value.as < Expression* > () = new Expr::CBinaryOperation::CreateMul(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
 #line 974 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 62: // exp: exp "EKWAL" exp
-#line 252 "parser.y"
-                     { /* TODO */ }
+  case 61: // exp: exp "DEVID" exp
+#line 257 "parser.y"
+                     { yylhs.value.as < Expression* > () = new Expr::CBinaryOperation::CreateDiv(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
 #line 980 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 63: // exp: exp "NEKWAL" exp
-#line 253 "parser.y"
+  case 62: // exp: exp "EKWAL" exp
+#line 258 "parser.y"
                      { /* TODO */ }
 #line 986 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 64: // exp: exp "LES" exp
-#line 254 "parser.y"
+  case 63: // exp: exp "NEKWAL" exp
+#line 259 "parser.y"
                      { /* TODO */ }
 #line 992 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 65: // exp: exp "BIGA" exp
-#line 255 "parser.y"
+  case 64: // exp: exp "LES" exp
+#line 260 "parser.y"
                      { /* TODO */ }
 #line 998 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 66: // exp: exp "LESOEK" exp
-#line 256 "parser.y"
+  case 65: // exp: exp "BIGA" exp
+#line 261 "parser.y"
                      { /* TODO */ }
 #line 1004 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 67: // exp: exp "BIGOEK" exp
-#line 257 "parser.y"
+  case 66: // exp: exp "LESOEK" exp
+#line 262 "parser.y"
                      { /* TODO */ }
 #line 1010 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 68: // exp: "(" exp ")"
-#line 258 "parser.y"
-                     { yylhs.value.as < Expression* > () = yystack_[1].value.as < Expression* > (); }
+  case 67: // exp: exp "BIGOEK" exp
+#line 263 "parser.y"
+                     { /* TODO */ }
 #line 1016 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
+  case 68: // exp: "(" exp ")"
+#line 264 "parser.y"
+                     { yylhs.value.as < Expression* > () = yystack_[1].value.as < Expression* > (); }
+#line 1022 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
 
-#line 1020 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+
+#line 1026 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
             default:
               break;
@@ -1405,8 +1411,8 @@ namespace yy {
        0,     0,     0,     0,     0,     0,     0,     0,    17,    25,
        0,    26,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,    10,     0,     0,    68,     0,     0,
-       0,    34,     0,     0,     0,     0,    24,     0,     0,    59,
-      58,    60,    61,    62,    63,    64,    65,    66,    67,     0,
+       0,    34,     0,     0,     0,     0,    24,     0,     0,    58,
+      59,    60,    61,    62,    63,    64,    65,    66,    67,     0,
       52,     0,    11,    18,    57,     0,     0,     0,     0,     0,
        0,    37,    23,    51,     0,    56,     0,    16,    22,     0,
        0,    32,     0,    30,    35,    19,     0,    21,    33,     0,
@@ -1623,13 +1629,13 @@ namespace yy {
   const short
   parser::yyrline_[] =
   {
-       0,   133,   133,   134,   137,   140,   143,   144,   147,   148,
-     151,   152,   155,   158,   161,   162,   165,   166,   167,   168,
-     169,   170,   171,   172,   173,   174,   175,   178,   179,   183,
-     186,   187,   190,   191,   194,   195,   198,   199,   200,   203,
-     204,   207,   210,   211,   212,   213,   214,   215,   218,   239,
-     240,   241,   242,   243,   244,   245,   246,   247,   248,   249,
-     250,   251,   252,   253,   254,   255,   256,   257,   258
+       0,   139,   139,   140,   143,   146,   149,   150,   153,   154,
+     157,   158,   161,   164,   167,   168,   171,   172,   173,   174,
+     175,   176,   177,   178,   179,   180,   181,   184,   185,   189,
+     192,   193,   196,   197,   200,   201,   204,   205,   206,   209,
+     210,   213,   216,   217,   218,   219,   220,   221,   224,   245,
+     246,   247,   248,   249,   250,   251,   252,   253,   254,   255,
+     256,   257,   258,   259,   260,   261,   262,   263,   264
   };
 
   void
@@ -1661,9 +1667,9 @@ namespace yy {
 
 
 } // yy
-#line 1665 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1671 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
-#line 261 "parser.y"
+#line 267 "parser.y"
 
 
 void

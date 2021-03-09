@@ -5,6 +5,6 @@
 namespace Visitor {
     class CBase {
       public:
-        virtual void Visit(Expression::CBase *expr) = 0;
+        virtual void Visit(Expr::CBase *expr) = 0;
     };
 };

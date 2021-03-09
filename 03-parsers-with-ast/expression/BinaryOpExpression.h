@@ -3,7 +3,7 @@
 #include "Expression.h"
 #include <visitor/Visitor.h>
 
-namespace Expression {
+namespace Expr {
     enum BinaryOperatorType {
         ADD,
         SUB,
@@ -17,31 +17,31 @@ namespace Expression {
         NEQUAL  
     };
 
-    class CBinaryOperation : public Expression::CBase {
+    class CBinaryOperation : public Expr::CBase {
       public:
         void Accept(Visitor::CBase *visitor) override;
         CBinaryOperation(
             BinaryOperatorType type,
-            Expression::CBase *left,
-            Expression::CBase *right
+            Expr::CBase *left,
+            Expr::CBase *right
         );
         ~CBinaryOperation() override = default;
 
-        static CBinaryOperation *CreateAdd    (Expression::CBase *left, Expression::CBase *right);
-        static CBinaryOperation *CreateSub    (Expression::CBase *left, Expression::CBase *right);
-        static CBinaryOperation *CreateMul    (Expression::CBase *left, Expression::CBase *right);
-        static CBinaryOperation *CreateDiv    (Expression::CBase *left, Expression::CBase *right);
-        static CBinaryOperation *CreateBigger (Expression::CBase *left, Expression::CBase *right);
-        static CBinaryOperation *CreateLess   (Expression::CBase *left, Expression::CBase *right);
-        static CBinaryOperation *CreateLequal (Expression::CBase *left, Expression::CBase *right);
-        static CBinaryOperation *CreateBequal (Expression::CBase *left, Expression::CBase *right);
-        static CBinaryOperation *CreateEqual  (Expression::CBase *left, Expression::CBase *right);
-        static CBinaryOperation *CreateNequal (Expression::CBase *left, Expression::CBase *right);
+        static CBinaryOperation *CreateSub    (Expr::CBase *left, Expr::CBase *right);
+        static CBinaryOperation *CreateAdd    (Expr::CBase *left, Expr::CBase *right);
+        static CBinaryOperation *CreateMul    (Expr::CBase *left, Expr::CBase *right);
+        static CBinaryOperation *CreateDiv    (Expr::CBase *left, Expr::CBase *right);
+        static CBinaryOperation *CreateBigger (Expr::CBase *left, Expr::CBase *right);
+        static CBinaryOperation *CreateLess   (Expr::CBase *left, Expr::CBase *right);
+        static CBinaryOperation *CreateLequal (Expr::CBase *left, Expr::CBase *right);
+        static CBinaryOperation *CreateBequal (Expr::CBase *left, Expr::CBase *right);
+        static CBinaryOperation *CreateEqual  (Expr::CBase *left, Expr::CBase *right);
+        static CBinaryOperation *CreateNequal (Expr::CBase *left, Expr::CBase *right);
 
 
       private:
         BinaryOperatorType type_;
-        Expression::CBase *left_;
-        Expression::CBase *right_;
+        Expr::CBase *left_;
+        Expr::CBase *right_;
     };
 }

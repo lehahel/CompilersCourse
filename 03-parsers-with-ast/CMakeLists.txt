@@ -26,14 +26,17 @@ add_executable(
     driver.cpp
     ${BISON_MyParserWithAst_OUTPUTS}
     ${FLEX_MyScannerWithAst_OUTPUTS}
-    expressions/NumberExpression.cpp
-    expressions/MulExpression.cpp
-    expressions/AddExpression.cpp
-    expressions/SubstractExpression.cpp
-    expressions/DivExpression.cpp
-    expressions/IdentExpression.cpp
-    assignments/Assignment.cpp
-    assignments/AssignmentList.cpp
+    # expressions/NumberExpression.cpp
+    # expressions/MulExpression.cpp
+    # expressions/AddExpression.cpp
+    # expressions/SubstractExpression.cpp
+    # expressions/DivExpression.cpp
+    # expressions/IdentExpression.cpp
+    # assignments/Assignment.cpp
+    # assignments/AssignmentList.cpp
+    expression/BinaryOpExpression.cpp
+    expression/UnaryOpExpression.cpp
+    expression/NumberExpression.cpp
     Program.cpp
 )
 

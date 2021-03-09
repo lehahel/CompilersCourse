@@ -31,15 +31,21 @@
     #include "driver.hh"
     #include "location.hh"
 
-    #include "expressions/NumberExpression.h"
-    #include "expressions/AddExpression.h"
-    #include "expressions/MulExpression.h"
-    #include "expressions/DivExpression.h"
-    #include "expressions/SubstractExpression.h"
-    #include "expressions/IdentExpression.h"
-    #include "assignments/Assignment.h"
-    #include "assignments/AssignmentList.h"
+    // #include "expressions/NumberExpression.h"
+    // #include "expressions/AddExpression.h"
+    // #include "expressions/MulExpression.h"
+    // #include "expressions/DivExpression.h"
+    // #include "expressions/SubstractExpression.h"
+    // #include "expressions/IdentExpression.h"
+    // #include "assignments/Assignment.h"
+    // #include "assignments/AssignmentList.h"
 
+    #include "Base.h"
+    #include "visitor/Visitor.h"
+    #include "expression/Expression.h"
+    #include "expression/BinaryOpExpression.h"
+    #include "expression/UnaryOpExpression.h"
+    #include "expression/NumberExpression.h"
     // #include "assignments_default/assignment.h"
     // #include "assignments_default/assignment_list.h"
     // #include "expression_default/addexpression.h"
@@ -236,8 +242,8 @@ assignment:
 %left "MUTLI" "DEVID";
 
 exp:
-    "number"         { $$ = new NumberExpression($1);}
-  | "identifier"     { $$ = new IdentExpression($1); }
+    "number"         { $$ = new Expr::CNumber($1);}
+  | "identifier"     { /*$$ = new IdentExpression($1);*/ }
   | exp "[" exp "]"  { /* TODO */ }
   | exp "." "LENA"   { /* TODO */ }
   | "YES"            { /* TODO */ }
@@ -245,10 +251,10 @@ exp:
   | "NOT" exp        { /* TODO */ }
   | "POLLIWOG" simpletype "[" exp "]" { /* TODO */ }
   | "POLLIWOG" typeid "(" ")"         { /* TODO */ }
-  | exp "PLUBS" exp  { $$ = new AddExpression($1, $3); }
-  | exp "MENUS" exp  { $$ = new SubstractExpression($1, $3); }
-  | exp "MUTLI" exp  { $$ = new MulExpression($1, $3); }
-  | exp "DEVID" exp  { $$ = new DivExpression($1, $3); }
+  | exp "MENUS" exp  { $$ = new Expr::CBinaryOperation::CreateSub($1, $3); }
+  | exp "PLUBS" exp  { $$ = new Expr::CBinaryOperation::CreateAdd($1, $3); }
+  | exp "MUTLI" exp  { $$ = new Expr::CBinaryOperation::CreateMul($1, $3); }
+  | exp "DEVID" exp  { $$ = new Expr::CBinaryOperation::CreateDiv($1, $3); }
   | exp "EKWAL" exp  { /* TODO */ }
   | exp "NEKWAL" exp { /* TODO */ }
   | exp "LES"    exp { /* TODO */ }

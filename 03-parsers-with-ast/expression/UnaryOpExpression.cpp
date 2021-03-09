@@ -1,16 +1,16 @@
 #include "UnaryOpExpression.h"
 
-Expression::CUnaryOperation::CUnaryOperation(
+Expr::CUnaryOperation::CUnaryOperation(
     UnaryOperatorType type,
-    Expression::CBase *expr
+    Expr::CBase *expr
 ) : type_(type), expr_(expr) {}
 
-static Expression::CUnaryOperation::CUnaryOperation*
-CreateAdd(Expression::CBase *expr) {
-    return new Expression::CUnaryOperation(Expression::MINUS, expr);
+static Expr::CUnaryOperation::CUnaryOperation*
+CreateAdd(Expr::CBase *expr) {
+    return new Expr::CUnaryOperation(Expr::MINUS, expr);
 }
 
-static Expression::CUnaryOperation::CUnaryOperation*
-CreateSub(Expression::CBase *expr) {
-    return new Expression::CUnaryOperation(Expression::NOT, expr);
+static Expr::CUnaryOperation::CUnaryOperation*
+CreateSub(Expr::CBase *expr) {
+    return new Expr::CUnaryOperation(Expr::NOT, expr);
 }

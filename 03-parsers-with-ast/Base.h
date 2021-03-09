@@ -1,6 +1,6 @@
 #pragma once
 
-#include <visitor/Visitor.h>
+#include "visitor/Visitor.h"
 #include "location.hh"
 
 class CBaseNonterminal {
