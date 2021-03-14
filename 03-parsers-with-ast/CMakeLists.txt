@@ -3,7 +3,7 @@ set(
     HEADERS
     driver.hh
     parser.hh
-    )
+)
 
 BISON_TARGET(
     MyParserWithAst
@@ -26,14 +26,22 @@ add_executable(
     driver.cpp
     ${BISON_MyParserWithAst_OUTPUTS}
     ${FLEX_MyScannerWithAst_OUTPUTS}
-    expressions/NumberExpression.cpp
-    expressions/MulExpression.cpp
-    expressions/AddExpression.cpp
-    expressions/SubstractExpression.cpp
-    expressions/DivExpression.cpp
-    expressions/IdentExpression.cpp
+    # expressions/NumberExpression.cpp
+    # expressions/MulExpression.cpp
+    # expressions/AddExpression.cpp
+    # expressions/SubstractExpression.cpp
+    # expressions/DivExpression.cpp
+    # expressions/IdentExpression.cpp
     assignments/Assignment.cpp
     assignments/AssignmentList.cpp
+    expression/BinaryOpExpression.cpp
+    expression/UnaryOpExpression.cpp
+    expression/IntExpression.cpp
+    type/Type.cpp
+    type/Int.hpp
+    type/Double.hpp
+    type/Bool.hpp
+    type/String.hpp
     Program.cpp
 )
 

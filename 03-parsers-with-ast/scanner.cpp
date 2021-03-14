@@ -1064,7 +1064,7 @@ case 31:
 YY_RULE_SETUP
 #line 83 "scanner.l"
 {
-              std::cout << "MENBUS : " << loc.begin.line << " " << loc.end.line << std::endl;
+              std::cout << loc.begin.line << " " << loc.end.line << std::endl;
               return yy::parser::make_MINUS  (loc);
            }
 	YY_BREAK

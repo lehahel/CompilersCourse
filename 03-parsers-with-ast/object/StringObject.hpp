@@ -9,7 +9,6 @@
 class CStringObject : public CObject {
   public:
     explicit CStringObject(const std::string &val)
-        : CObject(new CString()), value_(val) {};
-  private:
-    std::string value_;
+        : CObject(new CString()), value(val) {};
+    std::string value;
 };

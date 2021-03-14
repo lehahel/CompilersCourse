@@ -1,8 +1,8 @@
-// A Bison parser, made by GNU Bison 3.7.5.
+// A Bison parser, made by GNU Bison 3.4.1.
 
 // Skeleton implementation for Bison LALR(1) parsers in C++
 
-// Copyright (C) 2002-2015, 2018-2021 Free Software Foundation, Inc.
+// Copyright (C) 2002-2015, 2018-2019 Free Software Foundation, Inc.
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,9 +30,8 @@
 // This special exception was added by the Free Software Foundation in
 // version 2.2 of Bison.
 
-// DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
-// especially those whose name start with YY_ or yy_.  They are
-// private implementation details that can be changed or removed.
+// Undocumented macros, especially those whose name start with YY_,
+// are private implementation details.  Do not rely on them.
 
 
 
@@ -42,7 +41,7 @@
 
 
 // Unqualified %code blocks.
-#line 30 "parser.y"
+#line 31 "parser.y"
 
     #include "driver.hh"
     #include "location.hh"
@@ -55,6 +54,14 @@
     #include "expressions/IdentExpression.h"
     #include "assignments/Assignment.h"
     #include "assignments/AssignmentList.h"
+
+    #include "expression/Expression.h"
+    #include "expression/BinaryOpExpression.h"
+    #include "expression/UnaryOpExpression.h"
+    #include "expression/IntExpression.h"
+    #include "expression/BoolExpression.h"
+    #include "expression/StringExpression.h"
+    #include "expression/DoubleExpression.h"
 
     // #include "assignments_default/assignment.h"
     // #include "assignments_default/assignment_list.h"
@@ -75,7 +82,7 @@
         return scanner.ScanToken();
     }
 
-#line 79 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 86 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
 
 #ifndef YY_
@@ -89,7 +96,6 @@
 #  define YY_(msgid) msgid
 # endif
 #endif
-
 
 // Whether we are compiled with exception support.
 #ifndef YY_EXCEPTIONS
@@ -121,6 +127,9 @@
 # endif
 
 
+// Suppress unused-variable warnings by "using" E.
+#define YYUSE(E) ((void) (E))
+
 // Enable debugging if requested.
 #if YYDEBUG
 
@@ -146,13 +155,13 @@
 # define YY_STACK_PRINT()               \
   do {                                  \
     if (yydebug_)                       \
-      yy_stack_print_ ();                \
+      yystack_print_ ();                \
   } while (false)
 
 #else // !YYDEBUG
 
 # define YYCDEBUG if (false) std::cerr
-# define YY_SYMBOL_PRINT(Title, Symbol)  YY_USE (Symbol)
+# define YY_SYMBOL_PRINT(Title, Symbol)  YYUSE (Symbol)
 # define YY_REDUCE_PRINT(Rule)           static_cast<void> (0)
 # define YY_STACK_PRINT()                static_cast<void> (0)
 
@@ -167,15 +176,56 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 171 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 180 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+
+
+  /* Return YYSTR after stripping away unnecessary quotes and
+     backslashes, so that it's suitable for yyerror.  The heuristic is
+     that double-quoting is unnecessary unless the string contains an
+     apostrophe, a comma, or backslash (other than backslash-backslash).
+     YYSTR is taken from yytname.  */
+  std::string
+  parser::yytnamerr_ (const char *yystr)
+  {
+    if (*yystr == '"')
+      {
+        std::string yyr;
+        char const *yyp = yystr;
+
+        for (;;)
+          switch (*++yyp)
+            {
+            case '\'':
+            case ',':
+              goto do_not_strip_quotes;
+
+            case '\\':
+              if (*++yyp != '\\')
+                goto do_not_strip_quotes;
+              else
+                goto append;
+
+            append:
+            default:
+              yyr += *yyp;
+              break;
+
+            case '"':
+              return yyr;
+            }
+      do_not_strip_quotes: ;
+      }
+
+    return yystr;
+  }
+
 
   /// Build a parser object.
   parser::parser (Scanner &scanner_yyarg, Driver &driver_yyarg)
-#if YYDEBUG
-    : yydebug_ (false),
-      yycdebug_ (&std::cerr),
-#else
     :
+#if YYDEBUG
+      yydebug_ (false),
+      yycdebug_ (&std::cerr),
 #endif
       scanner (scanner_yyarg),
       driver (driver_yyarg)
@@ -188,7 +238,7 @@ namespace yy {
   {}
 
   /*---------------.
-  | symbol kinds.  |
+  | Symbol types.  |
   `---------------*/
 
 
@@ -219,13 +269,13 @@ namespace yy {
     : state (s)
   {}
 
-  parser::symbol_kind_type
-  parser::by_state::kind () const YY_NOEXCEPT
+  parser::symbol_number_type
+  parser::by_state::type_get () const YY_NOEXCEPT
   {
     if (state == empty_state)
-      return symbol_kind::S_YYEMPTY;
+      return empty_symbol;
     else
-      return YY_CAST (symbol_kind_type, yystos_[+state]);
+      return yystos_[state];
   }
 
   parser::stack_symbol_type::stack_symbol_type ()
@@ -234,17 +284,17 @@ namespace yy {
   parser::stack_symbol_type::stack_symbol_type (YY_RVREF (stack_symbol_type) that)
     : super_type (YY_MOVE (that.state), YY_MOVE (that.location))
   {
-    switch (that.kind ())
+    switch (that.type_get ())
     {
-      case symbol_kind::S_exp: // exp
-        value.YY_MOVE_OR_COPY< Expression* > (YY_MOVE (that.value));
+      case 48: // exp
+        value.YY_MOVE_OR_COPY< Expr::CBase* > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case 46: // "number"
         value.YY_MOVE_OR_COPY< int > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case 45: // "identifier"
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
@@ -261,17 +311,17 @@ namespace yy {
   parser::stack_symbol_type::stack_symbol_type (state_type s, YY_MOVE_REF (symbol_type) that)
     : super_type (s, YY_MOVE (that.location))
   {
-    switch (that.kind ())
+    switch (that.type_get ())
     {
-      case symbol_kind::S_exp: // exp
-        value.move< Expression* > (YY_MOVE (that.value));
+      case 48: // exp
+        value.move< Expr::CBase* > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case 46: // "number"
         value.move< int > (YY_MOVE (that.value));
         break;
 
-      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case 45: // "identifier"
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
@@ -280,51 +330,25 @@ namespace yy {
     }
 
     // that is emptied.
-    that.kind_ = symbol_kind::S_YYEMPTY;
+    that.type = empty_symbol;
   }
 
 #if YY_CPLUSPLUS < 201103L
   parser::stack_symbol_type&
-  parser::stack_symbol_type::operator= (const stack_symbol_type& that)
-  {
-    state = that.state;
-    switch (that.kind ())
-    {
-      case symbol_kind::S_exp: // exp
-        value.copy< Expression* > (that.value);
-        break;
-
-      case symbol_kind::S_NUMBER: // "number"
-        value.copy< int > (that.value);
-        break;
-
-      case symbol_kind::S_IDENTIFIER: // "identifier"
-        value.copy< std::string > (that.value);
-        break;
-
-      default:
-        break;
-    }
-
-    location = that.location;
-    return *this;
-  }
-
-  parser::stack_symbol_type&
   parser::stack_symbol_type::operator= (stack_symbol_type& that)
   {
     state = that.state;
-    switch (that.kind ())
+    switch (that.type_get ())
     {
-      case symbol_kind::S_exp: // exp
-        value.move< Expression* > (that.value);
+      case 48: // exp
+        value.move< Expr::CBase* > (that.value);
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case 46: // "number"
         value.move< int > (that.value);
         break;
 
-      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case 45: // "identifier"
         value.move< std::string > (that.value);
         break;
 
@@ -350,21 +374,23 @@ namespace yy {
 #if YYDEBUG
   template <typename Base>
   void
-  parser::yy_print_ (std::ostream& yyo, const basic_symbol<Base>& yysym) const
+  parser::yy_print_ (std::ostream& yyo,
+                                     const basic_symbol<Base>& yysym) const
   {
     std::ostream& yyoutput = yyo;
-    YY_USE (yyoutput);
+    YYUSE (yyoutput);
+    symbol_number_type yytype = yysym.type_get ();
+#if defined __GNUC__ && ! defined __clang__ && ! defined __ICC && __GNUC__ * 100 + __GNUC_MINOR__ <= 408
+    // Avoid a (spurious) G++ 4.8 warning about "array subscript is
+    // below array bounds".
     if (yysym.empty ())
-      yyo << "empty symbol";
-    else
-      {
-        symbol_kind_type yykind = yysym.kind ();
-        yyo << (yykind < YYNTOKENS ? "token" : "nterm")
-            << ' ' << yysym.name () << " ("
-            << yysym.location << ": ";
-        YY_USE (yykind);
-        yyo << ')';
-      }
+      std::abort ();
+#endif
+    yyo << (yytype < yyntokens_ ? "token" : "nterm")
+        << ' ' << yytname_[yytype] << " ("
+        << yysym.location << ": ";
+    YYUSE (yytype);
+    yyo << ')';
   }
 #endif
 
@@ -423,11 +449,11 @@ namespace yy {
   parser::state_type
   parser::yy_lr_goto_state_ (state_type yystate, int yysym)
   {
-    int yyr = yypgoto_[yysym - YYNTOKENS] + yystate;
+    int yyr = yypgoto_[yysym - yyntokens_] + yystate;
     if (0 <= yyr && yyr <= yylast_ && yycheck_[yyr] == yystate)
       return yytable_[yyr];
     else
-      return yydefgoto_[yysym - YYNTOKENS];
+      return yydefgoto_[yysym - yyntokens_];
   }
 
   bool
@@ -451,6 +477,7 @@ namespace yy {
   int
   parser::parse ()
   {
+    // State.
     int yyn;
     /// Length of the RHS of the rule being reduced.
     int yylen = 0;
@@ -486,8 +513,7 @@ namespace yy {
   | yynewstate -- push a new symbol on the stack.  |
   `-----------------------------------------------*/
   yynewstate:
-    YYCDEBUG << "Entering state " << int (yystack_[0].state) << '\n';
-    YY_STACK_PRINT ();
+    YYCDEBUG << "Entering state " << yystack_[0].state << '\n';
 
     // Accept?
     if (yystack_[0].state == yyfinal_)
@@ -501,14 +527,14 @@ namespace yy {
   `-----------*/
   yybackup:
     // Try to take a decision without lookahead.
-    yyn = yypact_[+yystack_[0].state];
+    yyn = yypact_[yystack_[0].state];
     if (yy_pact_value_is_default_ (yyn))
       goto yydefault;
 
     // Read a lookahead token.
     if (yyla.empty ())
       {
-        YYCDEBUG << "Reading a token\n";
+        YYCDEBUG << "Reading a token: ";
 #if YY_EXCEPTIONS
         try
 #endif // YY_EXCEPTIONS
@@ -527,23 +553,11 @@ namespace yy {
       }
     YY_SYMBOL_PRINT ("Next token is", yyla);
 
-    if (yyla.kind () == symbol_kind::S_YYerror)
-    {
-      // The scanner already issued an error message, process directly
-      // to error recovery.  But do not keep the error token as
-      // lookahead, it is too special and may lead us to an endless
-      // loop in error recovery. */
-      yyla.kind_ = symbol_kind::S_YYUNDEF;
-      goto yyerrlab1;
-    }
-
     /* If the proper action on seeing token YYLA.TYPE is to reduce or
        to detect an error, take that action.  */
-    yyn += yyla.kind ();
-    if (yyn < 0 || yylast_ < yyn || yycheck_[yyn] != yyla.kind ())
-      {
-        goto yydefault;
-      }
+    yyn += yyla.type_get ();
+    if (yyn < 0 || yylast_ < yyn || yycheck_[yyn] != yyla.type_get ())
+      goto yydefault;
 
     // Reduce or error.
     yyn = yytable_[yyn];
@@ -560,7 +574,7 @@ namespace yy {
       --yyerrstatus_;
 
     // Shift the lookahead token.
-    yypush_ ("Shifting", state_type (yyn), YY_MOVE (yyla));
+    yypush_ ("Shifting", yyn, YY_MOVE (yyla));
     goto yynewstate;
 
 
@@ -568,7 +582,7 @@ namespace yy {
   | yydefault -- do the default action for the current state.  |
   `-----------------------------------------------------------*/
   yydefault:
-    yyn = yydefact_[+yystack_[0].state];
+    yyn = yydefact_[yystack_[0].state];
     if (yyn == 0)
       goto yyerrlab;
     goto yyreduce;
@@ -587,15 +601,15 @@ namespace yy {
          when using variants.  */
       switch (yyr1_[yyn])
     {
-      case symbol_kind::S_exp: // exp
-        yylhs.value.emplace< Expression* > ();
+      case 48: // exp
+        yylhs.value.emplace< Expr::CBase* > ();
         break;
 
-      case symbol_kind::S_NUMBER: // "number"
+      case 46: // "number"
         yylhs.value.emplace< int > ();
         break;
 
-      case symbol_kind::S_IDENTIFIER: // "identifier"
+      case 45: // "identifier"
         yylhs.value.emplace< std::string > ();
         break;
 
@@ -619,404 +633,404 @@ namespace yy {
         {
           switch (yyn)
             {
-  case 2: // program: main
-#line 133 "parser.y"
-                      { /* TODO */ }
-#line 626 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 2:
+#line 142 "parser.y"
+    { /* TODO */ }
+#line 640 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 3: // program: program classdecl
-#line 134 "parser.y"
-                      { /* TODO */ }
-#line 632 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 5: // classdecl: "FROG" "identifier" "{" declarations "}"
-#line 140 "parser.y"
-                                             { /* TODO */ }
-#line 638 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 6: // declaration: vardecl
+  case 3:
 #line 143 "parser.y"
-               { /* TODO */ }
-#line 644 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 646 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 7: // declaration: methoddecl
-#line 144 "parser.y"
-               { /* TODO */ }
-#line 650 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 5:
+#line 149 "parser.y"
+    { /* TODO */ }
+#line 652 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 8: // declarations: %empty
-#line 147 "parser.y"
-                             { /* TODO */ }
-#line 656 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 9: // declarations: declarations declaration
-#line 148 "parser.y"
-                             { /* TODO */ }
-#line 662 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 10: // methoddecl: "BUBLIC" type "identifier" "(" ")" "{" statements "}"
-#line 151 "parser.y"
-                                                                  { /* TODO */ }
-#line 668 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 11: // methoddecl: "BUBLIC" type "identifier" "(" formals ")" "{" statements "}"
+  case 6:
 #line 152 "parser.y"
-                                                                  { /* TODO */ }
-#line 674 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 658 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 12: // vardecl: type "identifier" ";"
-#line 155 "parser.y"
-                          { /* TODO */ }
-#line 680 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 7:
+#line 153 "parser.y"
+    { /* TODO */ }
+#line 664 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 13: // formal: type "identifier"
-#line 158 "parser.y"
-                      { /* TODO */ }
-#line 686 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 8:
+#line 156 "parser.y"
+    { /* TODO */ }
+#line 670 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 14: // formals: formal
+  case 9:
+#line 157 "parser.y"
+    { /* TODO */ }
+#line 676 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 10:
+#line 160 "parser.y"
+    { /* TODO */ }
+#line 682 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 11:
 #line 161 "parser.y"
-                          { /* TODO */ }
-#line 692 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 688 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 15: // formals: formals formal
-#line 162 "parser.y"
-                          { /* TODO */ }
-#line 698 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 12:
+#line 164 "parser.y"
+    { /* TODO */ }
+#line 694 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 16: // statement: "OSETR" "(" exp ")" ";"
-#line 165 "parser.y"
-                                                   { /* TODO */ }
-#line 704 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 17: // statement: locvardecl ";"
-#line 166 "parser.y"
-                                                   { /* TODO */ }
-#line 710 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 18: // statement: "{" statements "}" ";"
+  case 13:
 #line 167 "parser.y"
-                                                   { /* TODO */ }
-#line 716 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 700 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 19: // statement: "IFF" "(" exp ")" statement ";"
-#line 168 "parser.y"
-                                                   { /* TODO */ }
-#line 722 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 20: // statement: "IFF" "(" exp ")" statement "ELS" statement ";"
-#line 169 "parser.y"
-                                                   { /* TODO */ }
-#line 728 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 21: // statement: "LOOPA" "(" exp ")" statement ";"
+  case 14:
 #line 170 "parser.y"
-                                                   { /* TODO */ }
-#line 734 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 706 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 22: // statement: "CROAK" "(" exp ")" ";"
+  case 15:
 #line 171 "parser.y"
-                                                   { /* TODO */ }
-#line 740 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 712 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 23: // statement: lvalue "ASS" exp ";"
-#line 172 "parser.y"
-                                                   { /* TODO */ }
-#line 746 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 24: // statement: "BURP" exp ";"
-#line 173 "parser.y"
-                                                   { /* TODO */ }
-#line 752 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 25: // statement: methinvokation ";"
+  case 16:
 #line 174 "parser.y"
-                                                   { /* TODO */ }
-#line 758 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 718 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 26: // statement: exp ";"
+  case 17:
 #line 175 "parser.y"
-                                                   { /* TODO */ }
-#line 764 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 724 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 27: // statements: %empty
+  case 18:
+#line 176 "parser.y"
+    { /* TODO */ }
+#line 730 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 19:
+#line 177 "parser.y"
+    { /* TODO */ }
+#line 736 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 20:
 #line 178 "parser.y"
-                          { /* TODO */ }
-#line 770 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 742 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 28: // statements: statements statement
+  case 21:
 #line 179 "parser.y"
-                          { /* TODO */ }
-#line 776 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 748 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 29: // locvardecl: vardecl
+  case 22:
+#line 180 "parser.y"
+    { /* TODO */ }
+#line 754 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 23:
+#line 181 "parser.y"
+    { /* TODO */ }
+#line 760 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 24:
+#line 182 "parser.y"
+    { /* TODO */ }
+#line 766 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 25:
 #line 183 "parser.y"
-            { /* TODO */ }
-#line 782 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 772 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 30: // exprargs: exp
-#line 186 "parser.y"
-                      { /* TODO */ }
-#line 788 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 26:
+#line 184 "parser.y"
+    { /* TODO */ }
+#line 778 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 31: // exprargs: exprargs "," exp
+  case 27:
 #line 187 "parser.y"
-                      { /* TODO */ }
-#line 794 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 784 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 32: // methinvokation: exp "." "identifier" "(" ")"
-#line 190 "parser.y"
-                                           { /* TODO */ }
-#line 800 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 28:
+#line 188 "parser.y"
+    { /* TODO */ }
+#line 790 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 33: // methinvokation: exp "." "identifier" "(" exprargs ")"
-#line 191 "parser.y"
-                                           { /* TODO */ }
-#line 806 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 29:
+#line 192 "parser.y"
+    { /* TODO */ }
+#line 796 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 34: // fieldinvokation: "DIS" "." "identifier"
-#line 194 "parser.y"
-                                        { /* TODO */ }
-#line 812 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 35: // fieldinvokation: "DIS" "." "identifier" "[" exp "]"
+  case 30:
 #line 195 "parser.y"
-                                        { /* TODO */ }
-#line 818 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 802 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 36: // lvalue: "identifier"
-#line 198 "parser.y"
-                              { /* TODO */ }
-#line 824 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 31:
+#line 196 "parser.y"
+    { /* TODO */ }
+#line 808 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 37: // lvalue: "identifier" "[" exp "]"
+  case 32:
 #line 199 "parser.y"
-                              { /* TODO */ }
-#line 830 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 814 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 38: // lvalue: fieldinvokation
+  case 33:
 #line 200 "parser.y"
-                              { /* TODO */ }
-#line 836 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 820 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 39: // type: simpletype
+  case 34:
 #line 203 "parser.y"
-               { /* TODO */ }
-#line 842 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 826 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 40: // type: arraytype
+  case 35:
 #line 204 "parser.y"
-               { /* TODO */ }
-#line 848 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 832 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 41: // typeid: "identifier"
+  case 36:
 #line 207 "parser.y"
-                 { /* TODO */ }
-#line 854 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 838 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 42: // simpletype: "NUMBA"
-#line 210 "parser.y"
-             { /* TODO */ }
-#line 860 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 37:
+#line 208 "parser.y"
+    { /* TODO */ }
+#line 844 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 43: // simpletype: "DUMBA"
-#line 211 "parser.y"
-             { /* TODO */ }
-#line 866 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 38:
+#line 209 "parser.y"
+    { /* TODO */ }
+#line 850 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 44: // simpletype: "TEXTA"
+  case 39:
 #line 212 "parser.y"
-             { /* TODO */ }
-#line 872 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 856 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 45: // simpletype: "BOOLA"
+  case 40:
 #line 213 "parser.y"
-             { /* TODO */ }
-#line 878 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 862 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 46: // simpletype: "VOEDA"
-#line 214 "parser.y"
-             { /* TODO */ }
-#line 884 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 41:
+#line 216 "parser.y"
+    { /* TODO */ }
+#line 868 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 47: // simpletype: typeid
-#line 215 "parser.y"
-             { /* TODO */ }
-#line 890 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 42:
+#line 219 "parser.y"
+    { /* TODO */ }
+#line 874 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 48: // arraytype: simpletype "[" "]"
-#line 218 "parser.y"
-                       { /* TODO */ }
-#line 896 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 43:
+#line 220 "parser.y"
+    { /* TODO */ }
+#line 880 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 49: // exp: "number"
-#line 239 "parser.y"
-                     { yylhs.value.as < Expression* > () = new NumberExpression(yystack_[0].value.as < int > ());}
-#line 902 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 44:
+#line 221 "parser.y"
+    { /* TODO */ }
+#line 886 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 50: // exp: "identifier"
-#line 240 "parser.y"
-                     { yylhs.value.as < Expression* > () = new IdentExpression(yystack_[0].value.as < std::string > ()); }
-#line 908 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 45:
+#line 222 "parser.y"
+    { /* TODO */ }
+#line 892 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 51: // exp: exp "[" exp "]"
-#line 241 "parser.y"
-                     { /* TODO */ }
-#line 914 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 46:
+#line 223 "parser.y"
+    { /* TODO */ }
+#line 898 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 52: // exp: exp "." "LENA"
-#line 242 "parser.y"
-                     { /* TODO */ }
-#line 920 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 47:
+#line 224 "parser.y"
+    { /* TODO */ }
+#line 904 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 53: // exp: "YES"
-#line 243 "parser.y"
-                     { /* TODO */ }
-#line 926 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+  case 48:
+#line 227 "parser.y"
+    { /* TODO */ }
+#line 910 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 54: // exp: "NO"
-#line 244 "parser.y"
-                     { /* TODO */ }
-#line 932 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 55: // exp: "NOT" exp
-#line 245 "parser.y"
-                     { /* TODO */ }
-#line 938 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 56: // exp: "POLLIWOG" simpletype "[" exp "]"
-#line 246 "parser.y"
-                                      { /* TODO */ }
-#line 944 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 57: // exp: "POLLIWOG" typeid "(" ")"
-#line 247 "parser.y"
-                                      { /* TODO */ }
-#line 950 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 58: // exp: exp "PLUBS" exp
+  case 49:
 #line 248 "parser.y"
-                     { yylhs.value.as < Expression* > () = new AddExpression(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
-#line 956 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { yylhs.value.as < Expr::CBase* > () = new Expr::CIntExpr(yystack_[0].value.as < int > ()); /* $$ = new NumberExpression($1); */}
+#line 916 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 59: // exp: exp "MENUS" exp
+  case 50:
 #line 249 "parser.y"
-                     { yylhs.value.as < Expression* > () = new SubstractExpression(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
-#line 962 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* $$ = new IdentExpression($1); */ }
+#line 922 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 60: // exp: exp "MUTLI" exp
+  case 51:
 #line 250 "parser.y"
-                     { yylhs.value.as < Expression* > () = new MulExpression(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
-#line 968 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 928 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 61: // exp: exp "DEVID" exp
+  case 52:
 #line 251 "parser.y"
-                     { yylhs.value.as < Expression* > () = new DivExpression(yystack_[2].value.as < Expression* > (), yystack_[0].value.as < Expression* > ()); }
-#line 974 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 934 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 62: // exp: exp "EKWAL" exp
+  case 53:
 #line 252 "parser.y"
-                     { /* TODO */ }
-#line 980 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { yylhs.value.as < Expr::CBase* > () = new Expr::CBoolExpr(true); }
+#line 940 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 63: // exp: exp "NEKWAL" exp
+  case 54:
 #line 253 "parser.y"
-                     { /* TODO */ }
-#line 986 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { yylhs.value.as < Expr::CBase* > () = new Expr::CBoolExpr(false); }
+#line 946 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 64: // exp: exp "LES" exp
+  case 55:
 #line 254 "parser.y"
-                     { /* TODO */ }
-#line 992 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { yylhs.value.as < Expr::CBase* > () = new Expr::UnaryOperation::CreateMinus(yystack_[0].value.as < Expr::CBase* > ()); }
+#line 952 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 65: // exp: exp "BIGA" exp
+  case 56:
 #line 255 "parser.y"
-                     { /* TODO */ }
-#line 998 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 958 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 66: // exp: exp "LESOEK" exp
+  case 57:
 #line 256 "parser.y"
-                     { /* TODO */ }
-#line 1004 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { /* TODO */ }
+#line 964 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 67: // exp: exp "BIGOEK" exp
+  case 58:
 #line 257 "parser.y"
-                     { /* TODO */ }
-#line 1010 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { yylhs.value.as < Expr::CBase* > () = new Expr::BinaryOperation::CreateAdd(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new AddExpression($1, $3); */ }
+#line 970 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 68: // exp: "(" exp ")"
+  case 59:
 #line 258 "parser.y"
-                     { yylhs.value.as < Expression* > () = yystack_[1].value.as < Expression* > (); }
-#line 1016 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    { yylhs.value.as < Expr::CBase* > () = new Expr::BinaryOperation::CreateSub(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new SubstractExpression($1, $3); */ }
+#line 976 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 60:
+#line 259 "parser.y"
+    { yylhs.value.as < Expr::CBase* > () = new Expr::BinaryOperation::CreateMul(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new MulExpression($1, $3); */}
+#line 982 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 61:
+#line 260 "parser.y"
+    { yylhs.value.as < Expr::CBase* > () = new Expr::BinaryOperation::CreateDiv(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new DivExpression($1, $3); */ }
+#line 988 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 62:
+#line 261 "parser.y"
+    { /* TODO */ }
+#line 994 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 63:
+#line 262 "parser.y"
+    { /* TODO */ }
+#line 1000 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 64:
+#line 263 "parser.y"
+    { /* TODO */ }
+#line 1006 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 65:
+#line 264 "parser.y"
+    { /* TODO */ }
+#line 1012 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 66:
+#line 265 "parser.y"
+    { /* TODO */ }
+#line 1018 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 67:
+#line 266 "parser.y"
+    { /* TODO */ }
+#line 1024 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 68:
+#line 267 "parser.y"
+    { yylhs.value.as < Expr::CBase* > () = yystack_[1].value.as < Expr::CBase* > (); }
+#line 1030 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
 
-#line 1020 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1034 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
             default:
               break;
@@ -1033,6 +1047,7 @@ namespace yy {
       YY_SYMBOL_PRINT ("-> $$ =", yylhs);
       yypop_ (yylen);
       yylen = 0;
+      YY_STACK_PRINT ();
 
       // Shift the result of the reduction.
       yypush_ (YY_NULLPTR, YY_MOVE (yylhs));
@@ -1048,9 +1063,7 @@ namespace yy {
     if (!yyerrstatus_)
       {
         ++yynerrs_;
-        context yyctx (*this, yyla);
-        std::string msg = yysyntax_error_ (yyctx);
-        error (yyla.location, YY_MOVE (msg));
+        error (yyla.location, yysyntax_error_ (yystack_[0].state, yyla));
       }
 
 
@@ -1061,7 +1074,7 @@ namespace yy {
            error, discard it.  */
 
         // Return failure if at end of input.
-        if (yyla.kind () == symbol_kind::S_YYEOF)
+        if (yyla.type_get () == yyeof_)
           YYABORT;
         else if (!yyla.empty ())
           {
@@ -1087,7 +1100,6 @@ namespace yy {
        this YYERROR.  */
     yypop_ (yylen);
     yylen = 0;
-    YY_STACK_PRINT ();
     goto yyerrlab1;
 
 
@@ -1096,39 +1108,37 @@ namespace yy {
   `-------------------------------------------------------------*/
   yyerrlab1:
     yyerrstatus_ = 3;   // Each real token shifted decrements this.
-    // Pop stack until we find a state that shifts the error token.
-    for (;;)
-      {
-        yyn = yypact_[+yystack_[0].state];
-        if (!yy_pact_value_is_default_ (yyn))
-          {
-            yyn += symbol_kind::S_YYerror;
-            if (0 <= yyn && yyn <= yylast_
-                && yycheck_[yyn] == symbol_kind::S_YYerror)
-              {
-                yyn = yytable_[yyn];
-                if (0 < yyn)
-                  break;
-              }
-          }
-
-        // Pop the current state because it cannot handle the error token.
-        if (yystack_.size () == 1)
-          YYABORT;
-
-        yyerror_range[1].location = yystack_[0].location;
-        yy_destroy_ ("Error: popping", yystack_[0]);
-        yypop_ ();
-        YY_STACK_PRINT ();
-      }
     {
       stack_symbol_type error_token;
+      for (;;)
+        {
+          yyn = yypact_[yystack_[0].state];
+          if (!yy_pact_value_is_default_ (yyn))
+            {
+              yyn += yyterror_;
+              if (0 <= yyn && yyn <= yylast_ && yycheck_[yyn] == yyterror_)
+                {
+                  yyn = yytable_[yyn];
+                  if (0 < yyn)
+                    break;
+                }
+            }
+
+          // Pop the current state because it cannot handle the error token.
+          if (yystack_.size () == 1)
+            YYABORT;
+
+          yyerror_range[1].location = yystack_[0].location;
+          yy_destroy_ ("Error: popping", yystack_[0]);
+          yypop_ ();
+          YY_STACK_PRINT ();
+        }
 
       yyerror_range[2].location = yyla.location;
       YYLLOC_DEFAULT (error_token.location, yyerror_range, 2);
 
       // Shift the error token.
-      error_token.state = state_type (yyn);
+      error_token.state = yyn;
       yypush_ ("Shifting", YY_MOVE (error_token));
     }
     goto yynewstate;
@@ -1160,7 +1170,6 @@ namespace yy {
     /* Do not reclaim the symbols of the rule whose action triggered
        this YYABORT or YYACCEPT.  */
     yypop_ (yylen);
-    YY_STACK_PRINT ();
     while (1 < yystack_.size ())
       {
         yy_destroy_ ("Cleanup: popping", yystack_[0]);
@@ -1194,100 +1203,18 @@ namespace yy {
     error (yyexc.location, yyexc.what ());
   }
 
-  /* Return YYSTR after stripping away unnecessary quotes and
-     backslashes, so that it's suitable for yyerror.  The heuristic is
-     that double-quoting is unnecessary unless the string contains an
-     apostrophe, a comma, or backslash (other than backslash-backslash).
-     YYSTR is taken from yytname.  */
+  // Generate an error message.
   std::string
-  parser::yytnamerr_ (const char *yystr)
+  parser::yysyntax_error_ (state_type yystate, const symbol_type& yyla) const
   {
-    if (*yystr == '"')
-      {
-        std::string yyr;
-        char const *yyp = yystr;
+    // Number of reported tokens (one for the "unexpected", one per
+    // "expected").
+    size_t yycount = 0;
+    // Its maximum.
+    enum { YYERROR_VERBOSE_ARGS_MAXIMUM = 5 };
+    // Arguments of yyformat.
+    char const *yyarg[YYERROR_VERBOSE_ARGS_MAXIMUM];
 
-        for (;;)
-          switch (*++yyp)
-            {
-            case '\'':
-            case ',':
-              goto do_not_strip_quotes;
-
-            case '\\':
-              if (*++yyp != '\\')
-                goto do_not_strip_quotes;
-              else
-                goto append;
-
-            append:
-            default:
-              yyr += *yyp;
-              break;
-
-            case '"':
-              return yyr;
-            }
-      do_not_strip_quotes: ;
-      }
-
-    return yystr;
-  }
-
-  std::string
-  parser::symbol_name (symbol_kind_type yysymbol)
-  {
-    return yytnamerr_ (yytname_[yysymbol]);
-  }
-
-
-
-  // parser::context.
-  parser::context::context (const parser& yyparser, const symbol_type& yyla)
-    : yyparser_ (yyparser)
-    , yyla_ (yyla)
-  {}
-
-  int
-  parser::context::expected_tokens (symbol_kind_type yyarg[], int yyargn) const
-  {
-    // Actual number of expected tokens
-    int yycount = 0;
-
-    int yyn = yypact_[+yyparser_.yystack_[0].state];
-    if (!yy_pact_value_is_default_ (yyn))
-      {
-        /* Start YYX at -YYN if negative to avoid negative indexes in
-           YYCHECK.  In other words, skip the first -YYN actions for
-           this state because they are default actions.  */
-        int yyxbegin = yyn < 0 ? -yyn : 0;
-        // Stay within bounds of both yycheck and yytname.
-        int yychecklim = yylast_ - yyn + 1;
-        int yyxend = yychecklim < YYNTOKENS ? yychecklim : YYNTOKENS;
-        for (int yyx = yyxbegin; yyx < yyxend; ++yyx)
-          if (yycheck_[yyx + yyn] == yyx && yyx != symbol_kind::S_YYerror
-              && !yy_table_value_is_error_ (yytable_[yyx + yyn]))
-            {
-              if (!yyarg)
-                ++yycount;
-              else if (yycount == yyargn)
-                return 0;
-              else
-                yyarg[yycount++] = YY_CAST (symbol_kind_type, yyx);
-            }
-      }
-
-    if (yyarg && yycount == 0 && 0 < yyargn)
-      yyarg[0] = symbol_kind::S_YYEMPTY;
-    return yycount;
-  }
-
-
-
-  int
-  parser::yy_syntax_error_arguments_ (const context& yyctx,
-                                                 symbol_kind_type yyarg[], int yyargn) const
-  {
     /* There are many possibilities here to consider:
        - If this state is a consistent state with a default action, then
          the only way this function was invoked is if the default action
@@ -1306,32 +1233,41 @@ namespace yy {
        - Of course, the expected token list depends on states to have
          correct lookahead information, and it depends on the parser not
          to perform extra reductions after fetching a lookahead from the
-         scanner and before detecting a syntax error.  Thus, state merging
-         (from LALR or IELR) and default reductions corrupt the expected
-         token list.  However, the list is correct for canonical LR with
-         one exception: it will still contain any token that will not be
-         accepted due to an error action in a later state.
+         scanner and before detecting a syntax error.  Thus, state
+         merging (from LALR or IELR) and default reductions corrupt the
+         expected token list.  However, the list is correct for
+         canonical LR with one exception: it will still contain any
+         token that will not be accepted due to an error action in a
+         later state.
     */
-
-    if (!yyctx.lookahead ().empty ())
+    if (!yyla.empty ())
       {
-        if (yyarg)
-          yyarg[0] = yyctx.token ();
-        int yyn = yyctx.expected_tokens (yyarg ? yyarg + 1 : yyarg, yyargn - 1);
-        return yyn + 1;
+        int yytoken = yyla.type_get ();
+        yyarg[yycount++] = yytname_[yytoken];
+        int yyn = yypact_[yystate];
+        if (!yy_pact_value_is_default_ (yyn))
+          {
+            /* Start YYX at -YYN if negative to avoid negative indexes in
+               YYCHECK.  In other words, skip the first -YYN actions for
+               this state because they are default actions.  */
+            int yyxbegin = yyn < 0 ? -yyn : 0;
+            // Stay within bounds of both yycheck and yytname.
+            int yychecklim = yylast_ - yyn + 1;
+            int yyxend = yychecklim < yyntokens_ ? yychecklim : yyntokens_;
+            for (int yyx = yyxbegin; yyx < yyxend; ++yyx)
+              if (yycheck_[yyx + yyn] == yyx && yyx != yyterror_
+                  && !yy_table_value_is_error_ (yytable_[yyx + yyn]))
+                {
+                  if (yycount == YYERROR_VERBOSE_ARGS_MAXIMUM)
+                    {
+                      yycount = 1;
+                      break;
+                    }
+                  else
+                    yyarg[yycount++] = yytname_[yyx];
+                }
+          }
       }
-    return 0;
-  }
-
-  // Generate an error message.
-  std::string
-  parser::yysyntax_error_ (const context& yyctx) const
-  {
-    // Its maximum.
-    enum { YYARGS_MAX = 5 };
-    // Arguments of yyformat.
-    symbol_kind_type yyarg[YYARGS_MAX];
-    int yycount = yy_syntax_error_arguments_ (yyctx, yyarg, YYARGS_MAX);
 
     char const* yyformat = YY_NULLPTR;
     switch (yycount)
@@ -1352,11 +1288,11 @@ namespace yy {
 
     std::string yyres;
     // Argument number.
-    std::ptrdiff_t yyi = 0;
+    size_t yyi = 0;
     for (char const* yyp = yyformat; *yyp; ++yyp)
       if (yyp[0] == '%' && yyp[1] == 's' && yyi < yycount)
         {
-          yyres += symbol_name (yyarg[yyi++]);
+          yyres += yytnamerr_ (yyarg[yyi++]);
           ++yyp;
         }
       else
@@ -1365,33 +1301,33 @@ namespace yy {
   }
 
 
-  const signed char parser::yypact_ninf_ = -85;
+  const short parser::yypact_ninf_ = -136;
 
   const signed char parser::yytable_ninf_ = -42;
 
   const short
   parser::yypact_[] =
   {
-     -22,   -38,    10,   -85,     8,   -85,   -36,   -85,     1,    12,
-       2,   -85,    -6,   219,    30,   -85,   478,   -85,   -85,   -85,
-     -85,   -85,   -85,   -85,   -85,   -85,    13,   -85,    41,   -85,
-      47,    19,    62,    46,    52,    54,   -85,   -85,    53,   -14,
-     -85,    55,   -85,    -9,    29,    59,   -85,    58,   -85,   -85,
-     210,   210,   -85,    60,   478,   -85,   -85,    61,    65,    66,
-      68,    69,   210,     9,   -85,   -85,   -85,    84,   103,   -85,
-     108,   268,    92,   -85,   -85,   484,   322,   125,   -85,    91,
-      93,    70,   210,   210,   210,   210,   286,   210,   -85,   -85,
-     210,   -85,   210,   210,   210,   210,   210,   210,   210,   210,
-     210,   210,   210,   -31,   -85,   158,    79,   -85,   113,   100,
-     210,    98,   340,   358,   376,   394,   -85,   412,   304,   505,
-     505,   518,   518,   484,   484,   484,   484,   484,   484,   430,
-     -85,   104,   -85,   -85,   -85,   448,   210,   116,   124,   191,
-     191,   -85,   -85,   -85,   224,   -85,   466,   -85,   -85,    -1,
-     136,   -85,   -12,   484,   -85,   -85,   191,   -85,   -85,   210,
-     137,   484,   -85
+     -22,   -38,     3,  -136,   -10,  -136,   -34,  -136,    -5,     4,
+      -3,  -136,    -9,   247,    -1,  -136,    39,  -136,  -136,  -136,
+    -136,  -136,  -136,  -136,  -136,  -136,   -18,  -136,     8,  -136,
+      22,     6,    59,    38,    46,    48,  -136,  -136,    57,   -15,
+    -136,    60,  -136,   225,    35,    58,  -136,    65,  -136,  -136,
+      20,    20,  -136,    81,    39,  -136,  -136,    84,    91,    92,
+      94,    95,    20,     5,  -136,   283,  -136,  -136,   110,   113,
+    -136,   114,    96,  -136,  -136,   499,   337,   129,  -136,   101,
+      99,    75,    20,    20,    20,    20,   301,    20,  -136,    20,
+      20,    20,    20,    20,    20,    20,    20,    20,    20,    20,
+     -25,  -136,  -136,    20,  -136,   162,    86,  -136,   119,   106,
+      20,   104,   355,   373,   391,   409,  -136,   427,   515,   515,
+     528,   528,   499,   499,   499,   499,   499,   499,   445,  -136,
+     115,   319,  -136,  -136,  -136,   463,    20,   140,   141,   195,
+     195,  -136,  -136,   228,  -136,  -136,   481,  -136,  -136,    10,
+     143,  -136,   499,    56,  -136,  -136,   195,  -136,  -136,    20,
+     146,   499,  -136
   };
 
-  const signed char
+  const unsigned char
   parser::yydefact_[] =
   {
        0,     0,     0,     2,     0,     1,     0,     3,     0,     0,
@@ -1400,190 +1336,192 @@ namespace yy {
        0,     0,     0,     0,     0,     0,    12,    48,     0,     0,
       27,     0,    14,     0,     0,     0,    27,     0,    15,    13,
        0,     0,    27,     0,     0,    53,    54,     0,     0,     0,
-       0,     0,     0,    50,    49,    29,    28,     0,     0,    38,
-       0,     0,     0,    27,    50,    55,     0,     0,     4,    47,
-       0,     0,     0,     0,     0,     0,     0,     0,    17,    25,
-       0,    26,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,    10,     0,     0,    68,     0,     0,
-       0,    34,     0,     0,     0,     0,    24,     0,     0,    59,
-      58,    60,    61,    62,    63,    64,    65,    66,    67,     0,
-      52,     0,    11,    18,    57,     0,     0,     0,     0,     0,
-       0,    37,    23,    51,     0,    56,     0,    16,    22,     0,
-       0,    32,     0,    30,    35,    19,     0,    21,    33,     0,
+       0,     0,     0,    50,    49,     0,    29,    28,     0,     0,
+      38,     0,     0,    27,    50,    55,     0,     0,     4,    47,
+       0,     0,     0,     0,     0,     0,     0,     0,    26,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    17,    25,     0,    10,     0,     0,    68,     0,     0,
+       0,    34,     0,     0,     0,     0,    24,     0,    59,    58,
+      60,    61,    62,    63,    64,    65,    66,    67,     0,    52,
+       0,     0,    11,    18,    57,     0,     0,     0,     0,     0,
+       0,    37,    51,     0,    23,    56,     0,    16,    22,     0,
+       0,    32,    30,     0,    35,    19,     0,    21,    33,     0,
        0,    31,    20
   };
 
   const short
   parser::yypgoto_[] =
   {
-     -85,   -85,   -85,   -85,   -85,   -85,   -85,   129,   102,   -85,
-     -84,     7,   -85,   -85,   -85,   -85,   -85,    23,    94,    95,
-     -85,   -50
+    -136,   -50,  -136,  -136,  -136,  -136,  -136,  -136,   137,   108,
+    -136,  -135,     9,  -136,  -136,  -136,  -136,  -136,    42,    98,
+     100,  -136
   };
 
-  const unsigned char
+  const short
   parser::yydefgoto_[] =
   {
-       0,     2,     3,     7,    23,    13,    24,    65,    42,    43,
-      66,    45,    67,   152,    68,    69,    70,    26,    27,    28,
-      29,    71
+      -1,    65,     2,     3,     7,    23,    13,    24,    66,    42,
+      43,    67,    45,    68,   153,    69,    70,    71,    26,    27,
+      28,    29
   };
 
   const short
   parser::yytable_[] =
   {
-      75,    76,   155,    41,   130,   158,     1,     4,    47,     9,
-       5,   159,    86,   -36,   131,    17,    18,    19,    20,    21,
-      17,    18,    19,    20,    21,    10,     8,    14,    12,    87,
-      11,    22,   112,   113,   114,   115,    22,   117,     6,    31,
-     118,   156,   119,   120,   121,   122,   123,   124,   125,   126,
-     127,   128,   129,    72,   -41,   149,   150,    30,    32,    77,
-     135,    33,    44,    34,    35,    36,    44,    37,    50,    38,
-      39,    40,   160,    46,    49,    51,    73,    52,    53,    78,
-     105,    82,    83,    81,    84,    85,   146,    88,    17,    18,
-      19,    20,    21,    54,   153,    55,    56,    57,    58,    59,
-      60,    50,    61,    62,    63,    64,    89,   109,    51,   161,
-      52,   104,    90,   110,   130,   111,   133,   134,   136,   147,
-     144,    17,    18,    19,    20,    21,    54,   148,    55,    56,
-      57,    58,    59,    60,    50,    61,    62,    63,    64,   157,
-     162,    51,    25,    52,   108,    48,     0,     0,    79,    80,
+      75,    76,    41,     5,   149,   150,     1,     4,     8,   -36,
+     129,     9,    86,   155,    17,    18,    19,    20,    21,    10,
+     130,   160,    11,    12,    14,    87,    30,    32,    33,    50,
+      22,     6,   112,   113,   114,   115,    51,   117,    34,   118,
+     119,   120,   121,   122,   123,   124,   125,   126,   127,   128,
+     -41,    35,   156,   131,    54,    72,    55,    56,    31,    37,
+     135,    77,    36,    38,    39,    74,    64,    50,    17,    18,
+      19,    20,    21,   158,    51,    40,    52,    53,    46,   159,
+      49,    44,   105,    73,    22,    44,   146,    17,    18,    19,
+      20,    21,    54,   152,    55,    56,    57,    58,    59,    60,
+      78,    61,    62,    63,    64,    50,    81,    82,    83,   161,
+      84,    85,    51,   101,    52,   104,   102,   109,   103,   110,
+     111,   129,   133,   134,   136,    17,    18,    19,    20,    21,
+      54,   143,    55,    56,    57,    58,    59,    60,    50,    61,
+      62,    63,    64,   147,   148,    51,   157,    52,   108,   162,
+      25,    48,    79,     0,    80,     0,     0,     0,    17,    18,
+      19,    20,    21,    54,     0,    55,    56,    57,    58,    59,
+      60,    50,    61,    62,    63,    64,     0,     0,    51,     0,
+      52,   132,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    17,    18,    19,    20,    21,    54,     0,    55,    56,
+      57,    58,    59,    60,    50,    61,    62,    63,    64,     0,
+       0,    51,     0,    52,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,    17,    18,    19,    20,    21,    54,
        0,    55,    56,    57,    58,    59,    60,    50,    61,    62,
-      63,    64,     0,     0,    51,     0,    52,   132,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,    17,    18,    19,
-      20,    21,    54,     0,    55,    56,    57,    58,    59,    60,
-      50,    61,    62,    63,    64,     0,     0,    51,     0,    52,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,    50,
-      17,    18,    19,    20,    21,    54,    51,    55,    56,    57,
-      58,    59,    60,    50,    61,    62,    63,    64,    15,     0,
-      51,   151,     0,    16,    54,     0,    55,    56,    17,    18,
-      19,    20,    21,     0,     0,    74,    64,     0,    54,     0,
-      55,    56,     0,     0,    22,     0,     0,     0,     0,    74,
-      64,    91,     0,    92,    93,    94,    95,     0,    96,    97,
-      98,    99,   100,   101,     0,     0,     0,     0,   102,   116,
-     103,    92,    93,    94,    95,     0,    96,    97,    98,    99,
-     100,   101,     0,     0,     0,     0,   102,   142,   106,    92,
-      93,    94,    95,     0,    96,    97,    98,    99,   100,   101,
-       0,     0,     0,     0,   102,     0,   106,    92,    93,    94,
-      95,     0,    96,    97,    98,    99,   100,   101,     0,   107,
-       0,     0,   102,     0,   106,    92,    93,    94,    95,     0,
-      96,    97,    98,    99,   100,   101,     0,   137,     0,     0,
-     102,     0,   106,    92,    93,    94,    95,     0,    96,    97,
-      98,    99,   100,   101,     0,   138,     0,     0,   102,     0,
-     106,    92,    93,    94,    95,     0,    96,    97,    98,    99,
-     100,   101,     0,   139,     0,     0,   102,     0,   106,    92,
-      93,    94,    95,     0,    96,    97,    98,    99,   100,   101,
-       0,   140,     0,     0,   102,     0,   106,    92,    93,    94,
-      95,     0,    96,    97,    98,    99,   100,   101,     0,     0,
-       0,     0,   102,   141,   106,    92,    93,    94,    95,     0,
-      96,    97,    98,    99,   100,   101,     0,     0,     0,     0,
-     102,   143,   106,    92,    93,    94,    95,     0,    96,    97,
-      98,    99,   100,   101,     0,     0,     0,     0,   102,   145,
-     106,    92,    93,    94,    95,     0,    96,    97,    98,    99,
-     100,   101,     0,     0,     0,     0,   102,   154,   106,    92,
-      93,    94,    95,     0,    96,    97,    98,    99,   100,   101,
-       0,     0,     0,     0,   102,     0,   106,    17,    18,    19,
-      20,    21,    94,    95,     0,    96,    97,    98,    99,   100,
-     101,     0,     0,    22,     0,   102,     0,   106,    96,    97,
-      98,    99,   100,   101,     0,     0,     0,     0,   102,     0,
+      63,    64,    47,     0,    51,   151,     0,     0,     0,     0,
+       0,     0,     0,     0,    17,    18,    19,    20,    21,     0,
+       0,     0,    54,     0,    55,    56,    15,     0,     0,     0,
+      22,    16,     0,    74,    64,     0,    17,    18,    19,    20,
+      21,     0,     0,     0,     0,     0,    88,     0,    89,    90,
+      91,    92,    22,    93,    94,    95,    96,    97,    98,     0,
+       0,     0,     0,    99,   116,   100,    89,    90,    91,    92,
+       0,    93,    94,    95,    96,    97,    98,     0,     0,     0,
+       0,    99,   144,   106,    89,    90,    91,    92,     0,    93,
+      94,    95,    96,    97,    98,     0,     0,     0,     0,    99,
+       0,   106,    89,    90,    91,    92,     0,    93,    94,    95,
+      96,    97,    98,     0,   107,     0,     0,    99,     0,   106,
+      89,    90,    91,    92,     0,    93,    94,    95,    96,    97,
+      98,     0,   137,     0,     0,    99,     0,   106,    89,    90,
+      91,    92,     0,    93,    94,    95,    96,    97,    98,     0,
+     138,     0,     0,    99,     0,   106,    89,    90,    91,    92,
+       0,    93,    94,    95,    96,    97,    98,     0,   139,     0,
+       0,    99,     0,   106,    89,    90,    91,    92,     0,    93,
+      94,    95,    96,    97,    98,     0,   140,     0,     0,    99,
+       0,   106,    89,    90,    91,    92,     0,    93,    94,    95,
+      96,    97,    98,     0,     0,     0,     0,    99,   141,   106,
+      89,    90,    91,    92,     0,    93,    94,    95,    96,    97,
+      98,     0,     0,     0,     0,    99,   142,   106,    89,    90,
+      91,    92,     0,    93,    94,    95,    96,    97,    98,     0,
+       0,     0,     0,    99,   145,   106,    89,    90,    91,    92,
+       0,    93,    94,    95,    96,    97,    98,     0,     0,     0,
+       0,    99,   154,   106,    89,    90,    91,    92,     0,    93,
+      94,    95,    96,    97,    98,     0,     0,     0,     0,    99,
+       0,   106,    91,    92,     0,    93,    94,    95,    96,    97,
+      98,     0,     0,     0,     0,    99,     0,   106,    93,    94,
+      95,    96,    97,    98,     0,     0,     0,     0,    99,     0,
      106
   };
 
   const short
   parser::yycheck_[] =
   {
-      50,    51,     3,    17,    35,    17,    28,    45,    17,    45,
-       0,    23,    62,     4,    45,    29,    30,    31,    32,    33,
-      29,    30,    31,    32,    33,    24,    18,    33,    26,    20,
-      18,    45,    82,    83,    84,    85,    45,    87,    28,    16,
-      90,    42,    92,    93,    94,    95,    96,    97,    98,    99,
-     100,   101,   102,    46,    45,   139,   140,    27,    45,    52,
-     110,    20,    39,    16,    45,     3,    43,    21,     9,    17,
-      16,    18,   156,    18,    45,    16,    18,    18,    19,    19,
-      73,    16,    16,    22,    16,    16,   136,     3,    29,    30,
-      31,    32,    33,    34,   144,    36,    37,    38,    39,    40,
-      41,     9,    43,    44,    45,    46,     3,    16,    16,   159,
-      18,    19,     4,    20,    35,    45,     3,    17,    20,     3,
-      16,    29,    30,    31,    32,    33,    34,     3,    36,    37,
-      38,    39,    40,    41,     9,    43,    44,    45,    46,     3,
-       3,    16,    13,    18,    19,    43,    -1,    -1,    54,    54,
+      50,    51,    17,     0,   139,   140,    28,    45,    18,     4,
+      35,    45,    62,     3,    29,    30,    31,    32,    33,    24,
+      45,   156,    18,    26,    33,    20,    27,    45,    20,     9,
+      45,    28,    82,    83,    84,    85,    16,    87,    16,    89,
+      90,    91,    92,    93,    94,    95,    96,    97,    98,    99,
+      45,    45,    42,   103,    34,    46,    36,    37,    16,    21,
+     110,    52,     3,    17,    16,    45,    46,     9,    29,    30,
+      31,    32,    33,    17,    16,    18,    18,    19,    18,    23,
+      45,    39,    73,    18,    45,    43,   136,    29,    30,    31,
+      32,    33,    34,   143,    36,    37,    38,    39,    40,    41,
+      19,    43,    44,    45,    46,     9,    22,    16,    16,   159,
+      16,    16,    16,     3,    18,    19,     3,    16,     4,    20,
+      45,    35,     3,    17,    20,    29,    30,    31,    32,    33,
+      34,    16,    36,    37,    38,    39,    40,    41,     9,    43,
+      44,    45,    46,     3,     3,    16,     3,    18,    19,     3,
+      13,    43,    54,    -1,    54,    -1,    -1,    -1,    29,    30,
+      31,    32,    33,    34,    -1,    36,    37,    38,    39,    40,
+      41,     9,    43,    44,    45,    46,    -1,    -1,    16,    -1,
+      18,    19,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    29,    30,    31,    32,    33,    34,    -1,    36,    37,
+      38,    39,    40,    41,     9,    43,    44,    45,    46,    -1,
+      -1,    16,    -1,    18,    -1,    -1,    -1,    -1,    -1,    -1,
       -1,    -1,    -1,    -1,    29,    30,    31,    32,    33,    34,
       -1,    36,    37,    38,    39,    40,    41,     9,    43,    44,
-      45,    46,    -1,    -1,    16,    -1,    18,    19,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    29,    30,    31,
-      32,    33,    34,    -1,    36,    37,    38,    39,    40,    41,
-       9,    43,    44,    45,    46,    -1,    -1,    16,    -1,    18,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,     9,
-      29,    30,    31,    32,    33,    34,    16,    36,    37,    38,
-      39,    40,    41,     9,    43,    44,    45,    46,    19,    -1,
-      16,    17,    -1,    24,    34,    -1,    36,    37,    29,    30,
-      31,    32,    33,    -1,    -1,    45,    46,    -1,    34,    -1,
-      36,    37,    -1,    -1,    45,    -1,    -1,    -1,    -1,    45,
-      46,     3,    -1,     5,     6,     7,     8,    -1,    10,    11,
-      12,    13,    14,    15,    -1,    -1,    -1,    -1,    20,     3,
-      22,     5,     6,     7,     8,    -1,    10,    11,    12,    13,
-      14,    15,    -1,    -1,    -1,    -1,    20,     3,    22,     5,
-       6,     7,     8,    -1,    10,    11,    12,    13,    14,    15,
-      -1,    -1,    -1,    -1,    20,    -1,    22,     5,     6,     7,
-       8,    -1,    10,    11,    12,    13,    14,    15,    -1,    17,
-      -1,    -1,    20,    -1,    22,     5,     6,     7,     8,    -1,
-      10,    11,    12,    13,    14,    15,    -1,    17,    -1,    -1,
-      20,    -1,    22,     5,     6,     7,     8,    -1,    10,    11,
-      12,    13,    14,    15,    -1,    17,    -1,    -1,    20,    -1,
-      22,     5,     6,     7,     8,    -1,    10,    11,    12,    13,
-      14,    15,    -1,    17,    -1,    -1,    20,    -1,    22,     5,
-       6,     7,     8,    -1,    10,    11,    12,    13,    14,    15,
-      -1,    17,    -1,    -1,    20,    -1,    22,     5,     6,     7,
-       8,    -1,    10,    11,    12,    13,    14,    15,    -1,    -1,
-      -1,    -1,    20,    21,    22,     5,     6,     7,     8,    -1,
-      10,    11,    12,    13,    14,    15,    -1,    -1,    -1,    -1,
-      20,    21,    22,     5,     6,     7,     8,    -1,    10,    11,
-      12,    13,    14,    15,    -1,    -1,    -1,    -1,    20,    21,
-      22,     5,     6,     7,     8,    -1,    10,    11,    12,    13,
-      14,    15,    -1,    -1,    -1,    -1,    20,    21,    22,     5,
-       6,     7,     8,    -1,    10,    11,    12,    13,    14,    15,
-      -1,    -1,    -1,    -1,    20,    -1,    22,    29,    30,    31,
-      32,    33,     7,     8,    -1,    10,    11,    12,    13,    14,
-      15,    -1,    -1,    45,    -1,    20,    -1,    22,    10,    11,
+      45,    46,    17,    -1,    16,    17,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    -1,    29,    30,    31,    32,    33,    -1,
+      -1,    -1,    34,    -1,    36,    37,    19,    -1,    -1,    -1,
+      45,    24,    -1,    45,    46,    -1,    29,    30,    31,    32,
+      33,    -1,    -1,    -1,    -1,    -1,     3,    -1,     5,     6,
+       7,     8,    45,    10,    11,    12,    13,    14,    15,    -1,
+      -1,    -1,    -1,    20,     3,    22,     5,     6,     7,     8,
+      -1,    10,    11,    12,    13,    14,    15,    -1,    -1,    -1,
+      -1,    20,     3,    22,     5,     6,     7,     8,    -1,    10,
+      11,    12,    13,    14,    15,    -1,    -1,    -1,    -1,    20,
+      -1,    22,     5,     6,     7,     8,    -1,    10,    11,    12,
+      13,    14,    15,    -1,    17,    -1,    -1,    20,    -1,    22,
+       5,     6,     7,     8,    -1,    10,    11,    12,    13,    14,
+      15,    -1,    17,    -1,    -1,    20,    -1,    22,     5,     6,
+       7,     8,    -1,    10,    11,    12,    13,    14,    15,    -1,
+      17,    -1,    -1,    20,    -1,    22,     5,     6,     7,     8,
+      -1,    10,    11,    12,    13,    14,    15,    -1,    17,    -1,
+      -1,    20,    -1,    22,     5,     6,     7,     8,    -1,    10,
+      11,    12,    13,    14,    15,    -1,    17,    -1,    -1,    20,
+      -1,    22,     5,     6,     7,     8,    -1,    10,    11,    12,
+      13,    14,    15,    -1,    -1,    -1,    -1,    20,    21,    22,
+       5,     6,     7,     8,    -1,    10,    11,    12,    13,    14,
+      15,    -1,    -1,    -1,    -1,    20,    21,    22,     5,     6,
+       7,     8,    -1,    10,    11,    12,    13,    14,    15,    -1,
+      -1,    -1,    -1,    20,    21,    22,     5,     6,     7,     8,
+      -1,    10,    11,    12,    13,    14,    15,    -1,    -1,    -1,
+      -1,    20,    21,    22,     5,     6,     7,     8,    -1,    10,
+      11,    12,    13,    14,    15,    -1,    -1,    -1,    -1,    20,
+      -1,    22,     7,     8,    -1,    10,    11,    12,    13,    14,
+      15,    -1,    -1,    -1,    -1,    20,    -1,    22,    10,    11,
       12,    13,    14,    15,    -1,    -1,    -1,    -1,    20,    -1,
       22
   };
 
-  const signed char
+  const unsigned char
   parser::yystos_[] =
   {
-       0,    28,    48,    49,    45,     0,    28,    50,    18,    45,
-      24,    18,    26,    52,    33,    19,    24,    29,    30,    31,
-      32,    33,    45,    51,    53,    54,    64,    65,    66,    67,
-      27,    64,    45,    20,    16,    45,     3,    21,    17,    16,
-      18,    17,    55,    56,    64,    58,    18,    17,    55,    45,
+       0,    28,    49,    50,    45,     0,    28,    51,    18,    45,
+      24,    18,    26,    53,    33,    19,    24,    29,    30,    31,
+      32,    33,    45,    52,    54,    55,    65,    66,    67,    68,
+      27,    65,    45,    20,    16,    45,     3,    21,    17,    16,
+      18,    17,    56,    57,    65,    59,    18,    17,    56,    45,
        9,    16,    18,    19,    34,    36,    37,    38,    39,    40,
-      41,    43,    44,    45,    46,    54,    57,    59,    61,    62,
-      63,    68,    58,    18,    45,    68,    68,    58,    19,    65,
-      66,    22,    16,    16,    16,    16,    68,    20,     3,     3,
-       4,     3,     5,     6,     7,     8,    10,    11,    12,    13,
-      14,    15,    20,    22,    19,    58,    22,    17,    19,    16,
-      20,    45,    68,    68,    68,    68,     3,    68,    68,    68,
-      68,    68,    68,    68,    68,    68,    68,    68,    68,    68,
-      35,    45,    19,     3,    17,    68,    20,    17,    17,    17,
-      17,    21,     3,    21,    16,    21,    68,     3,     3,    57,
-      57,    17,    60,    68,    21,     3,    42,     3,    17,    23,
-      57,    68,     3
+      41,    43,    44,    45,    46,    48,    55,    58,    60,    62,
+      63,    64,    59,    18,    45,    48,    48,    59,    19,    66,
+      67,    22,    16,    16,    16,    16,    48,    20,     3,     5,
+       6,     7,     8,    10,    11,    12,    13,    14,    15,    20,
+      22,     3,     3,     4,    19,    59,    22,    17,    19,    16,
+      20,    45,    48,    48,    48,    48,     3,    48,    48,    48,
+      48,    48,    48,    48,    48,    48,    48,    48,    48,    35,
+      45,    48,    19,     3,    17,    48,    20,    17,    17,    17,
+      17,    21,    21,    16,     3,    21,    48,     3,     3,    58,
+      58,    17,    48,    61,    21,     3,    42,     3,    17,    23,
+      58,    48,     3
   };
 
-  const signed char
+  const unsigned char
   parser::yyr1_[] =
   {
-       0,    47,    48,    48,    49,    50,    51,    51,    52,    52,
-      53,    53,    54,    55,    56,    56,    57,    57,    57,    57,
-      57,    57,    57,    57,    57,    57,    57,    58,    58,    59,
-      60,    60,    61,    61,    62,    62,    63,    63,    63,    64,
-      64,    65,    66,    66,    66,    66,    66,    66,    67,    68,
-      68,    68,    68,    68,    68,    68,    68,    68,    68,    68,
-      68,    68,    68,    68,    68,    68,    68,    68,    68
+       0,    47,    49,    49,    50,    51,    52,    52,    53,    53,
+      54,    54,    55,    56,    57,    57,    58,    58,    58,    58,
+      58,    58,    58,    58,    58,    58,    58,    59,    59,    60,
+      61,    61,    62,    62,    63,    63,    64,    64,    64,    65,
+      65,    66,    67,    67,    67,    67,    67,    67,    68,    48,
+      48,    48,    48,    48,    48,    48,    48,    48,    48,    48,
+      48,    48,    48,    48,    48,    48,    48,    48,    48
   };
 
-  const signed char
+  const unsigned char
   parser::yyr2_[] =
   {
        0,     2,     1,     2,    13,     5,     1,     1,     0,     2,
@@ -1596,13 +1534,13 @@ namespace yy {
   };
 
 
-#if YYDEBUG || 1
+
   // YYTNAME[SYMBOL-NUM] -- String name of the symbol SYMBOL-NUM.
-  // First, the terminals, then, starting at \a YYNTOKENS, nonterminals.
+  // First, the terminals, then, starting at \a yyntokens_, nonterminals.
   const char*
   const parser::yytname_[] =
   {
-  "\"end of file\"", "error", "\"invalid token\"", "\";\"", "\"ASS\"",
+  "\"end of file\"", "error", "$undefined", "\";\"", "\"ASS\"",
   "\"MENUS\"", "\"PLUBS\"", "\"MUTLI\"", "\"DEVID\"", "\"NOT\"",
   "\"EKWAL\"", "\"NEKWAL\"", "\"LES\"", "\"BIGA\"", "\"LESOEK\"",
   "\"BIGOEK\"", "\"(\"", "\")\"", "\"{\"", "\"}\"", "\"[\"", "\"]\"",
@@ -1610,44 +1548,44 @@ namespace yy {
   "\"FROG\"", "\"NUMBA\"", "\"DUMBA\"", "\"BOOLA\"", "\"TEXTA\"",
   "\"VOEDA\"", "\"POLLIWOG\"", "\"LENA\"", "\"YES\"", "\"NO\"", "\"DIS\"",
   "\"OSETR\"", "\"CROAK\"", "\"IFF\"", "\"ELS\"", "\"LOOPA\"", "\"BURP\"",
-  "\"identifier\"", "\"number\"", "$accept", "program", "main",
+  "\"identifier\"", "\"number\"", "$accept", "exp", "program", "main",
   "classdecl", "declaration", "declarations", "methoddecl", "vardecl",
   "formal", "formals", "statement", "statements", "locvardecl", "exprargs",
   "methinvokation", "fieldinvokation", "lvalue", "type", "typeid",
-  "simpletype", "arraytype", "exp", YY_NULLPTR
+  "simpletype", "arraytype", YY_NULLPTR
   };
-#endif
-
 
 #if YYDEBUG
-  const short
+  const unsigned short
   parser::yyrline_[] =
   {
-       0,   133,   133,   134,   137,   140,   143,   144,   147,   148,
-     151,   152,   155,   158,   161,   162,   165,   166,   167,   168,
-     169,   170,   171,   172,   173,   174,   175,   178,   179,   183,
-     186,   187,   190,   191,   194,   195,   198,   199,   200,   203,
-     204,   207,   210,   211,   212,   213,   214,   215,   218,   239,
-     240,   241,   242,   243,   244,   245,   246,   247,   248,   249,
-     250,   251,   252,   253,   254,   255,   256,   257,   258
+       0,   142,   142,   143,   146,   149,   152,   153,   156,   157,
+     160,   161,   164,   167,   170,   171,   174,   175,   176,   177,
+     178,   179,   180,   181,   182,   183,   184,   187,   188,   192,
+     195,   196,   199,   200,   203,   204,   207,   208,   209,   212,
+     213,   216,   219,   220,   221,   222,   223,   224,   227,   248,
+     249,   250,   251,   252,   253,   254,   255,   256,   257,   258,
+     259,   260,   261,   262,   263,   264,   265,   266,   267
   };
 
+  // Print the state stack on the debug stream.
   void
-  parser::yy_stack_print_ () const
+  parser::yystack_print_ ()
   {
     *yycdebug_ << "Stack now";
     for (stack_type::const_iterator
            i = yystack_.begin (),
            i_end = yystack_.end ();
          i != i_end; ++i)
-      *yycdebug_ << ' ' << int (i->state);
+      *yycdebug_ << ' ' << i->state;
     *yycdebug_ << '\n';
   }
 
+  // Report on the debug stream that the rule \a yyrule is going to be reduced.
   void
-  parser::yy_reduce_print_ (int yyrule) const
+  parser::yy_reduce_print_ (int yyrule)
   {
-    int yylno = yyrline_[yyrule];
+    unsigned yylno = yyrline_[yyrule];
     int yynrhs = yyr2_[yyrule];
     // Print the symbols being reduced, and their result.
     *yycdebug_ << "Reducing stack by rule " << yyrule - 1
@@ -1661,9 +1599,9 @@ namespace yy {
 
 
 } // yy
-#line 1665 "/Users/destitutiones/Desktop/Studies/CompilersCourse/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1603 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
-#line 261 "parser.y"
+#line 270 "parser.y"
 
 
 void

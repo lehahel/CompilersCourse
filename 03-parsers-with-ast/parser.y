@@ -8,6 +8,7 @@
 
 %code requires {
     #include <string>
+    #include <ForwardDeclarations.h>
     class Scanner;
     class Driver;
     class Expression;
@@ -39,6 +40,14 @@
     #include "expressions/IdentExpression.h"
     #include "assignments/Assignment.h"
     #include "assignments/AssignmentList.h"
+
+    #include "expression/Expression.h"
+    #include "expression/BinaryOpExpression.h"
+    #include "expression/UnaryOpExpression.h"
+    #include "expression/IntExpression.h"
+    #include "expression/BoolExpression.h"
+    #include "expression/StringExpression.h"
+    #include "expression/DoubleExpression.h"
 
     // #include "assignments_default/assignment.h"
     // #include "assignments_default/assignment_list.h"
@@ -119,7 +128,7 @@
 %token <int> NUMBER "number"
 
 // non-terminal types
-%nterm <Expression*> exp
+%nterm <Expr::CBase*> exp
 %nterm <Assignment*> assignment
 %nterm <AssignmentList*> assignments
 %nterm <Program*> unit
@@ -236,19 +245,19 @@ assignment:
 %left "MUTLI" "DEVID";
 
 exp:
-    "number"         { $$ = new NumberExpression($1);}
-  | "identifier"     { $$ = new IdentExpression($1); }
+    "number"         { $$ = new Expr::CIntExpr($1); /* $$ = new NumberExpression($1); */}
+  | "identifier"     { /* $$ = new IdentExpression($1); */ }
   | exp "[" exp "]"  { /* TODO */ }
   | exp "." "LENA"   { /* TODO */ }
-  | "YES"            { /* TODO */ }
-  | "NO"             { /* TODO */ }
-  | "NOT" exp        { /* TODO */ }
+  | "YES"            { $$ = new Expr::CBoolExpr(true); }
+  | "NO"             { $$ = new Expr::CBoolExpr(false); }
+  | "NOT" exp        { $$ = new Expr::UnaryOperation::CreateMinus($2); }
   | "POLLIWOG" simpletype "[" exp "]" { /* TODO */ }
   | "POLLIWOG" typeid "(" ")"         { /* TODO */ }
-  | exp "PLUBS" exp  { $$ = new AddExpression($1, $3); }
-  | exp "MENUS" exp  { $$ = new SubstractExpression($1, $3); }
-  | exp "MUTLI" exp  { $$ = new MulExpression($1, $3); }
-  | exp "DEVID" exp  { $$ = new DivExpression($1, $3); }
+  | exp "PLUBS" exp  { $$ = new Expr::BinaryOperation::CreateAdd($1, $3); /* $$ = new AddExpression($1, $3); */ }
+  | exp "MENUS" exp  { $$ = new Expr::BinaryOperation::CreateSub($1, $3); /* $$ = new SubstractExpression($1, $3); */ }
+  | exp "MUTLI" exp  { $$ = new Expr::BinaryOperation::CreateMul($1, $3); /* $$ = new MulExpression($1, $3); */}
+  | exp "DEVID" exp  { $$ = new Expr::BinaryOperation::CreateDiv($1, $3); /* $$ = new DivExpression($1, $3); */ }
   | exp "EKWAL" exp  { /* TODO */ }
   | exp "NEKWAL" exp { /* TODO */ }
   | exp "LES"    exp { /* TODO */ }

@@ -7,7 +7,6 @@
 class CIntObject : public CObject {
   public:
     explicit CIntObject(int val)
-    : CObject(new CInt()), value_(val) {};
-  private:
-    int value_;
+    : CObject(new CInt()), value(val) {};
+    int value;
 };

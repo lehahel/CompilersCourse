@@ -80,7 +80,7 @@ blank [ \t\r]
 \n+        loc.lines (yyleng); loc.step ();
 
 "MENUS"    {
-              std::cout << "MENBUS : " << loc.begin.line << " " << loc.end.line << std::endl;
+              std::cout << loc.begin.line << " " << loc.end.line << std::endl;
               return yy::parser::make_MINUS  (loc);
            }
 "PLUBS"    { return yy::parser::make_PLUS    (loc); }

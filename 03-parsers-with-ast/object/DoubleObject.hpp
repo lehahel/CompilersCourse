@@ -7,7 +7,6 @@
 class CDoubleObject : public CObject {
   public:
     explicit CDoubleObject(double val)
-    : CObject(new CDouble()), value_(val) {};
-  private:
-    double value_;
+    : CObject(new CDouble()), value(val) {};
+    double value;
 };

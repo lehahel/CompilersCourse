@@ -1,7 +1,7 @@
 #pragma once
 
 struct CType {
-  enum class TypeName {
+  enum TypeName {
       VOID,
       BOOL,
       INT,
