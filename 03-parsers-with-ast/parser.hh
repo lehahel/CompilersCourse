@@ -380,14 +380,23 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
+      // main
+      char dummy1[sizeof (CMain*)];
+
       // exp
-      char dummy1[sizeof (Expr::CBase*)];
+      char dummy2[sizeof (Expr::CBase*)];
+
+      // statement
+      char dummy3[sizeof (Statement::CBase*)];
+
+      // statements
+      char dummy4[sizeof (Statement::CList*)];
 
       // "number"
-      char dummy2[sizeof (int)];
+      char dummy5[sizeof (int)];
 
       // "identifier"
-      char dummy3[sizeof (std::string)];
+      char dummy6[sizeof (std::string)];
     };
 
     /// The size of the largest semantic type.
@@ -534,6 +543,19 @@ namespace yy {
       {}
 #endif
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, CMain*&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const CMain*& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, Expr::CBase*&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -541,6 +563,32 @@ namespace yy {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const Expr::CBase*& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, Statement::CBase*&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const Statement::CBase*& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, Statement::CList*&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const Statement::CList*& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -595,8 +643,20 @@ namespace yy {
         // Type destructor.
 switch (yytype)
     {
+      case 51: // main
+        value.template destroy< CMain* > ();
+        break;
+
       case 48: // exp
         value.template destroy< Expr::CBase* > ();
+        break;
+
+      case 49: // statement
+        value.template destroy< Statement::CBase* > ();
+        break;
+
+      case 50: // statements
+        value.template destroy< Statement::CList* > ();
         break;
 
       case 46: // "number"
@@ -1739,7 +1799,7 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 550,     ///< Last index in yytable_.
+      yylast_ = 540,     ///< Last index in yytable_.
       yynnts_ = 22,  ///< Number of nonterminal symbols.
       yyfinal_ = 5, ///< Termination state number.
       yyterror_ = 1,
@@ -1816,8 +1876,20 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
+      case 51: // main
+        value.move< CMain* > (std::move (that.value));
+        break;
+
       case 48: // exp
         value.move< Expr::CBase* > (std::move (that.value));
+        break;
+
+      case 49: // statement
+        value.move< Statement::CBase* > (std::move (that.value));
+        break;
+
+      case 50: // statements
+        value.move< Statement::CList* > (std::move (that.value));
         break;
 
       case 46: // "number"
@@ -1843,8 +1915,20 @@ switch (yytype)
   {
     switch (this->type_get ())
     {
+      case 51: // main
+        value.copy< CMain* > (YY_MOVE (that.value));
+        break;
+
       case 48: // exp
         value.copy< Expr::CBase* > (YY_MOVE (that.value));
+        break;
+
+      case 49: // statement
+        value.copy< Statement::CBase* > (YY_MOVE (that.value));
+        break;
+
+      case 50: // statements
+        value.copy< Statement::CList* > (YY_MOVE (that.value));
         break;
 
       case 46: // "number"
@@ -1877,8 +1961,20 @@ switch (yytype)
     super_type::move (s);
     switch (this->type_get ())
     {
+      case 51: // main
+        value.move< CMain* > (YY_MOVE (s.value));
+        break;
+
       case 48: // exp
         value.move< Expr::CBase* > (YY_MOVE (s.value));
+        break;
+
+      case 49: // statement
+        value.move< Statement::CBase* > (YY_MOVE (s.value));
+        break;
+
+      case 50: // statements
+        value.move< Statement::CList* > (YY_MOVE (s.value));
         break;
 
       case 46: // "number"
@@ -1963,7 +2059,7 @@ switch (yytype)
   }
 
 } // yy
-#line 1967 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.hh"
+#line 2063 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.hh"
 
 
 

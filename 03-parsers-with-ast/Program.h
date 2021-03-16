@@ -1,12 +1,17 @@
 #pragma once
 
-#include "assignments/AssignmentList.h"
-#include "expressions/Expression.h"
+#include <ForwardDeclarations.h>
+// #include "assignments/AssignmentList.h"
+// #include "statement/Statement.h"
+// #include "statement/StatementList.h"
+
+// #include <MainClass.h>
 
 class Program {
  public:
-    Program(AssignmentList* assignments, Expression* expression);
+    Program(CMain *main_class);
+  
+    // Program(AssignmentList* assignments, Expression* expression);
+    CMain *main_class_;
  private:
-    AssignmentList* assignments_;
-    Expression* expression_;
 };

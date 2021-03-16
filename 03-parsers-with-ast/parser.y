@@ -51,6 +51,12 @@
     #include "expression/StringExpression.h"
     #include "expression/DoubleExpression.h"
 
+    #include "statement/Statement.h"
+    #include "statement/ExprStatement.h"
+    #include "statement/StatementList.h"
+
+    #include "MainClass.h"
+
     // #include "assignments_default/assignment.h"
     // #include "assignments_default/assignment_list.h"
     // #include "expression_default/addexpression.h"
@@ -134,6 +140,9 @@
 %nterm <Assignment*> assignment
 %nterm <AssignmentList*> assignments
 %nterm <Program*> unit
+%nterm <Statement::CBase*> statement
+%nterm <Statement::CList*> statements
+%nterm <CMain*> main;
 
 // %printer { yyo << $$; } <*>;
 
@@ -141,11 +150,13 @@
 %start program;
 
 program:
-    main              { /* TODO */ }
+    main              { driver.program = new Program($1); }
   | program classdecl { /* TODO */ };
 
 main: 
-    "FROG" "identifier" "{" "BUBLIC" "STATEC" "VOEDA" "SWAMP" "(" ")" "{" statements "}" "}";
+    "FROG" "identifier" "{" "BUBLIC" "STATEC" "VOEDA" "SWAMP" "(" ")" "{" statements "}" "}" ";" { 
+        $$ = new CMain($11);
+     };
 
 classdecl:
     "FROG" "identifier" "{" declarations "}" { /* TODO */ };
@@ -183,11 +194,11 @@ statement:
   | lvalue "ASS" exp ";"                           { /* TODO */ }
   | "BURP" exp ";"                                 { /* TODO */ }
   | methinvokation ";"                             { /* TODO */ }
-  | exp ";"                                        { /* TODO */ };
+  | exp ";"                                        { $$ = new Statement::CExpr($1); };
 
 statements:
-    %empty                { /* TODO */ }
-  | statements statement  { /* TODO */ };
+    %empty                { $$ = new Statement::CList(); }
+  | statements statement  { $1->Append($2); $$ = $1; };
 
 
 locvardecl:

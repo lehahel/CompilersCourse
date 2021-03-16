@@ -7,7 +7,7 @@
 #include "parser.hh"
 
 #include "Program.h"
-
+#include "expression/Expression.h"
 
 
 class Driver {
@@ -19,6 +19,8 @@ class Driver {
     std::string file;
     bool trace_parsing;
 
+    void PrintTree(const std::string &filename);
+    
     void scan_begin();
     void scan_end();
 

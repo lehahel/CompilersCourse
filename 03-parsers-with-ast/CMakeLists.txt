@@ -43,6 +43,13 @@ add_executable(
     expression/DoubleExpression.cpp
     expression/StringExpression.cpp
     expression/BoolExpression.cpp
+
+    statement/ExprStatement.cpp
+    statement/StatementList.cpp
+    
+    visitor/PrintVisitor.cpp
+    
+    MainClass.cpp
     
     type/Type.cpp
     type/Int.hpp

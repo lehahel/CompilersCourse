@@ -1,6 +1,4 @@
 #include "Program.h"
 
-Program::Program(
-    AssignmentList* assignments,
-    Expression* expression
-): assignments_(assignments), expression_(expression) {}
+Program::Program(CMain *main_class) 
+  : main_class_(main_class) {};
