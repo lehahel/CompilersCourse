@@ -16,14 +16,15 @@ std::string Expr::CUnaryOperation::GetExprName() const {
     if (type_ == Expr::NOT) {
         return "NotExpression";
     }
+    return "ERROR";
 }
 
-static Expr::CUnaryOperation*
-CreateAdd(Expr::CBase *expr) {
+Expr::CUnaryOperation*
+Expr::CUnaryOperation::CreateMinus(Expr::CBase *expr) {
     return new Expr::CUnaryOperation(Expr::MINUS, expr);
 }
 
-static Expr::CUnaryOperation*
-CreateSub(Expr::CBase *expr) {
+Expr::CUnaryOperation*
+Expr::CUnaryOperation::CreateNot(Expr::CBase *expr) {
     return new Expr::CUnaryOperation(Expr::NOT, expr);
 }

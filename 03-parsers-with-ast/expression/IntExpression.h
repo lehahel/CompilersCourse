@@ -1,8 +1,8 @@
 #pragma once
 
-#include <ForwardDeclarations.h>
 #include "Expression.h"
 #include <object/IntObject.hpp>
+#include <ForwardDeclarations.h>
 
 namespace Expr {
     class CIntExpr : public CBase {

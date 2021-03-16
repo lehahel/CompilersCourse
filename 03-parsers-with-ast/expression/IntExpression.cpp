@@ -9,3 +9,7 @@ void Expr::CIntExpr::Accept(Visitor::CBase *visitor) {
 int Expr::CIntExpr::GetValue() const {
     return object_->value;
 }
+
+std::string Expr::CIntExpr::GetExprName() const {
+    return "IntExpression";
+}

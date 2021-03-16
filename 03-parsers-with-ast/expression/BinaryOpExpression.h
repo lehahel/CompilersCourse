@@ -28,7 +28,7 @@ namespace Expr {
         );
         ~CBinaryOperation() override = default;
         std::string GetExprName() const override;
-
+      
         static CBinaryOperation *CreateAdd    (Expr::CBase *left, Expr::CBase *right);
         static CBinaryOperation *CreateSub    (Expr::CBase *left, Expr::CBase *right);
         static CBinaryOperation *CreateMul    (Expr::CBase *left, Expr::CBase *right);

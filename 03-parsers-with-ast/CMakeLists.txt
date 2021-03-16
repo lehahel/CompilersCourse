@@ -24,6 +24,7 @@ add_executable(
     ParserExampleWithAst
     main.cpp
     driver.cpp
+
     ${BISON_MyParserWithAst_OUTPUTS}
     ${FLEX_MyScannerWithAst_OUTPUTS}
     # expressions/NumberExpression.cpp
@@ -34,14 +35,21 @@ add_executable(
     # expressions/IdentExpression.cpp
     assignments/Assignment.cpp
     assignments/AssignmentList.cpp
+
     expression/BinaryOpExpression.cpp
     expression/UnaryOpExpression.cpp
+
     expression/IntExpression.cpp
+    expression/DoubleExpression.cpp
+    expression/StringExpression.cpp
+    expression/BoolExpression.cpp
+    
     type/Type.cpp
     type/Int.hpp
     type/Double.hpp
     type/Bool.hpp
     type/String.hpp
+    
     Program.cpp
 )
 

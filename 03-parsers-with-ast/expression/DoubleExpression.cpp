@@ -9,3 +9,7 @@ void Expr::CDoubleExpr::Accept(Visitor::CBase *visitor) {
 double Expr::CDoubleExpr::GetValue() const {
     return object_->value;
 }
+
+std::string Expr::CDoubleExpr::GetExprName() const {
+    return "DoubleExpression";
+}

@@ -43,6 +43,8 @@
 // Unqualified %code blocks.
 #line 31 "parser.y"
 
+    #include "ForwardDeclarations.h"
+
     #include "driver.hh"
     #include "location.hh"
 
@@ -82,7 +84,7 @@
         return scanner.ScanToken();
     }
 
-#line 86 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 88 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
 
 #ifndef YY_
@@ -176,7 +178,7 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 180 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 182 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
 
   /* Return YYSTR after stripping away unnecessary quotes and
@@ -634,403 +636,403 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 142 "parser.y"
+#line 144 "parser.y"
     { /* TODO */ }
-#line 640 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 642 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 3:
-#line 143 "parser.y"
+#line 145 "parser.y"
     { /* TODO */ }
-#line 646 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 648 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 5:
-#line 149 "parser.y"
+#line 151 "parser.y"
     { /* TODO */ }
-#line 652 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 654 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 6:
-#line 152 "parser.y"
+#line 154 "parser.y"
     { /* TODO */ }
-#line 658 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 660 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 7:
-#line 153 "parser.y"
+#line 155 "parser.y"
     { /* TODO */ }
-#line 664 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 666 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 8:
-#line 156 "parser.y"
+#line 158 "parser.y"
     { /* TODO */ }
-#line 670 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 672 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 9:
-#line 157 "parser.y"
+#line 159 "parser.y"
     { /* TODO */ }
-#line 676 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 678 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 10:
-#line 160 "parser.y"
+#line 162 "parser.y"
     { /* TODO */ }
-#line 682 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 684 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 11:
-#line 161 "parser.y"
+#line 163 "parser.y"
     { /* TODO */ }
-#line 688 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 690 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 12:
-#line 164 "parser.y"
+#line 166 "parser.y"
     { /* TODO */ }
-#line 694 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 696 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 13:
-#line 167 "parser.y"
+#line 169 "parser.y"
     { /* TODO */ }
-#line 700 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 702 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 14:
-#line 170 "parser.y"
+#line 172 "parser.y"
     { /* TODO */ }
-#line 706 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 708 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 15:
-#line 171 "parser.y"
+#line 173 "parser.y"
     { /* TODO */ }
-#line 712 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 714 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 16:
-#line 174 "parser.y"
+#line 176 "parser.y"
     { /* TODO */ }
-#line 718 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 720 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 17:
-#line 175 "parser.y"
+#line 177 "parser.y"
     { /* TODO */ }
-#line 724 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 726 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 18:
-#line 176 "parser.y"
+#line 178 "parser.y"
     { /* TODO */ }
-#line 730 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 732 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 19:
-#line 177 "parser.y"
+#line 179 "parser.y"
     { /* TODO */ }
-#line 736 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 738 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 20:
-#line 178 "parser.y"
+#line 180 "parser.y"
     { /* TODO */ }
-#line 742 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 744 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 21:
-#line 179 "parser.y"
+#line 181 "parser.y"
     { /* TODO */ }
-#line 748 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 750 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 22:
-#line 180 "parser.y"
+#line 182 "parser.y"
     { /* TODO */ }
-#line 754 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 756 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 23:
-#line 181 "parser.y"
+#line 183 "parser.y"
     { /* TODO */ }
-#line 760 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 762 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 24:
-#line 182 "parser.y"
+#line 184 "parser.y"
     { /* TODO */ }
-#line 766 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 768 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 25:
-#line 183 "parser.y"
+#line 185 "parser.y"
     { /* TODO */ }
-#line 772 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 774 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 26:
-#line 184 "parser.y"
+#line 186 "parser.y"
     { /* TODO */ }
-#line 778 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 780 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 27:
-#line 187 "parser.y"
+#line 189 "parser.y"
     { /* TODO */ }
-#line 784 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 786 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 28:
-#line 188 "parser.y"
+#line 190 "parser.y"
     { /* TODO */ }
-#line 790 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 792 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 29:
-#line 192 "parser.y"
+#line 194 "parser.y"
     { /* TODO */ }
-#line 796 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 798 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 30:
-#line 195 "parser.y"
+#line 197 "parser.y"
     { /* TODO */ }
-#line 802 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 804 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 31:
-#line 196 "parser.y"
+#line 198 "parser.y"
     { /* TODO */ }
-#line 808 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 810 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 32:
-#line 199 "parser.y"
+#line 201 "parser.y"
     { /* TODO */ }
-#line 814 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 816 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 33:
-#line 200 "parser.y"
+#line 202 "parser.y"
     { /* TODO */ }
-#line 820 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 822 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 34:
-#line 203 "parser.y"
+#line 205 "parser.y"
     { /* TODO */ }
-#line 826 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 828 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 35:
-#line 204 "parser.y"
+#line 206 "parser.y"
     { /* TODO */ }
-#line 832 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 834 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 36:
-#line 207 "parser.y"
+#line 209 "parser.y"
     { /* TODO */ }
-#line 838 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 840 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 37:
-#line 208 "parser.y"
+#line 210 "parser.y"
     { /* TODO */ }
-#line 844 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 846 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 38:
-#line 209 "parser.y"
+#line 211 "parser.y"
     { /* TODO */ }
-#line 850 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 852 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 39:
-#line 212 "parser.y"
+#line 214 "parser.y"
     { /* TODO */ }
-#line 856 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 858 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 40:
-#line 213 "parser.y"
+#line 215 "parser.y"
     { /* TODO */ }
-#line 862 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 864 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 41:
-#line 216 "parser.y"
+#line 218 "parser.y"
     { /* TODO */ }
-#line 868 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 870 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 42:
-#line 219 "parser.y"
+#line 221 "parser.y"
     { /* TODO */ }
-#line 874 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 876 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 43:
-#line 220 "parser.y"
+#line 222 "parser.y"
     { /* TODO */ }
-#line 880 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 882 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 44:
-#line 221 "parser.y"
+#line 223 "parser.y"
     { /* TODO */ }
-#line 886 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 888 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 45:
-#line 222 "parser.y"
+#line 224 "parser.y"
     { /* TODO */ }
-#line 892 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 894 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 46:
-#line 223 "parser.y"
+#line 225 "parser.y"
     { /* TODO */ }
-#line 898 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 900 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 47:
-#line 224 "parser.y"
+#line 226 "parser.y"
     { /* TODO */ }
-#line 904 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 906 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 48:
-#line 227 "parser.y"
+#line 229 "parser.y"
     { /* TODO */ }
-#line 910 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 912 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 49:
-#line 248 "parser.y"
+#line 250 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = new Expr::CIntExpr(yystack_[0].value.as < int > ()); /* $$ = new NumberExpression($1); */}
-#line 916 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 918 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 50:
-#line 249 "parser.y"
+#line 251 "parser.y"
     { /* $$ = new IdentExpression($1); */ }
-#line 922 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 924 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 51:
-#line 250 "parser.y"
+#line 252 "parser.y"
     { /* TODO */ }
-#line 928 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 930 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 52:
-#line 251 "parser.y"
+#line 253 "parser.y"
     { /* TODO */ }
-#line 934 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 936 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 53:
-#line 252 "parser.y"
+#line 254 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = new Expr::CBoolExpr(true); }
-#line 940 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 942 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 54:
-#line 253 "parser.y"
+#line 255 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = new Expr::CBoolExpr(false); }
-#line 946 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 948 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 55:
-#line 254 "parser.y"
-    { yylhs.value.as < Expr::CBase* > () = new Expr::UnaryOperation::CreateMinus(yystack_[0].value.as < Expr::CBase* > ()); }
-#line 952 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 256 "parser.y"
+    { yylhs.value.as < Expr::CBase* > () = Expr::CUnaryOperation::CreateMinus(yystack_[0].value.as < Expr::CBase* > ()); }
+#line 954 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 56:
-#line 255 "parser.y"
+#line 257 "parser.y"
     { /* TODO */ }
-#line 958 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 960 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 57:
-#line 256 "parser.y"
+#line 258 "parser.y"
     { /* TODO */ }
-#line 964 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 966 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 58:
-#line 257 "parser.y"
-    { yylhs.value.as < Expr::CBase* > () = new Expr::BinaryOperation::CreateAdd(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new AddExpression($1, $3); */ }
-#line 970 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 259 "parser.y"
+    { yylhs.value.as < Expr::CBase* > () = Expr::CBinaryOperation::CreateAdd(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new AddExpression($1, $3); */ }
+#line 972 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 59:
-#line 258 "parser.y"
-    { yylhs.value.as < Expr::CBase* > () = new Expr::BinaryOperation::CreateSub(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new SubstractExpression($1, $3); */ }
-#line 976 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 260 "parser.y"
+    { yylhs.value.as < Expr::CBase* > () = Expr::CBinaryOperation::CreateSub(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new SubstractExpression($1, $3); */ }
+#line 978 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 60:
-#line 259 "parser.y"
-    { yylhs.value.as < Expr::CBase* > () = new Expr::BinaryOperation::CreateMul(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new MulExpression($1, $3); */}
-#line 982 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 261 "parser.y"
+    { yylhs.value.as < Expr::CBase* > () = Expr::CBinaryOperation::CreateMul(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new MulExpression($1, $3); */}
+#line 984 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 61:
-#line 260 "parser.y"
-    { yylhs.value.as < Expr::CBase* > () = new Expr::BinaryOperation::CreateDiv(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new DivExpression($1, $3); */ }
-#line 988 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 262 "parser.y"
+    { yylhs.value.as < Expr::CBase* > () = Expr::CBinaryOperation::CreateDiv(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new DivExpression($1, $3); */ }
+#line 990 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 62:
-#line 261 "parser.y"
+#line 263 "parser.y"
     { /* TODO */ }
-#line 994 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 996 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 63:
-#line 262 "parser.y"
+#line 264 "parser.y"
     { /* TODO */ }
-#line 1000 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1002 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 64:
-#line 263 "parser.y"
+#line 265 "parser.y"
     { /* TODO */ }
-#line 1006 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1008 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 65:
-#line 264 "parser.y"
+#line 266 "parser.y"
     { /* TODO */ }
-#line 1012 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1014 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 66:
-#line 265 "parser.y"
+#line 267 "parser.y"
     { /* TODO */ }
-#line 1018 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1020 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 67:
-#line 266 "parser.y"
+#line 268 "parser.y"
     { /* TODO */ }
-#line 1024 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1026 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 68:
-#line 267 "parser.y"
+#line 269 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = yystack_[1].value.as < Expr::CBase* > (); }
-#line 1030 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1032 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
 
-#line 1034 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1036 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
             default:
               break;
@@ -1559,13 +1561,13 @@ namespace yy {
   const unsigned short
   parser::yyrline_[] =
   {
-       0,   142,   142,   143,   146,   149,   152,   153,   156,   157,
-     160,   161,   164,   167,   170,   171,   174,   175,   176,   177,
-     178,   179,   180,   181,   182,   183,   184,   187,   188,   192,
-     195,   196,   199,   200,   203,   204,   207,   208,   209,   212,
-     213,   216,   219,   220,   221,   222,   223,   224,   227,   248,
-     249,   250,   251,   252,   253,   254,   255,   256,   257,   258,
-     259,   260,   261,   262,   263,   264,   265,   266,   267
+       0,   144,   144,   145,   148,   151,   154,   155,   158,   159,
+     162,   163,   166,   169,   172,   173,   176,   177,   178,   179,
+     180,   181,   182,   183,   184,   185,   186,   189,   190,   194,
+     197,   198,   201,   202,   205,   206,   209,   210,   211,   214,
+     215,   218,   221,   222,   223,   224,   225,   226,   229,   250,
+     251,   252,   253,   254,   255,   256,   257,   258,   259,   260,
+     261,   262,   263,   264,   265,   266,   267,   268,   269
   };
 
   // Print the state stack on the debug stream.
@@ -1599,9 +1601,9 @@ namespace yy {
 
 
 } // yy
-#line 1603 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1605 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
-#line 270 "parser.y"
+#line 272 "parser.y"
 
 
 void

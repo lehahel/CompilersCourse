@@ -41,54 +41,55 @@ std::string Expr::CBinaryOperation::GetExprName() const {
     if (type_ == Expr::NEQUAL) {
         return "NequalExpression";
     }
+    return "ERROR";
 }
 
-static Expr::CBinaryOperation*
-CreateAdd(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateAdd(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::ADD, left, right);
 }
 
-static Expr::CBinaryOperation*
-CreateSub(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateSub(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::SUB, left, right);
 }
 
-static Expr::CBinaryOperation*
-CreateMul(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateMul(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::MUL, left, right);
 }
 
-static Expr::CBinaryOperation*
-CreateDiv(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateDiv(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::DIV, left, right);
 }
 
-static Expr::CBinaryOperation*
-CreateBigger(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateBigger(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::BIGGER, left, right);
 }
 
-static Expr::CBinaryOperation*
-CreateLess(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateLess(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::LESS, left, right);
 }
 
-static Expr::CBinaryOperation*
-CreateLequal(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateLequal(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::LEQUAL, left, right);
 }
 
-static Expr::CBinaryOperation*
-CreateBequal(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateBequal(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::BEQUAL, left, right);
 }
 
-static Expr::CBinaryOperation*
-CreateEqual(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateEqual(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::EQUAL, left, right);
 }
 
-static Expr::CBinaryOperation*
-CreateNequal(Expr::CBase *left, Expr::CBase *right) {
+Expr::CBinaryOperation*
+Expr::CBinaryOperation::CreateNequal(Expr::CBase *left, Expr::CBase *right) {
     return new Expr::CBinaryOperation(Expr::NEQUAL, left, right);
 }

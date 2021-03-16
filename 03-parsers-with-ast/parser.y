@@ -29,6 +29,8 @@
 %define parse.error verbose
 
 %code {
+    #include "ForwardDeclarations.h"
+
     #include "driver.hh"
     #include "location.hh"
 
@@ -251,13 +253,13 @@ exp:
   | exp "." "LENA"   { /* TODO */ }
   | "YES"            { $$ = new Expr::CBoolExpr(true); }
   | "NO"             { $$ = new Expr::CBoolExpr(false); }
-  | "NOT" exp        { $$ = new Expr::UnaryOperation::CreateMinus($2); }
+  | "NOT" exp        { $$ = Expr::CUnaryOperation::CreateMinus($2); }
   | "POLLIWOG" simpletype "[" exp "]" { /* TODO */ }
   | "POLLIWOG" typeid "(" ")"         { /* TODO */ }
-  | exp "PLUBS" exp  { $$ = new Expr::BinaryOperation::CreateAdd($1, $3); /* $$ = new AddExpression($1, $3); */ }
-  | exp "MENUS" exp  { $$ = new Expr::BinaryOperation::CreateSub($1, $3); /* $$ = new SubstractExpression($1, $3); */ }
-  | exp "MUTLI" exp  { $$ = new Expr::BinaryOperation::CreateMul($1, $3); /* $$ = new MulExpression($1, $3); */}
-  | exp "DEVID" exp  { $$ = new Expr::BinaryOperation::CreateDiv($1, $3); /* $$ = new DivExpression($1, $3); */ }
+  | exp "PLUBS" exp  { $$ = Expr::CBinaryOperation::CreateAdd($1, $3); /* $$ = new AddExpression($1, $3); */ }
+  | exp "MENUS" exp  { $$ = Expr::CBinaryOperation::CreateSub($1, $3); /* $$ = new SubstractExpression($1, $3); */ }
+  | exp "MUTLI" exp  { $$ = Expr::CBinaryOperation::CreateMul($1, $3); /* $$ = new MulExpression($1, $3); */}
+  | exp "DEVID" exp  { $$ = Expr::CBinaryOperation::CreateDiv($1, $3); /* $$ = new DivExpression($1, $3); */ }
   | exp "EKWAL" exp  { /* TODO */ }
   | exp "NEKWAL" exp { /* TODO */ }
   | exp "LES"    exp { /* TODO */ }

@@ -9,3 +9,7 @@ void Expr::CStringExpr::Accept(Visitor::CBase *visitor) {
 std::string Expr::CStringExpr::GetValue() const {
     return object_->value;
 }
+
+std::string Expr::CStringExpr::GetExprName() const {
+    return "StringExpression";
+}

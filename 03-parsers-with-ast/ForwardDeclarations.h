@@ -1,13 +1,15 @@
+#pragma once
+
 namespace Expr {
     class CBase;
     
     class CBinaryOperation;
     class CUnaryOperation;   
 
-    class CIntExpression;
-    class CDoubleExpression;
-    class CStringExpression;
-    class CBoolExpression;
+    class CIntExpr;
+    class CDoubleExpr;
+    class CStringExpr;
+    class CBoolExpr;
 };
 
 struct CInt;

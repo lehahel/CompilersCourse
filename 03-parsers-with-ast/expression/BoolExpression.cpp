@@ -9,3 +9,7 @@ void Expr::CBoolExpr::Accept(Visitor::CBase *visitor) {
 bool Expr::CBoolExpr::GetValue() const {
     return object_->value;
 }
+
+std::string Expr::CBoolExpr::GetExprName() const {
+    return "BoolExpression";
+}
