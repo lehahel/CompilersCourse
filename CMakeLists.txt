@@ -34,4 +34,4 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${Compilers_SOURCE_DIR}/bin)
 
 
-add_subdirectory(03-parsers-with-ast)
+add_subdirectory(src)
