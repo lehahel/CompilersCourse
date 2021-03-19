@@ -68,6 +68,10 @@
     #include "statement/Statement.h"
     #include "statement/ExprStatement.h"
     #include "statement/StatementList.h"
+    #include "statement/AssStatement.h"
+
+    #include "lvalue/Lvalue.h"
+    #include "lvalue/IdentLvalue.h"
 
     #include "MainClass.h"
 
@@ -90,7 +94,7 @@
         return scanner.ScanToken();
     }
 
-#line 94 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 98 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
 
 #ifndef YY_
@@ -184,7 +188,7 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 188 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 192 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
 
   /* Return YYSTR after stripping away unnecessary quotes and
@@ -302,6 +306,10 @@ namespace yy {
         value.YY_MOVE_OR_COPY< Expr::CBase* > (YY_MOVE (that.value));
         break;
 
+      case 52: // lvalue
+        value.YY_MOVE_OR_COPY< Lvalue::CBase* > (YY_MOVE (that.value));
+        break;
+
       case 49: // statement
         value.YY_MOVE_OR_COPY< Statement::CBase* > (YY_MOVE (that.value));
         break;
@@ -341,6 +349,10 @@ namespace yy {
         value.move< Expr::CBase* > (YY_MOVE (that.value));
         break;
 
+      case 52: // lvalue
+        value.move< Lvalue::CBase* > (YY_MOVE (that.value));
+        break;
+
       case 49: // statement
         value.move< Statement::CBase* > (YY_MOVE (that.value));
         break;
@@ -378,6 +390,10 @@ namespace yy {
 
       case 48: // exp
         value.move< Expr::CBase* > (that.value);
+        break;
+
+      case 52: // lvalue
+        value.move< Lvalue::CBase* > (that.value);
         break;
 
       case 49: // statement
@@ -653,6 +669,10 @@ namespace yy {
         yylhs.value.emplace< Expr::CBase* > ();
         break;
 
+      case 52: // lvalue
+        yylhs.value.emplace< Lvalue::CBase* > ();
+        break;
+
       case 49: // statement
         yylhs.value.emplace< Statement::CBase* > ();
         break;
@@ -690,411 +710,411 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 153 "parser.y"
+#line 158 "parser.y"
     { driver.program = new Program(yystack_[0].value.as < CMain* > ()); }
-#line 696 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 3:
-#line 154 "parser.y"
-    { /* TODO */ }
-#line 702 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 4:
-#line 157 "parser.y"
-    { 
-        yylhs.value.as < CMain* > () = new CMain(yystack_[3].value.as < Statement::CList* > ());
-     }
-#line 710 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
-    break;
-
-  case 5:
-#line 162 "parser.y"
-    { /* TODO */ }
 #line 716 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 6:
-#line 165 "parser.y"
+  case 3:
+#line 159 "parser.y"
     { /* TODO */ }
 #line 722 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
-  case 7:
-#line 166 "parser.y"
+  case 4:
+#line 162 "parser.y"
+    { 
+        yylhs.value.as < CMain* > () = new CMain(yystack_[3].value.as < Statement::CList* > ());
+     }
+#line 730 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 5:
+#line 167 "parser.y"
     { /* TODO */ }
-#line 728 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 736 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 6:
+#line 170 "parser.y"
+    { /* TODO */ }
+#line 742 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+    break;
+
+  case 7:
+#line 171 "parser.y"
+    { /* TODO */ }
+#line 748 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 8:
-#line 169 "parser.y"
+#line 174 "parser.y"
     { /* TODO */ }
-#line 734 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 754 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 9:
-#line 170 "parser.y"
+#line 175 "parser.y"
     { /* TODO */ }
-#line 740 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 760 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 10:
-#line 173 "parser.y"
+#line 178 "parser.y"
     { /* TODO */ }
-#line 746 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 766 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 11:
-#line 174 "parser.y"
+#line 179 "parser.y"
     { /* TODO */ }
-#line 752 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 772 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 12:
-#line 177 "parser.y"
+#line 182 "parser.y"
     { /* TODO */ }
-#line 758 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 778 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 13:
-#line 180 "parser.y"
+#line 185 "parser.y"
     { /* TODO */ }
-#line 764 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 784 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 14:
-#line 183 "parser.y"
+#line 188 "parser.y"
     { /* TODO */ }
-#line 770 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 790 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 15:
-#line 184 "parser.y"
+#line 189 "parser.y"
     { /* TODO */ }
-#line 776 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 796 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 16:
-#line 187 "parser.y"
+#line 192 "parser.y"
     { /* TODO */ }
-#line 782 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 802 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 17:
-#line 188 "parser.y"
+#line 193 "parser.y"
     { /* TODO */ }
-#line 788 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 808 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 18:
-#line 189 "parser.y"
+#line 194 "parser.y"
     { /* TODO */ }
-#line 794 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 814 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 19:
-#line 190 "parser.y"
+#line 195 "parser.y"
     { /* TODO */ }
-#line 800 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 820 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 20:
-#line 191 "parser.y"
+#line 196 "parser.y"
     { /* TODO */ }
-#line 806 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 826 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 21:
-#line 192 "parser.y"
+#line 197 "parser.y"
     { /* TODO */ }
-#line 812 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 832 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 22:
-#line 193 "parser.y"
+#line 198 "parser.y"
     { /* TODO */ }
-#line 818 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 838 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 23:
-#line 194 "parser.y"
-    { /* TODO */ }
-#line 824 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 199 "parser.y"
+    { yylhs.value.as < Statement::CBase* > () = new Statement::CAssignment(yystack_[3].value.as < Lvalue::CBase* > (), yystack_[1].value.as < Expr::CBase* > ()); }
+#line 844 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 24:
-#line 195 "parser.y"
+#line 200 "parser.y"
     { /* TODO */ }
-#line 830 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 850 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 25:
-#line 196 "parser.y"
+#line 201 "parser.y"
     { /* TODO */ }
-#line 836 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 856 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 26:
-#line 197 "parser.y"
+#line 202 "parser.y"
     { yylhs.value.as < Statement::CBase* > () = new Statement::CExpr(yystack_[1].value.as < Expr::CBase* > ()); }
-#line 842 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 862 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 27:
-#line 200 "parser.y"
+#line 205 "parser.y"
     { yylhs.value.as < Statement::CList* > () = new Statement::CList(); }
-#line 848 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 868 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 28:
-#line 201 "parser.y"
+#line 206 "parser.y"
     { yystack_[1].value.as < Statement::CList* > ()->Append(yystack_[0].value.as < Statement::CBase* > ()); yylhs.value.as < Statement::CList* > () = yystack_[1].value.as < Statement::CList* > (); }
-#line 854 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 874 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 29:
-#line 205 "parser.y"
+#line 210 "parser.y"
     { /* TODO */ }
-#line 860 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 880 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 30:
-#line 208 "parser.y"
+#line 213 "parser.y"
     { /* TODO */ }
-#line 866 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 886 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 31:
-#line 209 "parser.y"
+#line 214 "parser.y"
     { /* TODO */ }
-#line 872 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 892 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 32:
-#line 212 "parser.y"
+#line 217 "parser.y"
     { /* TODO */ }
-#line 878 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 898 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 33:
-#line 213 "parser.y"
+#line 218 "parser.y"
     { /* TODO */ }
-#line 884 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 904 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 34:
-#line 216 "parser.y"
+#line 221 "parser.y"
     { /* TODO */ }
-#line 890 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 910 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 35:
-#line 217 "parser.y"
+#line 222 "parser.y"
     { /* TODO */ }
-#line 896 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 916 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 36:
-#line 220 "parser.y"
-    { /* TODO */ }
-#line 902 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 225 "parser.y"
+    { yylhs.value.as < Lvalue::CBase* > () = new Lvalue::CIdentifier(yystack_[0].value.as < std::string > ()); }
+#line 922 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 37:
-#line 221 "parser.y"
+#line 226 "parser.y"
     { /* TODO */ }
-#line 908 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 928 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 38:
-#line 222 "parser.y"
+#line 227 "parser.y"
     { /* TODO */ }
-#line 914 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 934 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 39:
-#line 225 "parser.y"
+#line 230 "parser.y"
     { /* TODO */ }
-#line 920 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 940 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 40:
-#line 226 "parser.y"
+#line 231 "parser.y"
     { /* TODO */ }
-#line 926 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 946 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 41:
-#line 229 "parser.y"
+#line 234 "parser.y"
     { /* TODO */ }
-#line 932 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 952 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 42:
-#line 232 "parser.y"
+#line 237 "parser.y"
     { /* TODO */ }
-#line 938 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 958 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 43:
-#line 233 "parser.y"
+#line 238 "parser.y"
     { /* TODO */ }
-#line 944 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 964 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 44:
-#line 234 "parser.y"
+#line 239 "parser.y"
     { /* TODO */ }
-#line 950 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 970 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 45:
-#line 235 "parser.y"
+#line 240 "parser.y"
     { /* TODO */ }
-#line 956 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 976 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 46:
-#line 236 "parser.y"
+#line 241 "parser.y"
     { /* TODO */ }
-#line 962 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 982 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 47:
-#line 237 "parser.y"
+#line 242 "parser.y"
     { /* TODO */ }
-#line 968 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 988 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 48:
-#line 240 "parser.y"
+#line 245 "parser.y"
     { /* TODO */ }
-#line 974 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 994 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 49:
-#line 261 "parser.y"
+#line 266 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = new Expr::CIntExpr(yystack_[0].value.as < int > ()); /* $$ = new NumberExpression($1); */}
-#line 980 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1000 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 50:
-#line 262 "parser.y"
+#line 267 "parser.y"
     { /* $$ = new IdentExpression($1); */ }
-#line 986 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1006 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 51:
-#line 263 "parser.y"
+#line 268 "parser.y"
     { /* TODO */ }
-#line 992 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1012 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 52:
-#line 264 "parser.y"
+#line 269 "parser.y"
     { /* TODO */ }
-#line 998 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1018 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 53:
-#line 265 "parser.y"
+#line 270 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = new Expr::CBoolExpr(true); }
-#line 1004 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1024 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 54:
-#line 266 "parser.y"
+#line 271 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = new Expr::CBoolExpr(false); }
-#line 1010 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1030 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 55:
-#line 267 "parser.y"
+#line 272 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = Expr::CUnaryOperation::CreateMinus(yystack_[0].value.as < Expr::CBase* > ()); }
-#line 1016 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1036 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 56:
-#line 268 "parser.y"
+#line 273 "parser.y"
     { /* TODO */ }
-#line 1022 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1042 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 57:
-#line 269 "parser.y"
+#line 274 "parser.y"
     { /* TODO */ }
-#line 1028 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1048 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 58:
-#line 270 "parser.y"
+#line 275 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = Expr::CBinaryOperation::CreateAdd(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new AddExpression($1, $3); */ }
-#line 1034 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1054 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 59:
-#line 271 "parser.y"
+#line 276 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = Expr::CBinaryOperation::CreateSub(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new SubstractExpression($1, $3); */ }
-#line 1040 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1060 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 60:
-#line 272 "parser.y"
+#line 277 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = Expr::CBinaryOperation::CreateMul(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new MulExpression($1, $3); */}
-#line 1046 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1066 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 61:
-#line 273 "parser.y"
+#line 278 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = Expr::CBinaryOperation::CreateDiv(yystack_[2].value.as < Expr::CBase* > (), yystack_[0].value.as < Expr::CBase* > ()); /* $$ = new DivExpression($1, $3); */ }
-#line 1052 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1072 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 62:
-#line 274 "parser.y"
+#line 279 "parser.y"
     { /* TODO */ }
-#line 1058 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1078 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 63:
-#line 275 "parser.y"
+#line 280 "parser.y"
     { /* TODO */ }
-#line 1064 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1084 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 64:
-#line 276 "parser.y"
+#line 281 "parser.y"
     { /* TODO */ }
-#line 1070 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1090 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 65:
-#line 277 "parser.y"
+#line 282 "parser.y"
     { /* TODO */ }
-#line 1076 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1096 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 66:
-#line 278 "parser.y"
+#line 283 "parser.y"
     { /* TODO */ }
-#line 1082 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1102 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 67:
-#line 279 "parser.y"
+#line 284 "parser.y"
     { /* TODO */ }
-#line 1088 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1108 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
   case 68:
-#line 280 "parser.y"
+#line 285 "parser.y"
     { yylhs.value.as < Expr::CBase* > () = yystack_[1].value.as < Expr::CBase* > (); }
-#line 1094 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1114 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
     break;
 
 
-#line 1098 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1118 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
             default:
               break;
@@ -1374,18 +1394,18 @@ namespace yy {
   {
      -22,   -38,  -137,     3,   -10,  -137,   -34,  -137,    -5,     4,
       -3,  -137,    -9,   224,    -1,  -137,   186,  -137,  -137,  -137,
-    -137,  -137,  -137,  -137,  -137,  -137,   -18,  -137,    18,  -137,
-      43,    15,    61,    55,    45,    51,  -137,  -137,    62,   -15,
-    -137,    63,  -137,    41,    34,    59,  -137,    64,  -137,  -137,
-      20,    20,  -137,    65,   186,  -137,  -137,    79,    67,    69,
-      91,    92,    20,     5,  -137,   273,  -137,  -137,   106,   108,
-    -137,   110,    97,  -137,  -137,   489,   327,   130,   109,   102,
-      99,    75,    20,    20,    20,    20,   291,    20,  -137,    20,
+    -137,  -137,  -137,  -137,  -137,  -137,   -18,  -137,     8,  -137,
+      22,    15,    52,    43,    45,    51,  -137,  -137,    58,   -15,
+    -137,    61,  -137,    41,    36,    59,  -137,    64,  -137,  -137,
+      20,    20,  -137,    66,   186,  -137,  -137,    79,    67,    92,
+      93,    96,    20,     5,  -137,   273,  -137,   110,  -137,   114,
+     115,  -137,    97,  -137,  -137,   489,   327,   130,   116,   104,
+     101,    77,    20,    20,    20,    20,   291,    20,  -137,    20,
       20,    20,    20,    20,    20,    20,    20,    20,    20,    20,
-     -25,  -137,  -137,    20,  -137,   163,    86,  -137,   119,  -137,
-     107,    20,   105,   345,   363,   381,   399,  -137,   417,   505,
+     -25,    20,  -137,  -137,  -137,   163,    88,  -137,   121,  -137,
+     108,    20,   112,   345,   363,   381,   399,  -137,   417,   505,
      505,   518,   518,   489,   489,   489,   489,   489,   489,   435,
-    -137,   116,   309,  -137,  -137,  -137,   453,    20,   142,   144,
+    -137,   128,   309,  -137,  -137,  -137,   453,    20,   142,   144,
      196,   196,  -137,  -137,   229,  -137,  -137,   471,  -137,  -137,
       10,   147,  -137,   489,    46,  -137,  -137,   196,  -137,  -137,
       20,   148,   489,  -137
@@ -1400,11 +1420,11 @@ namespace yy {
        0,     0,     0,     0,     0,     0,    12,    48,     0,     0,
       27,     0,    14,     0,     0,     0,    27,     0,    15,    13,
        0,     0,    27,     0,     0,    53,    54,     0,     0,     0,
-       0,     0,     0,    50,    49,     0,    28,    29,     0,     0,
-      38,     0,     0,    27,    50,    55,     0,     0,     0,    47,
+       0,     0,     0,    50,    49,     0,    28,     0,    29,     0,
+       0,    38,     0,    27,    50,    55,     0,     0,     0,    47,
        0,     0,     0,     0,     0,     0,     0,     0,    26,     0,
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,    17,    25,     0,    10,     0,     0,    68,     0,     4,
+       0,     0,    17,    25,    10,     0,     0,    68,     0,     4,
        0,     0,    34,     0,     0,     0,     0,    24,     0,    59,
       58,    60,    61,    62,    63,    64,    65,    66,    67,     0,
       52,     0,     0,    11,    18,    57,     0,     0,     0,     0,
@@ -1416,16 +1436,16 @@ namespace yy {
   const short
   parser::yypgoto_[] =
   {
-    -137,   -50,  -136,    71,  -137,  -137,  -137,  -137,  -137,  -137,
-     139,   111,  -137,  -137,  -137,  -137,  -137,  -137,    12,   101,
-     103,  -137
+    -137,   -50,  -136,     7,  -137,  -137,  -137,  -137,  -137,  -137,
+    -137,   139,   111,  -137,  -137,  -137,  -137,  -137,    68,    99,
+     102,  -137
   };
 
   const short
   parser::yydefgoto_[] =
   {
-      -1,    65,    66,    45,     2,     3,     7,    23,    13,    24,
-      67,    42,    43,    68,   154,    69,    70,    71,    26,    27,
+      -1,    65,    66,    45,     2,    67,     3,     7,    23,    13,
+      24,    68,    42,    43,    69,   154,    70,    71,    26,    27,
       28,    29
   };
 
@@ -1434,20 +1454,20 @@ namespace yy {
   {
       75,    76,    41,     5,   150,   151,     1,     4,     8,   -36,
      130,     9,    86,   156,    17,    18,    19,    20,    21,    10,
-     131,   161,    11,    12,    14,    87,    30,    32,    31,    50,
-      22,     6,   113,   114,   115,   116,    51,   118,    33,   119,
+     131,   161,    11,    12,    14,    87,    30,    32,    33,    50,
+      22,     6,   113,   114,   115,   116,    51,   118,    34,   119,
      120,   121,   122,   123,   124,   125,   126,   127,   128,   129,
-     -41,    44,   157,   132,    54,    44,    55,    56,    47,    34,
-      35,   136,    38,   159,    36,    74,    64,    39,    50,   160,
-      17,    18,    19,    20,    21,    51,    37,    52,    53,    49,
-      40,    46,    73,    82,    78,    83,    22,   147,    17,    18,
+     -41,   132,   157,    72,    54,    36,    55,    56,    47,    77,
+      35,   136,    38,   159,    37,    74,    64,    39,    50,   160,
+      17,    18,    19,    20,    21,    51,    40,    52,    53,    46,
+     105,    49,    73,    82,    31,    78,    22,   147,    17,    18,
       19,    20,    21,    54,   153,    55,    56,    57,    58,    59,
-      60,    81,    61,    62,    63,    64,    50,    84,    85,   101,
-     162,   102,   109,    51,   103,    52,   104,    72,   110,   111,
-     112,   130,   134,    77,   135,   137,    17,    18,    19,    20,
-      21,    54,   144,    55,    56,    57,    58,    59,    60,    50,
-      61,    62,    63,    64,   105,   148,    51,   149,    52,   108,
-     158,   163,    25,     0,    48,    79,     0,    80,     0,    17,
+      60,    81,    61,    62,    63,    64,    50,    44,    83,    84,
+     162,    44,    85,    51,   101,    52,   104,   102,   103,   109,
+     110,   111,   112,   130,   134,   135,    17,    18,    19,    20,
+      21,    54,   137,    55,    56,    57,    58,    59,    60,    50,
+      61,    62,    63,    64,   144,   148,    51,   149,    52,   108,
+     158,   163,    25,    79,    48,     0,    80,     0,     0,    17,
       18,    19,    20,    21,    54,     0,    55,    56,    57,    58,
       59,    60,    50,    61,    62,    63,    64,     0,     0,    51,
        0,    52,   133,     0,     0,     0,     0,     0,     0,     0,
@@ -1494,20 +1514,20 @@ namespace yy {
   {
       50,    51,    17,     0,   140,   141,    28,    45,    18,     4,
       35,    45,    62,     3,    29,    30,    31,    32,    33,    24,
-      45,   157,    18,    26,    33,    20,    27,    45,    16,     9,
-      45,    28,    82,    83,    84,    85,    16,    87,    20,    89,
+      45,   157,    18,    26,    33,    20,    27,    45,    20,     9,
+      45,    28,    82,    83,    84,    85,    16,    87,    16,    89,
       90,    91,    92,    93,    94,    95,    96,    97,    98,    99,
-      45,    39,    42,   103,    34,    43,    36,    37,    17,    16,
-      45,   111,    17,    17,     3,    45,    46,    16,     9,    23,
-      29,    30,    31,    32,    33,    16,    21,    18,    19,    45,
-      18,    18,    18,    16,    19,    16,    45,   137,    29,    30,
+      45,   101,    42,    46,    34,     3,    36,    37,    17,    52,
+      45,   111,    17,    17,    21,    45,    46,    16,     9,    23,
+      29,    30,    31,    32,    33,    16,    18,    18,    19,    18,
+      73,    45,    18,    16,    16,    19,    45,   137,    29,    30,
       31,    32,    33,    34,   144,    36,    37,    38,    39,    40,
-      41,    22,    43,    44,    45,    46,     9,    16,    16,     3,
-     160,     3,     3,    16,     4,    18,    19,    46,    16,    20,
-      45,    35,     3,    52,    17,    20,    29,    30,    31,    32,
-      33,    34,    16,    36,    37,    38,    39,    40,    41,     9,
-      43,    44,    45,    46,    73,     3,    16,     3,    18,    19,
-       3,     3,    13,    -1,    43,    54,    -1,    54,    -1,    29,
+      41,    22,    43,    44,    45,    46,     9,    39,    16,    16,
+     160,    43,    16,    16,     4,    18,    19,     3,     3,     3,
+      16,    20,    45,    35,     3,    17,    29,    30,    31,    32,
+      33,    34,    20,    36,    37,    38,    39,    40,    41,     9,
+      43,    44,    45,    46,    16,     3,    16,     3,    18,    19,
+       3,     3,    13,    54,    43,    -1,    54,    -1,    -1,    29,
       30,    31,    32,    33,    34,    -1,    36,    37,    38,    39,
       40,    41,     9,    43,    44,    45,    46,    -1,    -1,    16,
       -1,    18,    19,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
@@ -1552,32 +1572,32 @@ namespace yy {
   const unsigned char
   parser::yystos_[] =
   {
-       0,    28,    51,    52,    45,     0,    28,    53,    18,    45,
-      24,    18,    26,    55,    33,    19,    24,    29,    30,    31,
-      32,    33,    45,    54,    56,    57,    65,    66,    67,    68,
+       0,    28,    51,    53,    45,     0,    28,    54,    18,    45,
+      24,    18,    26,    56,    33,    19,    24,    29,    30,    31,
+      32,    33,    45,    55,    57,    58,    65,    66,    67,    68,
       27,    65,    45,    20,    16,    45,     3,    21,    17,    16,
-      18,    17,    58,    59,    65,    50,    18,    17,    58,    45,
+      18,    17,    59,    60,    65,    50,    18,    17,    59,    45,
        9,    16,    18,    19,    34,    36,    37,    38,    39,    40,
-      41,    43,    44,    45,    46,    48,    49,    57,    60,    62,
+      41,    43,    44,    45,    46,    48,    49,    52,    58,    61,
       63,    64,    50,    18,    45,    48,    48,    50,    19,    66,
       67,    22,    16,    16,    16,    16,    48,    20,     3,     5,
        6,     7,     8,    10,    11,    12,    13,    14,    15,    20,
-      22,     3,     3,     4,    19,    50,    22,    17,    19,     3,
+      22,     4,     3,     3,    19,    50,    22,    17,    19,     3,
       16,    20,    45,    48,    48,    48,    48,     3,    48,    48,
       48,    48,    48,    48,    48,    48,    48,    48,    48,    48,
       35,    45,    48,    19,     3,    17,    48,    20,    17,    17,
       17,    17,    21,    21,    16,     3,    21,    48,     3,     3,
-      49,    49,    17,    48,    61,    21,     3,    42,     3,    17,
+      49,    49,    17,    48,    62,    21,     3,    42,     3,    17,
       23,    49,    48,     3
   };
 
   const unsigned char
   parser::yyr1_[] =
   {
-       0,    47,    52,    52,    51,    53,    54,    54,    55,    55,
-      56,    56,    57,    58,    59,    59,    49,    49,    49,    49,
-      49,    49,    49,    49,    49,    49,    49,    50,    50,    60,
-      61,    61,    62,    62,    63,    63,    64,    64,    64,    65,
+       0,    47,    53,    53,    51,    54,    55,    55,    56,    56,
+      57,    57,    58,    59,    60,    60,    49,    49,    49,    49,
+      49,    49,    49,    49,    49,    49,    49,    50,    50,    61,
+      62,    62,    63,    63,    64,    64,    52,    52,    52,    65,
       65,    66,    67,    67,    67,    67,    67,    67,    68,    48,
       48,    48,    48,    48,    48,    48,    48,    48,    48,    48,
       48,    48,    48,    48,    48,    48,    48,    48,    48
@@ -1611,23 +1631,23 @@ namespace yy {
   "\"VOEDA\"", "\"POLLIWOG\"", "\"LENA\"", "\"YES\"", "\"NO\"", "\"DIS\"",
   "\"OSETR\"", "\"CROAK\"", "\"IFF\"", "\"ELS\"", "\"LOOPA\"", "\"BURP\"",
   "\"identifier\"", "\"number\"", "$accept", "exp", "statement",
-  "statements", "main", "program", "classdecl", "declaration",
+  "statements", "main", "lvalue", "program", "classdecl", "declaration",
   "declarations", "methoddecl", "vardecl", "formal", "formals",
-  "locvardecl", "exprargs", "methinvokation", "fieldinvokation", "lvalue",
-  "type", "typeid", "simpletype", "arraytype", YY_NULLPTR
+  "locvardecl", "exprargs", "methinvokation", "fieldinvokation", "type",
+  "typeid", "simpletype", "arraytype", YY_NULLPTR
   };
 
 #if YYDEBUG
   const unsigned short
   parser::yyrline_[] =
   {
-       0,   153,   153,   154,   157,   162,   165,   166,   169,   170,
-     173,   174,   177,   180,   183,   184,   187,   188,   189,   190,
-     191,   192,   193,   194,   195,   196,   197,   200,   201,   205,
-     208,   209,   212,   213,   216,   217,   220,   221,   222,   225,
-     226,   229,   232,   233,   234,   235,   236,   237,   240,   261,
-     262,   263,   264,   265,   266,   267,   268,   269,   270,   271,
-     272,   273,   274,   275,   276,   277,   278,   279,   280
+       0,   158,   158,   159,   162,   167,   170,   171,   174,   175,
+     178,   179,   182,   185,   188,   189,   192,   193,   194,   195,
+     196,   197,   198,   199,   200,   201,   202,   205,   206,   210,
+     213,   214,   217,   218,   221,   222,   225,   226,   227,   230,
+     231,   234,   237,   238,   239,   240,   241,   242,   245,   266,
+     267,   268,   269,   270,   271,   272,   273,   274,   275,   276,
+     277,   278,   279,   280,   281,   282,   283,   284,   285
   };
 
   // Print the state stack on the debug stream.
@@ -1661,9 +1681,9 @@ namespace yy {
 
 
 } // yy
-#line 1665 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
+#line 1685 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.cpp"
 
-#line 283 "parser.y"
+#line 288 "parser.y"
 
 
 void

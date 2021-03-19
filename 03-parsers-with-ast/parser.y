@@ -54,6 +54,10 @@
     #include "statement/Statement.h"
     #include "statement/ExprStatement.h"
     #include "statement/StatementList.h"
+    #include "statement/AssStatement.h"
+
+    #include "lvalue/Lvalue.h"
+    #include "lvalue/IdentLvalue.h"
 
     #include "MainClass.h"
 
@@ -137,12 +141,13 @@
 
 // non-terminal types
 %nterm <Expr::CBase*> exp
-%nterm <Assignment*> assignment
 %nterm <AssignmentList*> assignments
 %nterm <Program*> unit
 %nterm <Statement::CBase*> statement
 %nterm <Statement::CList*> statements
 %nterm <CMain*> main;
+%nterm <CAssignment*> assignment
+%nterm <Lvalue::CBase*> lvalue
 
 // %printer { yyo << $$; } <*>;
 
@@ -191,7 +196,7 @@ statement:
   | "IFF" "(" exp ")" statement "ELS" statement ";"{ /* TODO */ }
   | "LOOPA" "(" exp ")" statement ";"              { /* TODO */ }
   | "CROAK" "(" exp ")" ";"                        { /* TODO */ }
-  | lvalue "ASS" exp ";"                           { /* TODO */ }
+  | lvalue "ASS" exp ";"                           { $$ = new Statement::CAssignment($1, $3); }
   | "BURP" exp ";"                                 { /* TODO */ }
   | methinvokation ";"                             { /* TODO */ }
   | exp ";"                                        { $$ = new Statement::CExpr($1); };
@@ -217,7 +222,7 @@ fieldinvokation:
   | "DIS" "." "identifier" "[" exp "]"  { /* TODO */ };
 
 lvalue:
-    "identifier"              { /* TODO */ }
+    "identifier"              { $$ = new Lvalue::CIdentifier($1); }
   | "identifier" "[" exp "]"  { /* TODO */ }
   | fieldinvokation           { /* TODO */ };
 
@@ -242,17 +247,17 @@ arraytype:
 unit: 
     assignments exp { $$ = new Program($1, $2); driver.program = $$; };
 
-assignments:
-    %empty { $$ = new AssignmentList(); /* A -> eps */}
-    | assignments assignment SEMICOLON {
-        $1->AddAssignment($2); $$ = $1;
-    };
+// assignments:
+//    %empty { $$ = new AssignmentList(); /* A -> eps */}
+//    | assignments assignment SEMICOLON {
+//        $1->AddAssignment($2); $$ = $1;
+//    };
 
-assignment:
-    "identifier" "ASS" exp {
-        $$ = new Assignment($1, $3);
-        driver.variables[$1] = $3->eval(driver);
-    };
+// assignment:
+//     "identifier" "ASS" exp {
+        // $$ = new CAssignment($1, $3);
+        // $$ = new Assignment($1, $3);
+        // driver.variables[$1] = $3->eval(driver); };
 
 %left "PLUBS" "MENUS";
 %left "MUTLI" "DEVID";

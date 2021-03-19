@@ -386,17 +386,20 @@ namespace yy {
       // exp
       char dummy2[sizeof (Expr::CBase*)];
 
+      // lvalue
+      char dummy3[sizeof (Lvalue::CBase*)];
+
       // statement
-      char dummy3[sizeof (Statement::CBase*)];
+      char dummy4[sizeof (Statement::CBase*)];
 
       // statements
-      char dummy4[sizeof (Statement::CList*)];
+      char dummy5[sizeof (Statement::CList*)];
 
       // "number"
-      char dummy5[sizeof (int)];
+      char dummy6[sizeof (int)];
 
       // "identifier"
-      char dummy6[sizeof (std::string)];
+      char dummy7[sizeof (std::string)];
     };
 
     /// The size of the largest semantic type.
@@ -569,6 +572,19 @@ namespace yy {
       {}
 #endif
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, Lvalue::CBase*&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const Lvalue::CBase*& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, Statement::CBase*&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -649,6 +665,10 @@ switch (yytype)
 
       case 48: // exp
         value.template destroy< Expr::CBase* > ();
+        break;
+
+      case 52: // lvalue
+        value.template destroy< Lvalue::CBase* > ();
         break;
 
       case 49: // statement
@@ -1884,6 +1904,10 @@ switch (yytype)
         value.move< Expr::CBase* > (std::move (that.value));
         break;
 
+      case 52: // lvalue
+        value.move< Lvalue::CBase* > (std::move (that.value));
+        break;
+
       case 49: // statement
         value.move< Statement::CBase* > (std::move (that.value));
         break;
@@ -1921,6 +1945,10 @@ switch (yytype)
 
       case 48: // exp
         value.copy< Expr::CBase* > (YY_MOVE (that.value));
+        break;
+
+      case 52: // lvalue
+        value.copy< Lvalue::CBase* > (YY_MOVE (that.value));
         break;
 
       case 49: // statement
@@ -1967,6 +1995,10 @@ switch (yytype)
 
       case 48: // exp
         value.move< Expr::CBase* > (YY_MOVE (s.value));
+        break;
+
+      case 52: // lvalue
+        value.move< Lvalue::CBase* > (YY_MOVE (s.value));
         break;
 
       case 49: // statement
@@ -2059,7 +2091,7 @@ switch (yytype)
   }
 
 } // yy
-#line 2063 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.hh"
+#line 2095 "/home/lehahel/CompilersCourse/03-parsers-with-ast/parser.hh"
 
 
 

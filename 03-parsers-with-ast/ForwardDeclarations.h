@@ -19,7 +19,13 @@ namespace Statement {
     class CBase;
     class CExpr;
     class CList;
+    class CAssignment;
 };
+
+namespace Lvalue {
+    class CBase;
+    class CIdentifier;
+}
 
 struct CInt;
 struct CDouble;

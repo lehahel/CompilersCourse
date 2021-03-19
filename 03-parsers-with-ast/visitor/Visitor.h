@@ -24,7 +24,10 @@ namespace Visitor {
         virtual void Visit(Expr::CBinaryOperation *expression) = 0;
         virtual void Visit(Expr::CUnaryOperation  *expression) = 0;
 
-        virtual void Visit(Statement::CExpr *statement)  = 0;
-        virtual void Visit(Statement::CList *statements) = 0;
+        virtual void Visit(Statement::CExpr       *statement)  = 0;
+        virtual void Visit(Statement::CAssignment *statement)  = 0;
+        virtual void Visit(Statement::CList       *statements) = 0;
+        
+        virtual void Visit(Lvalue::CIdentifier *identifier) = 0;
     };
 };

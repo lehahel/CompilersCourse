@@ -1,5 +1,6 @@
 #include "PrintVisitor.h"
 #include <statement/StatementList.h>
+#include <statement/AssStatement.h>
 #include <iostream>
 
 Visitor::CPrinter::CPrinter(const std::string &filename)
@@ -10,12 +11,11 @@ Visitor::CPrinter::~CPrinter() {
 }
 
 void Visitor::CPrinter::Visit(Program *program) {
-    Visit(program->main_class_);
+    program->main_class_->Accept(this);
 }
 
 void Visitor::CPrinter::Visit(CMain *main_class) {
     PrintTabs();
-    std::cout << "MAINAINIANIAN" << std::endl;
     stream_ << "MainClass: " << std::endl;
     ++num_tabs_;
     main_class->list_->Accept(this);
@@ -30,7 +30,6 @@ void Visitor::CPrinter::PrintTabs() {
 
 void Visitor::CPrinter::Visit(Expr::CIntExpr *expression) {
     PrintTabs();
-    std::cout << "EXPRESEON" << std::endl;
     stream_ << "IntExpression: " << expression->GetValue() << std::endl;
 }
 
@@ -77,6 +76,19 @@ void Visitor::CPrinter::Visit(Statement::CExpr *statement) {
 
 void Visitor::CPrinter::Visit(Statement::CList *statements) {
     PrintTabs();
-    std::cout << "STUMETENT" << std::endl;
     statements->Accept(this);
+}
+
+void Visitor::CPrinter::Visit(Statement::CAssignment *statement) {
+    PrintTabs();
+    stream_ << statement->ToString() << ": " << std::endl;
+    ++num_tabs_;
+    statement->lvalue_->Accept(this);
+    statement->expr_->Accept(this);
+    --num_tabs_;
+}
+
+void Visitor::CPrinter::Visit(Lvalue::CIdentifier *identifier) {
+    PrintTabs();
+    stream_ << identifier->ToString() << std::endl;
 }

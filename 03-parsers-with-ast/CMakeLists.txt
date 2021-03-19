@@ -46,6 +46,9 @@ add_executable(
 
     statement/ExprStatement.cpp
     statement/StatementList.cpp
+    statement/AssStatement.cpp
+
+    lvalue/IdentLvalue.cpp
     
     visitor/PrintVisitor.cpp
     

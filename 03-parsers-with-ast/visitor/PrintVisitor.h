@@ -11,6 +11,11 @@
 #include <statement/Statement.h>
 #include <statement/ExprStatement.h>
 
+#include <assignment/Assignment.h>
+
+#include <lvalue/Lvalue.h>
+#include <lvalue/IdentLvalue.h>
+
 #include <MainClass.h>
 
 #include <fstream>
@@ -34,8 +39,11 @@ namespace Visitor {
         void Visit(Expr::CBinaryOperation *expression) override;
         void Visit(Expr::CUnaryOperation  *expression) override;
 
-        void Visit(Statement::CExpr *statement)  override;
-        void Visit(Statement::CList *statements) override;
+        void Visit(Statement::CExpr       *statement)  override;
+        void Visit(Statement::CAssignment *statement)  override;
+        void Visit(Statement::CList       *statements) override;
+
+        void Visit(Lvalue::CIdentifier *identifier) override;
 
       private:  
         void PrintTabs();

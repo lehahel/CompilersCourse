@@ -5,4 +5,7 @@ mkdir build
 cd build
 cmake ..
 make
-../bin/ParserExampleWithAst ../tests/01.in
+cd ../bin/
+./ParserExampleWithAst ../tests/01.in
+cat outism
+cd ..
