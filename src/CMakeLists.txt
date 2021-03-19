@@ -27,9 +27,6 @@ add_executable(
 
     ${BISON_MyParserWithAst_OUTPUTS}
     ${FLEX_MyScannerWithAst_OUTPUTS}
-    
-    assignments/Assignment.cpp
-    assignments/AssignmentList.cpp
 
     expression/BinaryOpExpression.cpp
     expression/UnaryOpExpression.cpp

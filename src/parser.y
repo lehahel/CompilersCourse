@@ -34,15 +34,6 @@
     #include "driver.hh"
     #include "location.hh"
 
-    #include "expressions/NumberExpression.h"
-    #include "expressions/AddExpression.h"
-    #include "expressions/MulExpression.h"
-    #include "expressions/DivExpression.h"
-    #include "expressions/SubstractExpression.h"
-    #include "expressions/IdentExpression.h"
-    #include "assignments/Assignment.h"
-    #include "assignments/AssignmentList.h"
-
     #include "expression/Expression.h"
     #include "expression/BinaryOpExpression.h"
     #include "expression/UnaryOpExpression.h"
