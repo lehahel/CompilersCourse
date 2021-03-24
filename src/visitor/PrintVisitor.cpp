@@ -48,7 +48,6 @@ void Visitor::CPrinter::Visit(Expr::CStringExpr *expression) {
     stream_ << "StringExpression: " << expression->GetValue() << std::endl;
 }
 
-
 void Visitor::CPrinter::Visit(Expr::CBinaryOperation *expression) {
     PrintTabs();
     stream_ << expression->GetExprName() << ": " << std::endl;

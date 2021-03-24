@@ -263,16 +263,16 @@ exp:
   | "NOT" exp        { $$ = Expr::CUnaryOperation::CreateMinus($2); }
   | "POLLIWOG" simpletype "[" exp "]" { /* TODO */ }
   | "POLLIWOG" typeid "(" ")"         { /* TODO */ }
-  | exp "PLUBS" exp  { $$ = Expr::CBinaryOperation::CreateAdd($1, $3); /* $$ = new AddExpression($1, $3); */ }
-  | exp "MENUS" exp  { $$ = Expr::CBinaryOperation::CreateSub($1, $3); /* $$ = new SubstractExpression($1, $3); */ }
-  | exp "MUTLI" exp  { $$ = Expr::CBinaryOperation::CreateMul($1, $3); /* $$ = new MulExpression($1, $3); */}
-  | exp "DEVID" exp  { $$ = Expr::CBinaryOperation::CreateDiv($1, $3); /* $$ = new DivExpression($1, $3); */ }
-  | exp "EKWAL" exp  { /* TODO */ }
-  | exp "NEKWAL" exp { /* TODO */ }
-  | exp "LES"    exp { /* TODO */ }
-  | exp "BIGA"   exp { /* TODO */ }
-  | exp "LESOEK" exp { /* TODO */ }
-  | exp "BIGOEK" exp { /* TODO */ }
+  | exp "PLUBS" exp  { $$ = Expr::CBinaryOperation::CreateAdd    ($1, $3); }
+  | exp "MENUS" exp  { $$ = Expr::CBinaryOperation::CreateSub    ($1, $3); }
+  | exp "MUTLI" exp  { $$ = Expr::CBinaryOperation::CreateMul    ($1, $3); }
+  | exp "DEVID" exp  { $$ = Expr::CBinaryOperation::CreateDiv    ($1, $3); }
+  | exp "EKWAL" exp  { $$ = Expr::CBinaryOperation::CreateEqual  ($1, $3); }
+  | exp "NEKWAL" exp { $$ = Expr::CBinaryOperation::CreateNequal ($1, $3); }
+  | exp "LES"    exp { $$ = Expr::CBinaryOperation::CreateLess   ($1, $3); }
+  | exp "BIGA"   exp { $$ = Expr::CBinaryOperation::CreateBigger ($1, $3); }
+  | exp "LESOEK" exp { $$ = Expr::CBinaryOperation::CreateLequal ($1, $3); }
+  | exp "BIGOEK" exp { $$ = Expr::CBinaryOperation::CreateBequal ($1, $3); }
   | "(" exp ")"      { $$ = $2; };
 
 

@@ -1,0 +1,12 @@
+MainClass: 
+	Assignment: 
+		Identifier: BUBA
+		IntExpression: 3
+	ExprStatement: 
+		AddExpression: 
+			IntExpression: 3
+			IntExpression: 3
+	ExprStatement: 
+		MulExpression: 
+			IntExpression: 2
+			IntExpression: 3
