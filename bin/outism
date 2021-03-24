@@ -1,4 +1,6 @@
 MainClass: 
+	ExprStatement: 
+		IdentExpression: BIBA
 	Assignment: 
 		Identifier: BUBA
 		IntExpression: 3
@@ -6,6 +8,13 @@ MainClass:
 		AddExpression: 
 			IntExpression: 3
 			IntExpression: 3
+	LocVarDecl: 
+		VarDeclaration: BOBA
+	Assignment: 
+		Identifier: BIBA
+		SubExpression: 
+			IdentExpression: BUBA
+			IntExpression: 7
 	ExprStatement: 
 		MulExpression: 
 			IntExpression: 2

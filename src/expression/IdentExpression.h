@@ -1,17 +1,17 @@
 #pragma once
 
-#include <ForwardDeclarations.h>
 #include "Expression.h"
-#include <object/DoubleObject.hpp>
+#include <object/IntObject.hpp>
+#include <ForwardDeclarations.h>
 
 namespace Expr {
-    class CDoubleExpr : public CBase {
+    class CIdent : public CBase {
       public:
-        CDoubleExpr(double value);
+        CIdent(const std::string &var_name);
         void Accept(Visitor::CBase *visitor) override;
-        double GetValue() const;
+        int GetValue() const;
         std::string GetExprName() const override;
       private:
-        CDoubleObject *object_;
+        std::string var_name_;
     };
 } // namespace Expr

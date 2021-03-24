@@ -2,6 +2,13 @@
 
 #include "type/Type.h"
 
-struct CInt : public CType {
+class CInt : public CType {
+  public:
     CInt() : CType(CType::TypeName::INT) {};
+    void Accept(Visitor::CBase *visitor) override {
+        visitor->Visit(this);
+    }
+    std::string ToString() const override {
+        return "int";
+    }
 };

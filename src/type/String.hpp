@@ -2,6 +2,13 @@
 
 #include "type/Type.h"
 
-struct CString : public CType {
+class CString : public CType {
+  public:
     CString() : CType(CType::TypeName::STRING) {};
+    void Accept(Visitor::CBase *visitor) override {
+        visitor->Visit(this);
+    }
+    std::string ToString() const override {
+        return "string";
+    }
 };
