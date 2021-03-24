@@ -9,6 +9,7 @@ namespace Expr {
     class CBinaryOperation;
     class CUnaryOperation;   
 
+    class CIdent;
     class CIntExpr;
     class CDoubleExpr;
     class CStringExpr;
@@ -18,20 +19,27 @@ namespace Expr {
 namespace Statement {
     class CBase;
     class CExpr;
+    class CLocVarDecl;
     class CList;
     class CAssignment;
+};
+
+namespace Declaration {
+    class CBase;
+    class CVarDecl;
 };
 
 namespace Lvalue {
     class CBase;
     class CIdentifier;
-}
+};
 
-struct CInt;
-struct CDouble;
-struct CBool;
-struct CString;
-struct CCustom;
+class CType;
+class CInt;
+class CDouble;
+class CBool;
+class CString;
+class CCustom;
 
 class Program;
 class CMain;

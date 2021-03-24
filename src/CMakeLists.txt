@@ -31,14 +31,18 @@ add_executable(
     expression/BinaryOpExpression.cpp
     expression/UnaryOpExpression.cpp
 
+    expression/IdentExpression.cpp
     expression/IntExpression.cpp
     expression/DoubleExpression.cpp
     expression/StringExpression.cpp
     expression/BoolExpression.cpp
 
     statement/ExprStatement.cpp
+    statement/LocVarDeclStatement.cpp
     statement/StatementList.cpp
     statement/AssStatement.cpp
+
+    declaration/VarDeclaration.cpp
 
     lvalue/IdentLvalue.cpp
     

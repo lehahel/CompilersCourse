@@ -28,6 +28,11 @@ void Visitor::CPrinter::PrintTabs() {
     }
 }
 
+void Visitor::CPrinter::Visit(Expr::CIdent *expression) {
+    PrintTabs();
+    stream_ << "IdentExpression: " << expression->GetExprName() << std::endl;
+}
+
 void Visitor::CPrinter::Visit(Expr::CIntExpr *expression) {
     PrintTabs();
     stream_ << "IntExpression: " << expression->GetValue() << std::endl;
@@ -73,6 +78,14 @@ void Visitor::CPrinter::Visit(Statement::CExpr *statement) {
     --num_tabs_;
 }
 
+void Visitor::CPrinter::Visit(Statement::CLocVarDecl *statement) {
+    PrintTabs();
+    stream_ << statement->ToString() << ": " << std::endl;
+    ++num_tabs_;
+    statement->loc_var_->Accept(this);
+    --num_tabs_;
+}
+
 void Visitor::CPrinter::Visit(Statement::CList *statements) {
     PrintTabs();
     statements->Accept(this);
@@ -90,4 +103,29 @@ void Visitor::CPrinter::Visit(Statement::CAssignment *statement) {
 void Visitor::CPrinter::Visit(Lvalue::CIdentifier *identifier) {
     PrintTabs();
     stream_ << identifier->ToString() << std::endl;
+}
+
+void Visitor::CPrinter::Visit(Declaration::CVarDecl *declaration) {
+    PrintTabs();
+    stream_ << "VarDeclaration: " << declaration->ToString() << std::endl;
+}
+
+void Visitor::CPrinter::Visit(CBool *value) {
+    PrintTabs();
+    stream_ << "Type: " << value->ToString() << std::endl;
+}
+
+void Visitor::CPrinter::Visit(CDouble *value) {
+    PrintTabs();
+    stream_ << "Type: " << value->ToString() << std::endl;
+}
+
+void Visitor::CPrinter::Visit(CInt *value) {
+    PrintTabs();
+    stream_ << "Type: " << value->ToString() << std::endl;
+}
+
+void Visitor::CPrinter::Visit(CString *value) {
+    PrintTabs();
+    stream_ << "Type: " << value->ToString() << std::endl;
 }

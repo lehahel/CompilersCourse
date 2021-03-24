@@ -10,7 +10,7 @@ namespace Expr {
     class CStringExpr : public CBase {
       public:
         CStringExpr(std::string value);
-        void Accept(Visitor::CBase *visitor);
+        void Accept(Visitor::CBase *visitor) override;
         std::string GetValue() const;
         std::string GetExprName() const override;
       private:

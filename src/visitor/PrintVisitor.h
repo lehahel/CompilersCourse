@@ -1,6 +1,9 @@
+#pragma once
+
 #include "Visitor.h"
 
 #include <expression/Expression.h>
+#include <expression/IdentExpression.h>
 #include <expression/IntExpression.h>
 #include <expression/DoubleExpression.h>
 #include <expression/BoolExpression.h>
@@ -10,8 +13,19 @@
 
 #include <statement/Statement.h>
 #include <statement/ExprStatement.h>
+#include <statement/LocVarDeclStatement.h>
+#include <statement/StatementList.h>
+#include <statement/AssStatement.h>
 
 #include <assignment/Assignment.h>
+
+#include <declaration/Declaration.h>
+#include <declaration/VarDeclaration.h>
+
+#include <type/Bool.hpp>
+#include <type/Double.hpp>
+#include <type/Int.hpp>
+#include <type/String.hpp>
 
 #include <lvalue/Lvalue.h>
 #include <lvalue/IdentLvalue.h>
@@ -32,6 +46,7 @@ namespace Visitor {
 
         void Visit(CMain *main_class) override;
 
+        void Visit(Expr::CIdent           *expression) override;
         void Visit(Expr::CIntExpr         *expression) override;
         void Visit(Expr::CDoubleExpr      *expression) override;
         void Visit(Expr::CBoolExpr        *expression) override;
@@ -41,7 +56,15 @@ namespace Visitor {
 
         void Visit(Statement::CExpr       *statement)  override;
         void Visit(Statement::CAssignment *statement)  override;
+        void Visit(Statement::CLocVarDecl *statements) override;
         void Visit(Statement::CList       *statements) override;
+
+        void Visit(CBool    *value) override;
+        void Visit(CDouble  *value) override;
+        void Visit(CInt     *value) override;
+        void Visit(CString  *value) override;
+
+        void Visit(Declaration::CVarDecl  *declaration) override;
 
         void Visit(Lvalue::CIdentifier *identifier) override;
 

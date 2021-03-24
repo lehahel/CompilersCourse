@@ -35,6 +35,7 @@
     #include "location.hh"
 
     #include "expression/Expression.h"
+    #include "expression/IdentExpression.h"
     #include "expression/BinaryOpExpression.h"
     #include "expression/UnaryOpExpression.h"
     #include "expression/IntExpression.h"
@@ -44,27 +45,24 @@
 
     #include "statement/Statement.h"
     #include "statement/ExprStatement.h"
+    #include "statement/LocVarDeclStatement.h"
     #include "statement/StatementList.h"
     #include "statement/AssStatement.h"
+
+    #include "type/Type.h"
+    #include "type/Bool.hpp"
+    #include "type/Custom.hpp"
+    #include "type/Double.hpp"
+    #include "type/Int.hpp"
+    #include "type/String.hpp"
+
+    #include "declaration/Declaration.h"
+    #include "declaration/VarDeclaration.h"
 
     #include "lvalue/Lvalue.h"
     #include "lvalue/IdentLvalue.h"
 
     #include "MainClass.h"
-
-    // #include "assignments_default/assignment.h"
-    // #include "assignments_default/assignment_list.h"
-    // #include "expression_default/addexpression.h"
-    // #include "expression_default/divexpression.h"
-    // #include "expression_default/expression.h"
-    // #include "expression_default/mulexpression.h"
-    // #include "expression_default/subexpression.h"
-    // #include "expression_template/addexpression.h"
-    // #include "expression_template/divexpression.h"
-    // #include "expression_template/expression.h"
-    // #include "expression_template/mulexpression.h"
-    // #include "expression_template/subexpression.h"
-
     #include "Program.h"
 
     static yy::parser::symbol_type yylex(Scanner &scanner, Driver& driver) {
@@ -139,6 +137,12 @@
 %nterm <CMain*> main;
 %nterm <CAssignment*> assignment
 %nterm <Lvalue::CBase*> lvalue
+%nterm <CType*> type
+%nterm <CType*> simpletype
+%nterm <CType*> arraytype
+%nterm <Declaration::CBase*> declaration
+%nterm <Declaration::CVarDecl*> vardecl
+%nterm <Declaration::CVarDecl*> locvardecl
 
 // %printer { yyo << $$; } <*>;
 
@@ -158,7 +162,7 @@ classdecl:
     "FROG" "identifier" "{" declarations "}" { /* TODO */ };
 
 declaration:  
-    vardecl    { /* TODO */ } 
+    vardecl    { $$ = $1; } 
   | methoddecl { /* TODO */ };
 
 declarations:
@@ -170,7 +174,7 @@ methoddecl:
   | "BUBLIC" type "identifier" "(" formals ")" "{" statements "}" { /* TODO */ };
 
 vardecl:
-    type "identifier" ";" { /* TODO */ };
+    type "identifier" ";" { $$ = new Declaration::CVarDecl($1, $2); };
 
 formal:
     type "identifier" { /* TODO */ };
@@ -181,7 +185,7 @@ formals:
 
 statement:  
     "OSETR" "(" exp ")" ";"                        { /* TODO */ }
-  | locvardecl ";"                                 { /* TODO */ }
+  | locvardecl                                     { $$ = new Statement::CLocVarDecl($1); std::cout << "here\n"; }
   | "{" statements "}" ";"                         { /* TODO */ }
   | "IFF" "(" exp ")" statement ";"                { /* TODO */ }
   | "IFF" "(" exp ")" statement "ELS" statement ";"{ /* TODO */ }
@@ -198,7 +202,7 @@ statements:
 
 
 locvardecl:
-    vardecl { /* TODO */ };
+    vardecl { $$ = $1; };
 
 exprargs:
     exp               { /* TODO */ }
@@ -218,17 +222,17 @@ lvalue:
   | fieldinvokation           { /* TODO */ };
 
 type:
-    simpletype { /* TODO */ }
+    simpletype { $$ = $1; }
   | arraytype  { /* TODO */ };
 
 typeid:
     "identifier" { /* TODO */ }
 
 simpletype: 
-    "NUMBA"  { /* TODO */ }
-  | "DUMBA"  { /* TODO */ }
-  | "TEXTA"  { /* TODO */ }
-  | "BOOLA"  { /* TODO */ }
+    "NUMBA"  { $$ = new CInt(); }
+  | "DUMBA"  { $$ = new CDouble(); }
+  | "TEXTA"  { $$ = new CString(); }
+  | "BOOLA"  { $$ = new CBool(); }
   | "VOEDA"  { /* TODO */ }
   | typeid   { /* TODO */ };
 
@@ -255,7 +259,7 @@ unit:
 
 exp:
     "number"         { $$ = new Expr::CIntExpr($1); /* $$ = new NumberExpression($1); */}
-  | "identifier"     { /* $$ = new IdentExpression($1); */ }
+  | "identifier"     { $$ = new Expr::CIdent($1); }
   | exp "[" exp "]"  { /* TODO */ }
   | exp "." "LENA"   { /* TODO */ }
   | "YES"            { $$ = new Expr::CBoolExpr(true); }
@@ -263,11 +267,11 @@ exp:
   | "NOT" exp        { $$ = Expr::CUnaryOperation::CreateMinus($2); }
   | "POLLIWOG" simpletype "[" exp "]" { /* TODO */ }
   | "POLLIWOG" typeid "(" ")"         { /* TODO */ }
-  | exp "PLUBS" exp  { $$ = Expr::CBinaryOperation::CreateAdd    ($1, $3); }
-  | exp "MENUS" exp  { $$ = Expr::CBinaryOperation::CreateSub    ($1, $3); }
-  | exp "MUTLI" exp  { $$ = Expr::CBinaryOperation::CreateMul    ($1, $3); }
-  | exp "DEVID" exp  { $$ = Expr::CBinaryOperation::CreateDiv    ($1, $3); }
-  | exp "EKWAL" exp  { $$ = Expr::CBinaryOperation::CreateEqual  ($1, $3); }
+  | exp "PLUBS"  exp { $$ = Expr::CBinaryOperation::CreateAdd    ($1, $3); }
+  | exp "MENUS"  exp { $$ = Expr::CBinaryOperation::CreateSub    ($1, $3); }
+  | exp "MUTLI"  exp { $$ = Expr::CBinaryOperation::CreateMul    ($1, $3); }
+  | exp "DEVID"  exp { $$ = Expr::CBinaryOperation::CreateDiv    ($1, $3); }
+  | exp "EKWAL"  exp { $$ = Expr::CBinaryOperation::CreateEqual  ($1, $3); }
   | exp "NEKWAL" exp { $$ = Expr::CBinaryOperation::CreateNequal ($1, $3); }
   | exp "LES"    exp { $$ = Expr::CBinaryOperation::CreateLess   ($1, $3); }
   | exp "BIGA"   exp { $$ = Expr::CBinaryOperation::CreateBigger ($1, $3); }

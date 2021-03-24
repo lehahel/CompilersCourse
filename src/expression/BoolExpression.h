@@ -8,7 +8,7 @@ namespace Expr {
     class CBoolExpr : public CBase {
       public:
         CBoolExpr(bool value);
-        void Accept(Visitor::CBase *visitor);
+        void Accept(Visitor::CBase *visitor) override;
         bool GetValue() const;
         std::string GetExprName() const override;
       private:

@@ -8,7 +8,7 @@ namespace Statement {
     class CAssignment : public CBase {
       public:
         CAssignment(Lvalue::CBase *identifier, Expr::CBase *expr);
-        void Accept(Visitor::CBase *visitor);
+        void Accept(Visitor::CBase *visitor) override;
         std::string ToString() const override;
     
         Lvalue::CBase *lvalue_;
