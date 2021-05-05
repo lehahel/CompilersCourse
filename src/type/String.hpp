@@ -2,13 +2,17 @@
 
 #include "type/Type.h"
 
-class CString : public CType {
+namespace Type {
+const std::string STRING_STR = "Type: string";
+
+class CString : public CBase {
   public:
-    CString() : CType(CType::TypeName::STRING) {};
+    CString() : CBase(Type::Name::STRING) {};
     void Accept(Visitor::CBase *visitor) override {
         visitor->Visit(this);
     }
     std::string ToString() const override {
-        return "string";
+        return STRING_STR;
     }
 };
+} // namespace Type

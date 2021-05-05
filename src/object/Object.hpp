@@ -4,7 +4,8 @@
 
 class CObject {
   public:
-    explicit CObject(CType *type) : type(type) {};
+    explicit CObject(Type::CBase *type) : type(type) {};
     virtual ~CObject() = default;
-    CType *type;
+    virtual std::string ToString() const = 0;
+    Type::CBase *type;
 };

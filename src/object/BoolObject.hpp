@@ -7,6 +7,9 @@
 class CBoolObject : public CObject {
   public:
     explicit CBoolObject(bool val)
-    : CObject(new CBool()), value(val) {};
+    : CObject(new Type::CBool()), value(val) {};
+    std::string ToString() const override {
+        return std::to_string(value);
+    }
     bool value;
 };

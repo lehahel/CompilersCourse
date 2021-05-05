@@ -7,5 +7,5 @@ void CMain::Accept(Visitor::CBase *visitor) {
 }
 
 std::string CMain::ToString() const {
-    return "MainClass";
+    return MAIN_CLASS_STR;
 }

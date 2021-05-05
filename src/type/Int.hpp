@@ -2,13 +2,20 @@
 
 #include "type/Type.h"
 
-class CInt : public CType {
+#include <string>
+
+namespace Type {
+
+const std::string INT_STR = "Type: int";
+
+class CInt : public CBase {
   public:
-    CInt() : CType(CType::TypeName::INT) {};
+    CInt() : CBase(Type::Name::INT) {};
     void Accept(Visitor::CBase *visitor) override {
         visitor->Visit(this);
     }
     std::string ToString() const override {
-        return "int";
+        return INT_STR;
     }
 };
+} // namespace Type;

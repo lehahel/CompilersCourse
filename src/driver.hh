@@ -20,6 +20,7 @@ class Driver {
     bool trace_parsing;
 
     void PrintTree(const std::string &filename);
+    void Interprete();
     
     void scan_begin();
     void scan_end();

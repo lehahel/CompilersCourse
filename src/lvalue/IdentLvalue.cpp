@@ -8,5 +8,9 @@ void Lvalue::CIdentifier::Accept(Visitor::CBase *visitor) {
 }
 
 std::string Lvalue::CIdentifier::ToString() const {
-    return "Identifier: " + identifier_;
+    return IDENT_STRING + identifier_;
+}
+
+std::string Lvalue::CIdentifier::GetIdentifier() const {
+    return identifier_;
 }

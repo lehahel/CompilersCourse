@@ -6,10 +6,10 @@ void Expr::CBoolExpr::Accept(Visitor::CBase *visitor) {
     visitor->Visit(this);
 }
 
-bool Expr::CBoolExpr::GetValue() const {
-    return object_->value;
+CObject *Expr::CBoolExpr::GetValue() const {
+    return object_;
 }
 
-std::string Expr::CBoolExpr::GetExprName() const {
-    return "BoolExpression";
+std::string Expr::CBoolExpr::ToString() const {
+    return BOOL_EXPR_STR + object_->ToString();
 }

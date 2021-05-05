@@ -3,6 +3,10 @@
 #include "Statement.h"
 
 namespace Statement {
+
+
+    const std::string LOC_VAR_DECL_STR = "LocVarDecl";
+
     class CLocVarDecl : public CBase {
       public:
         void Accept(Visitor::CBase *visitor) override;

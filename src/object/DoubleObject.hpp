@@ -7,6 +7,9 @@
 class CDoubleObject : public CObject {
   public:
     explicit CDoubleObject(double val)
-    : CObject(new CDouble()), value(val) {};
+    : CObject(new Type::CDouble()), value(val) {};
+    std::string ToString() const override {
+        return std::to_string(value);
+    }
     double value;
 };

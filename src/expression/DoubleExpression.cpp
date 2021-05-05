@@ -6,10 +6,14 @@ void Expr::CDoubleExpr::Accept(Visitor::CBase *visitor) {
     visitor->Visit(this);
 }
 
-double Expr::CDoubleExpr::GetValue() const {
-    return object_->value;
+// double Expr::CDoubleExpr::GetValue() const {
+//     return object_->value;
+// }
+
+CObject *Expr::CDoubleExpr::GetValue() const {
+    return object_;
 }
 
-std::string Expr::CDoubleExpr::GetExprName() const {
-    return "DoubleExpression";
+std::string Expr::CDoubleExpr::ToString() const {
+    return DOUBLE_EXPR_STR + object_->ToString();
 }

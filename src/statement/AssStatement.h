@@ -5,6 +5,9 @@
 #include "Statement.h"
 
 namespace Statement {
+
+    const std::string ASSIGNMENT_STR = "Assignment";
+
     class CAssignment : public CBase {
       public:
         CAssignment(Lvalue::CBase *identifier, Expr::CBase *expr);

@@ -46,8 +46,11 @@ add_executable(
 
     lvalue/IdentLvalue.cpp
     
+    object/Operator.hpp
+
     visitor/PrintVisitor.cpp
-    
+    visitor/Interpreter.cpp
+
     MainClass.cpp
     
     type/Type.cpp

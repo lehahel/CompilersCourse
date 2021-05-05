@@ -6,10 +6,10 @@ void Expr::CIdent::Accept(Visitor::CBase *visitor) {
     visitor->Visit(this);
 }
 
-int Expr::CIdent::GetValue() const {
-    return 42;
+CObject *Expr::CIdent::GetValue() const {
+    return nullptr;  // ;)
 }
 
-std::string Expr::CIdent::GetExprName() const {
-    return var_name_;
+std::string Expr::CIdent::ToString() const {
+    return IDENT_EXPR_STR + var_name_;
 }

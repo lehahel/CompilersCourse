@@ -7,13 +7,16 @@
 #include <string>
 
 namespace Declaration {
+
+    const std::string VAR_DECL_STR = "VarDeclaration";
+    
     class CVarDecl : public CBase {
       public:
-        CVarDecl(CType *type, std::string var_name);
+        CVarDecl(Type::CBase *type, std::string var_name);
         void Accept(Visitor::CBase *visitor) override;
         std::string ToString() const override;   
       private:
-        CType *type_;
+        Type::CBase *type_;
         std::string var_name_;
     };
 }

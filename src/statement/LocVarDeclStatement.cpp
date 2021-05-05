@@ -8,5 +8,5 @@ void Statement::CLocVarDecl::Accept(Visitor::CBase *visitor) {
 }
 
 std::string Statement::CLocVarDecl::ToString() const {
-    return "LocVarDecl";
+    return LOC_VAR_DECL_STR;
 }

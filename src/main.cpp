@@ -17,6 +17,7 @@ int main(int argc, char** argv) {
         }
     }
     driver.PrintTree("outism");
+    driver.Interprete();
 
     return result;
 }

@@ -25,10 +25,10 @@ namespace Visitor {
 
         virtual void Visit(Declaration::CVarDecl  *declaration) = 0;
         
-        virtual void Visit(CBool    *value) = 0;
-        virtual void Visit(CDouble  *value) = 0;
-        virtual void Visit(CInt     *value) = 0;
-        virtual void Visit(CString  *value) = 0;
+        virtual void Visit(Type::CBool    *value) = 0;
+        virtual void Visit(Type::CDouble  *value) = 0;
+        virtual void Visit(Type::CInt     *value) = 0;
+        virtual void Visit(Type::CString  *value) = 0;
 
         virtual void Visit(Lvalue::CIdentifier *identifier) = 0;
     };

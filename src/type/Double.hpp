@@ -2,13 +2,20 @@
 
 #include "type/Type.h"
 
-class CDouble : public CType {
+#include <string>
+
+namespace Type {
+
+const std::string DOUBLE_STR = "Type: double";
+
+class CDouble : public CBase {
   public:
-    CDouble() : CType(CType::TypeName::DOUBLE) {};
+    CDouble() : CBase(Type::Name::DOUBLE) {};
     void Accept(Visitor::CBase *visitor) override {
         visitor->Visit(this);
     }
     std::string ToString() const override {
-        return "double";
+        return DOUBLE_STR;
     }
 };
+} // namespace Type

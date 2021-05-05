@@ -1,8 +1,8 @@
 #include "Type.h"
 
-CType::CType(TypeName type) 
+Type::CBase::CBase(Type::Name type) 
     : type_(type) {};
 
-CType::TypeName CType::get_type() const {
+Type::Name Type::CBase::get_type() const {
     return type_;
 }

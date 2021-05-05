@@ -1,6 +1,7 @@
 #include "VarDeclaration.h"
+#include <string>
 
-Declaration::CVarDecl::CVarDecl(CType *type, std::string var_name) 
+Declaration::CVarDecl::CVarDecl(Type::CBase *type, std::string var_name) 
     : type_(type), var_name_(var_name) {};
 
 void Declaration::CVarDecl::Accept(Visitor::CBase *visitor) {
@@ -8,5 +9,5 @@ void Declaration::CVarDecl::Accept(Visitor::CBase *visitor) {
 }
 
 std::string Declaration::CVarDecl::ToString() const {
-    return var_name_;
+    return VAR_DECL_STR + var_name_;
 }

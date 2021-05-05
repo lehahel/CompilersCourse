@@ -10,6 +10,9 @@ namespace Expr {
         NOT
     };
 
+    const std::string MINUS_EXPR_STR = "UnaryMinusExpression";
+    const std::string NOT_EXPR_STR   = "NotExpression";
+
     class CUnaryOperation : public Expr::CBase {
       public:
         void Accept(Visitor::CBase *visitor) override;
@@ -18,13 +21,14 @@ namespace Expr {
             Expr::CBase *expr
         );
         ~CUnaryOperation() override = default;
-        std::string GetExprName() const override;
+        std::string ToString() const override;
+        CObject *GetValue() const override;
 
         static CUnaryOperation *CreateMinus(Expr::CBase *expr);
         static CUnaryOperation *CreateNot  (Expr::CBase *expr);
 
         Expr::CBase *expr_;
-      private:
         UnaryOperatorType type_;
+      private:
     };
 }

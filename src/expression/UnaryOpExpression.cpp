@@ -5,18 +5,22 @@ Expr::CUnaryOperation::CUnaryOperation(
     Expr::CBase *expr
 ) : type_(type), expr_(expr) {}
 
+CObject *Expr::CUnaryOperation::GetValue() const {
+    return nullptr;
+}
+
 void Expr::CUnaryOperation::Accept(Visitor::CBase *visitor) {
     visitor->Visit(this);
 }
 
-std::string Expr::CUnaryOperation::GetExprName() const {
+std::string Expr::CUnaryOperation::ToString() const {
     if (type_ == Expr::MINUS) {
-        return "UnaryMinusExpression";
+        return MINUS_EXPR_STR;
     }
     if (type_ == Expr::NOT) {
-        return "NotExpression";
+        return NOT_EXPR_STR;
     }
-    return "ERROR";
+    std::abort();
 }
 
 Expr::CUnaryOperation*

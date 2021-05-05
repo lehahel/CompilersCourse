@@ -5,20 +5,23 @@
 
 #include <string>
 
-class CType {
+namespace Type {
+
+enum Name {
+    VOID,
+    BOOL,
+    INT,
+    DOUBLE,
+    STRING,
+    CUSTOM
+};
+class CBase {
   public:
-    enum TypeName {
-        VOID,
-        BOOL,
-        INT,
-        DOUBLE,
-        STRING,
-        CUSTOM
-    };
-    TypeName get_type() const;
-    explicit CType(TypeName type);
+    Name get_type() const;
+    explicit CBase(Name type);
     virtual void Accept(Visitor::CBase *visitor) = 0;
     virtual std::string ToString() const = 0;
   private:
-    TypeName type_;
+    Name type_;
 };
+} // namespace Type

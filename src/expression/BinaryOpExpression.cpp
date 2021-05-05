@@ -10,38 +10,27 @@ void Expr::CBinaryOperation::Accept(Visitor::CBase *visitor) {
     visitor->Visit(this);
 }
 
-std::string Expr::CBinaryOperation::GetExprName() const {
-    if (type_ == Expr::ADD) {
-        return "AddExpression";
+CObject *Expr::CBinaryOperation::GetValue() const {
+    return nullptr;
+}
+
+std::string Expr::CBinaryOperation::ToString() const {
+    switch (type_) {
+
+    case Expr::ADD:    return ADD_EXPR_STR;
+    case Expr::SUB:    return SUB_EXPR_STR;
+    case Expr::MUL:    return MUL_EXPR_STR;
+    case Expr::DIV:    return DIV_EXPR_STR;
+    case Expr::BIGGER: return BIGGER_EXPR_STR;
+    case Expr::LESS:   return LESS_EXPR_STR;
+    case Expr::BEQUAL: return BEQUAL_EXPR_STR;
+    case Expr::LEQUAL: return LEQUAL_EXPR_STR;
+    case Expr::EQUAL:  return EQUAL_EXPR_STR;
+    case Expr::NEQUAL: return NEQUAL_EXPR_STR;
+    
+    default: std::abort();
+
     }
-    if (type_ == Expr::SUB) {
-        return "SubExpression";
-    }
-    if (type_ == Expr::MUL) {
-        return "MulExpression";
-    }
-    if (type_ == Expr::DIV) {
-        return "DivExpression";
-    }
-    if (type_ == Expr::BIGGER) {
-        return "BiggerExpression";
-    }
-    if (type_ == Expr::LESS) {
-        return "LessExpression";
-    }
-    if (type_ == Expr::BEQUAL) {
-        return "BequalExpression";
-    }
-    if (type_ == Expr::LEQUAL) {
-        return "LequalExpression";
-    }
-    if (type_ == Expr::EQUAL) {
-        return "EqualExpression";
-    }
-    if (type_ == Expr::NEQUAL) {
-        return "NequalExpression";
-    }
-    return "ERROR";
 }
 
 Expr::CBinaryOperation*

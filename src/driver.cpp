@@ -1,6 +1,7 @@
 #include "driver.hh"
 #include "parser.hh"
 #include "visitor/PrintVisitor.h"
+#include "visitor/Interpreter.h"
 
 
 
@@ -35,14 +36,16 @@ void Driver::scan_begin() {
   }
 }
 
-void Driver::scan_end()
-{
+void Driver::scan_end() {
     stream.close();
 }
-
 
 void Driver::PrintTree(const std::string &filename) {
     Visitor::CPrinter printer(filename);
     printer.Visit(program);
 }
 
+void Driver::Interprete() {
+    Visitor::CInterpreter interpreter;
+    interpreter.Visit(program);
+}

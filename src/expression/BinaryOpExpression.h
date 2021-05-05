@@ -18,6 +18,19 @@ namespace Expr {
         NEQUAL  
     };
 
+
+    const std::string ADD_EXPR_STR = "AddExpression";
+    const std::string SUB_EXPR_STR = "SubExpression"; 
+    const std::string MUL_EXPR_STR = "MulExpression"; 
+    const std::string DIV_EXPR_STR = "DivExpression"; 
+    
+    const std::string BIGGER_EXPR_STR = "BiggerExpression";
+    const std::string LESS_EXPR_STR   = "LessExpression";
+    const std::string BEQUAL_EXPR_STR = "BequalExpression";
+    const std::string LEQUAL_EXPR_STR = "LequalExpression";
+    const std::string EQUAL_EXPR_STR  = "EqualExpression";
+    const std::string NEQUAL_EXPR_STR = "NequalExpression";
+
     class CBinaryOperation : public Expr::CBase {
       public:
         void Accept(Visitor::CBase *visitor) override;
@@ -27,7 +40,8 @@ namespace Expr {
             Expr::CBase *right
         );
         ~CBinaryOperation() override = default;
-        std::string GetExprName() const override;
+        CObject *GetValue() const override;
+        std::string ToString() const override;
       
         static CBinaryOperation *CreateAdd    (Expr::CBase *left, Expr::CBase *right);
         static CBinaryOperation *CreateSub    (Expr::CBase *left, Expr::CBase *right);
@@ -43,7 +57,7 @@ namespace Expr {
         Expr::CBase *left_;
         Expr::CBase *right_;
 
-      private:
         BinaryOperatorType type_;
+      private:
     };
 }

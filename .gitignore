@@ -5,6 +5,8 @@
 *.gv
 *.png
 
+bin/
+
 build/
 # Prerequisites
 *.d

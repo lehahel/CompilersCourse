@@ -2,13 +2,21 @@
 
 #include "type/Type.h"
 
-class CBool : public CType {
+#include <string>
+
+
+namespace Type {
+
+const std::string BOOL_STR = "Type: bool";
+
+class CBool : public CBase {
   public:
-    CBool() : CType(CType::TypeName::BOOL) {};
+    CBool() : CBase(Type::Name::BOOL) {};
     void Accept(Visitor::CBase *visitor) override {
         visitor->Visit(this);
     }
     std::string ToString() const override {
-        return "bool";
+        return BOOL_STR;
     }
 };
+} // namespace Type

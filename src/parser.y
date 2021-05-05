@@ -137,9 +137,9 @@
 %nterm <CMain*> main;
 %nterm <CAssignment*> assignment
 %nterm <Lvalue::CBase*> lvalue
-%nterm <CType*> type
-%nterm <CType*> simpletype
-%nterm <CType*> arraytype
+%nterm <Type::CBase*> type
+%nterm <Type::CBase*> simpletype
+%nterm <Type::CBase*> arraytype
 %nterm <Declaration::CBase*> declaration
 %nterm <Declaration::CVarDecl*> vardecl
 %nterm <Declaration::CVarDecl*> locvardecl
@@ -229,10 +229,10 @@ typeid:
     "identifier" { /* TODO */ }
 
 simpletype: 
-    "NUMBA"  { $$ = new CInt(); }
-  | "DUMBA"  { $$ = new CDouble(); }
-  | "TEXTA"  { $$ = new CString(); }
-  | "BOOLA"  { $$ = new CBool(); }
+    "NUMBA"  { $$ = new Type::CInt(); }
+  | "DUMBA"  { $$ = new Type::CDouble(); }
+  | "TEXTA"  { $$ = new Type::CString(); }
+  | "BOOLA"  { $$ = new Type::CBool(); }
   | "VOEDA"  { /* TODO */ }
   | typeid   { /* TODO */ };
 
