@@ -5,12 +5,15 @@
 #include <object/BoolObject.hpp>
 
 namespace Expr {
+
+    const std::string BOOL_EXPR_STR = "BoolExpression: ";
+
     class CBoolExpr : public CBase {
       public:
         CBoolExpr(bool value);
-        void Accept(Visitor::CBase *visitor);
-        bool GetValue() const;
-        std::string GetExprName() const override;
+        void Accept(Visitor::CBase *visitor) override;
+        CObject *GetValue() const override;
+        std::string ToString() const override;
       private:
         CBoolObject *object_;
     };

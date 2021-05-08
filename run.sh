@@ -7,5 +7,5 @@ cmake ..
 make
 cd ../bin/
 ./ParserExampleWithAst ../tests/01.in
-cat outism
+# cat outism
 cd ..

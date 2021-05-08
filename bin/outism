@@ -1,0 +1,12 @@
+MainClass: 
+	Assignment: 
+		Identifier: BUBA
+		IntExpression: 3
+	Assignment: 
+		Identifier: BOBA
+		IntExpression: 2
+	Assignment: 
+		Identifier: BIBA
+		MulExpression: 
+			IdentExpression: BUBA
+			IdentExpression: BOBA

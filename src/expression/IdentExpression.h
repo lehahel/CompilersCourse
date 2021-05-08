@@ -4,18 +4,19 @@
 #include <object/IntObject.hpp>
 #include <ForwardDeclarations.h>
 
+#include <string>
+
 namespace Expr {
 
-    const std::string INT_EXPR_STR = "IntExpression: ";
+    const std::string IDENT_EXPR_STR = "IdentExpression: ";
 
-    class CIntExpr : public CBase {
+    class CIdent : public CBase {
       public:
-        CIntExpr(int value);
+        CIdent(const std::string &var_name);
         void Accept(Visitor::CBase *visitor) override;
-        // int GetValue() const;
         CObject *GetValue() const override;
         std::string ToString() const override;
+        std::string var_name_;
       private:
-        CIntObject *object_;
     };
 } // namespace Expr

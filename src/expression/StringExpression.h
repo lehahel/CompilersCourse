@@ -7,12 +7,16 @@
 #include <object/StringObject.hpp>
 
 namespace Expr {
+
+    const std::string STRING_EXPR_STR = "StringExpression: ";
+
     class CStringExpr : public CBase {
       public:
         CStringExpr(std::string value);
-        void Accept(Visitor::CBase *visitor);
-        std::string GetValue() const;
-        std::string GetExprName() const override;
+        void Accept(Visitor::CBase *visitor) override;
+        // std::string GetValue() const;
+        CObject *GetValue() const override;
+        std::string ToString() const override;
       private:
         CStringObject *object_;
     };

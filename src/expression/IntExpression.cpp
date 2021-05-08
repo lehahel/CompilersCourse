@@ -6,10 +6,10 @@ void Expr::CIntExpr::Accept(Visitor::CBase *visitor) {
     visitor->Visit(this);
 }
 
-int Expr::CIntExpr::GetValue() const {
-    return object_->value;
+CObject *Expr::CIntExpr::GetValue() const {
+    return object_;
 }
 
-std::string Expr::CIntExpr::GetExprName() const {
-    return "IntExpression";
+std::string Expr::CIntExpr::ToString() const {
+    return INT_EXPR_STR + object_->ToString();
 }

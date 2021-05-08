@@ -6,10 +6,10 @@ void Expr::CStringExpr::Accept(Visitor::CBase *visitor) {
     visitor->Visit(this);
 }
 
-std::string Expr::CStringExpr::GetValue() const {
-    return object_->value;
+CObject *Expr::CStringExpr::GetValue() const {
+    return object_;
 }
 
-std::string Expr::CStringExpr::GetExprName() const {
-    return "StringExpression";
+std::string Expr::CStringExpr::ToString() const {
+    return STRING_EXPR_STR + object_->ToString();
 }

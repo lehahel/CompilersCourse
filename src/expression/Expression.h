@@ -11,8 +11,8 @@ namespace Expr {
     class CBase : public CBaseNonterminal {
       public:
         virtual void Accept(Visitor::CBase *visitor) = 0;
-        virtual std::string GetExprName() const = 0;
-        CType *type;
-        std::shared_ptr<CObject> object; 
+        virtual CObject *GetValue() const = 0;
+        Type::CBase *type;
+        CObject *object; 
     };
 }

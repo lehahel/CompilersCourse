@@ -7,5 +7,5 @@ void Statement::CExpr::Accept(Visitor::CBase *visitor) {
 }
 
 std::string Statement::CExpr::ToString() const {
-    return "ExprStatement";
+    return EXPR_STMT_STR;
 }
