@@ -13,6 +13,6 @@ namespace Expr {
         virtual void Accept(Visitor::CBase *visitor) = 0;
         virtual CObject *GetValue() const = 0;
         Type::CBase *type;
-        CObject *object; 
+        CObject *object;
     };
 }

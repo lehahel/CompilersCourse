@@ -4,7 +4,6 @@
 
 #include <string>
 
-
 namespace Type {
 
 const std::string BOOL_STR = "Type: bool";
